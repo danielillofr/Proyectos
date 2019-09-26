@@ -1,0 +1,42 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item">
+            
+            <a class="nav-link" [routerLink]="['/pages']">
+                <span class="menu-title">Home</span>
+                <span class="menu-sub-title"></span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="[ '/pages', 'createproject' ]" class="nav-link">
+                <span class="menu-title">Nuevo proyecto</span>
+                <i class="mdi mdi-library-plus menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a [routerLink]="['/pages','listprojects']" class="nav-link">
+                <span class="menu-title">Listado de proyectos</span>
+                <i class="mdi mdi-view-list menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/pages','statistics']">
+                <span class="menu-title">Estadísticas</span>
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/pages','profile']">
+                <span class="menu-title">Cuenta</span>
+                <i class="mdi mdi-account-card-details menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']">
+                <span class="menu-title">Salir</span>
+                <i class="mdi mdi-exit-to-app menu-icon"></i>
+            </a>
+        </li>
+    </ul>
+</nav>

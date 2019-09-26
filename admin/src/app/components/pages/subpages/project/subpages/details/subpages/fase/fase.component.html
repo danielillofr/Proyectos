@@ -1,0 +1,368 @@
+
+<div class="row" *ngIf="confFase">
+        <div class="col-md-12">
+            <div class="card cardFases">
+                <div class="card-title cardTitleCenter" *ngIf="confFase.mostrarTitulo">
+                    <h3><i class="mdi mdi-clock-start"></i>{{confFase.titulo}}</h3>
+                </div>
+                <div class="card-body">
+<!-- TODAS LAS FASES -->
+                    <!-- Fecha de creación y Jefe de proyecto -->
+                    <div class="row" *ngIf="confFase.mostrarFechaInicio || confFase.mostrarJefeProyecto">
+                        <div class="col-md-6" *ngIf="confFase.mostrarFechaInicio">
+                            <h4>
+                                Fecha {{confFase.titulo}}:
+                                <small class="text-muted">
+                                    09/09/2019
+                                </small>
+                            </h4>
+                            
+                        </div>
+                        <div class="col-md-6" *ngIf="confFase.mostrarJefeProyecto">
+                            <h4>
+                                Jefe de proyecto:
+                                <small class="text-muted">
+                                    María José Barquero
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                    <!-- END-Fecha de creación y Jefe de proyecto -->
+<!-- FASE CREACION -->
+                    <!-- Descripción -->
+                    <div *ngIf="confFase.mostrarDescripcion" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Descripción:
+                                <small class="text-muted">
+                                        Este proyecto consiste en crear algo de alguna cosa que haga cosas muy chulas,Este proyecto consiste en crear algo de alguna cosa que haga cosas muy chulas
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Descripción -->
+<!-- FASE REQUERIMIENTOS -->
+                    <!-- Documentos de requerimientos -->
+                    <div *ngIf="confFase.mostrarDocReq" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Documento requerimientos:
+                                <small class="text-muted">
+                                        Requerimientos.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Documentos de requerimientos -->
+<!-- FASE ANALISIS -->
+                    <!-- Tabla de análisis y tiempos -->
+                    <div *ngIf="confFase.mostrarAnalisis" class="row margenSup">
+                        <div class="col-md-12">
+                            <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                                <table class="table">
+                                    <thead>
+                                        <th>Fase</th>
+                                        <th>Recursos</th>
+                                        <th>Tiempo</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Especificación</td>
+                                            <td>2 I+D, 2 Jefatura, 1 Calidad</td>
+                                            <td>1 mes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Desarrollo</td>
+                                            <td>2 I+D</td>
+                                            <td>2 meses</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Validación</td>
+                                            <td>1 Calidad</td>
+                                            <td>1 mes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END-Tabla de análisis y tiempos -->
+<!-- FASE APROBACION -->
+                    <!-- Para fase de aprobación -->
+                    <!-- Estado aprobación -->
+                    <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
+                        <div class="col-md-6">
+                            <h4>
+                                Estado aprobación:
+                                <small class="text-muted">
+                                    Aprobado
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                    <!-- END-Estado aprobación -->
+                    <!-- Motivo de la aprobación/no aprobación -->
+                    <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Motivo:
+                                <small class="text-muted">
+                                        No merece la pena
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Motivo de la aprobación/no aprobación -->
+                    <!-- END-Para fase de aprobación -->
+<!-- FASE PLANIFICACION -->
+                    <!-- Tabla de planificación -->
+                    <div *ngIf="confFase.mostrarPlanif" class="row margenSup">
+                        <div class="col-md-12">
+                            <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                                <table class="table">
+                                    <thead>
+                                        <th>Fase</th>
+                                        <th>Fecha inicio</th>
+                                        <th>Fecha fin</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Especificación</td>
+                                            <td>01/01/2019</td>
+                                            <td>01/04/2019</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Desarrollo</td>
+                                            <td>01/04/2019</td>
+                                            <td>01/06/2019</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Validación</td>
+                                            <td>01/06/2019</td>
+                                            <td>01/08/2019</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END-Tabla de planificación -->
+<!-- FASE ESPECIFICACION -->
+                    <!-- Documentos de especificación -->
+                    <div *ngIf="confFase.mostrarDocEsp" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Documento especificaciones:
+                                <small class="text-muted">
+                                        Especificaciones.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Documentos de especificación -->
+<!-- FASE DESARROLLO -->
+                    <!-- Para la fase de desarrollo -->
+                    <!-- Descripción general Diseño-->
+                    <div *ngIf="confFase.mostrarDescDiseno" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Descripción general:
+                                <small class="text-muted">
+                                    Descripción del desarrollo
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Descripción general-->
+                    <!-- Descripción bloque 1-->
+                    <div *ngIf="confFase.mostrarInformeDiseno" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Descripción bloque 1:
+                                <small class="text-muted">
+                                    Descripción del desarrollo
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Descripción bloque 1-->
+                    <!-- Tabla bloque 1 -->
+                    <div *ngIf="confFase.mostrarInformeDiseno" class="row margenSup">
+                        <div class="col-md-12">
+                            <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                                <table class="table">
+                                    <thead>
+                                        <th>Tipo</th>
+                                        <th>ruta</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Esquemático</td>
+                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>PCB</td>
+                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Componentes</td>
+                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Software</td>
+                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                        </tr>
+                                    </tbody>
+                                </table>                        
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END-Tabla bloque 1 -->
+                    <!-- Documentos de SOO -->
+                    <div *ngIf="confFase.mostrarDocSOO" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Documento SOO:
+                                <small class="text-muted">
+                                        SOO.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Para la fase de desarrollo -->
+<!-- FASE VALIDACION INTERNA Y CALIDAD-->
+                    <!-- Para la fase de validación -->
+                    <!-- Documentos de pruebas realizadas -->
+                    <div *ngIf="confFase.mostrarDocPruebas" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Documento Pruebas:
+                                <small class="text-muted">
+                                        Pruebas.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Documentos de pruebas realizadas -->
+                    <!-- Documentos de Mantis -->
+                    <div *ngIf="confFase.mostrarDocMantis" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Documento Mantis:
+                                <small class="text-muted">
+                                        mantis.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Documentos de Mantis -->
+                    <!-- Manual -->
+                    <div *ngIf="confFase.mostrarManual" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Manual:
+                                <small class="text-muted">
+                                        manual.doc
+                                </small>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Manual -->
+                    <!-- Prueba en fábrica -->
+                    <div *ngIf="confFase.mostrarTestProbado" class="row margenSup">
+                        <div class="col-md-6">
+                            <h4>
+                                Test probado:
+                                <small class="text-muted">
+                                    SI
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                    <!-- END-Prueba en fábrica -->
+                    <!-- END-Para la fase de validación -->
+<!-- Fabricación primera unidad                 -->
+                    <!-- Fabricada en primera unidad -->
+                    <div *ngIf="confFase.mostrarPrimeraUnidadFabrciada" class="row margenSup">
+                        <div class="col-md-6">
+                            <h4>
+                                Fabricada primera unidad:
+                                <small class="text-muted">
+                                    NO
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                    <div *ngIf="confFase.mostrarComentariosFabPrimeraUnidad" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Comentarios:
+                                <small class="text-muted">
+                                        No ha habido problemas montándolo
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- END-Fabricada en primera unidad -->
+<!-- Validada primera unidad -->
+<!-- Validada primera unidad                 -->
+                    <!-- Validación primera unidad -->
+                    <div *ngIf="confFase.mostrarPrimeraUnidadTesteada" class="row margenSup">
+                        <div class="col-md-6">
+                            <h4>
+                                Validada primera unidad:
+                                <small class="text-muted">
+                                    NO
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                    <div *ngIf="confFase.mostrarComentariosValPrimeraUnidad" class="row margenSup">
+                        <div class="col-md-12">
+                            <h4>
+                                Comentarios:
+                                <small class="text-muted">
+                                        No ha habido problemas montándolo
+                                </small>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- END-Validación primera unidad -->
+                        
+                    <!-- Fecha prevista y responsable -->
+                    <div *ngIf="confFase.mostrarFechaResponsableSigFase" class="row margenSup">
+                        <div class="col-md-6">
+                            <h4>
+                                Fecha prevista recopilación:
+                                <small class="text-muted">
+                                    09/09/2019
+                                </small>
+                            </h4>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <h4>
+                                Resposable:
+                                <small class="text-muted">
+                                    Jefatura de producto
+                                </small>
+                            </h4>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

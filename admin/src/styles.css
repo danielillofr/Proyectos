@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+.botonActivo {
+    color: #965496;
+  }
+  
+  /* Fases */
+  
+  @media screen and (max-width: 1125px) {
+    .cajaFases {
+      display: none;
+    }
+  }
+  
+  .barraAccesoFases {
+    min-width: 805px; 
+    text-align: center;
+  }
+
+
+  .cardFases {
+    background-color: #E0F0FF;}
+    .cardFases h3 {
+      color: black;;
+    }
+  .cardTitleCenter {
+    text-align: center;
+  } 
+  .tableAnalisis {
+    border: #716db0;
+    border-block-style: solid;
+  }
+
+  .margenSup {
+    padding-top: 10px;
+  }
+  
+

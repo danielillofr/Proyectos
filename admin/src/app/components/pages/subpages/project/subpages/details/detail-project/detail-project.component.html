@@ -1,0 +1,53 @@
+
+
+<div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2" style="min-width: 208px">
+                <div class="card bg-gradient-warning stretch-card grid-margin">
+
+                        <div class="card-body" style="text-align:center; height: 182px;">
+                                <h3>Estado actual</h3>
+                                <h4 style="color: white">Creado</h4>
+                        </div>
+                </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2" style="min-width: 208px">
+                <div class="card bg-gradient-warning stretch-card grid-margin">
+
+                        <div class="card-body" style="text-align:center; height: 182px;">
+                                <h3>Fase actual</h3>
+                                <h4 style="color: white">Recopilando requerimientos</h4>
+                                <button type="button" [routerLink]="['/pages','project',idProyecto,'avanzararecreq']" class="btn btn-gradient-info btn-rounded btn-fw">
+                                        <i class="mdi mdi-border-color"></i>
+                                        Avanzar
+                                </button>
+                                <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+                        </div>
+                </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2" style="min-width: 208px">
+                <div class="card bg-gradient-warning stretch-card grid-margin">
+
+                        <div class="card-body" style="text-align:center; height: 182px;">
+                                <h3>Jefe de proyecto</h3>
+                                <h4 style="color: white">María José Barquero</h4>
+                                <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
+                        </div>
+                </div>
+        </div>
+</div>            
+
+<div class="cajaFases">
+
+        <hr>
+        
+        <!-- <div class="container cajaFases"> -->
+                
+                
+                <app-barra-fases [idProyecto]="idProyecto"></app-barra-fases>
+                <hr>
+                <router-outlet></router-outlet>
+        </div>
+<!-- </div> -->
