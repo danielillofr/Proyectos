@@ -25,7 +25,8 @@ let Autentificar = (req, res, next) => {
 }
 
 let AutentificarAdmin = (req, res, next) => {
-    if (req.usuario.nombre != 'Administrator') {
+    console.log(req.usuario);
+    if (req.usuario.role != 'ADMINISTRADOR') {
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
@@ -36,7 +37,7 @@ let AutentificarAdmin = (req, res, next) => {
 }
 
 let AutentificarAdminOUser = (req, res, next) => {
-    if ((req.usuario.nombre) == 'Administrator') {
+    if ((req.usuario.role) == 'ADMINISTRADOR') {
         return next();
     }
     if (req.usuario._id == mongoose.Types.ObjectId(req.params.id)) {

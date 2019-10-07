@@ -9,7 +9,7 @@ const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./.
 
 //Obtener un listado con todos los usuarios. Solo administrador
 
-app.get('/api/usuarios', Autentificar, function(req, res) {
+app.get('/api/usuarios/todos', Autentificar, AutentificarAdmin, function(req, res) {
     Usuario.find({}, (err, usuariosDB) => {
         if (err) {
             return res.status(200).json({
@@ -25,21 +25,48 @@ app.get('/api/usuarios', Autentificar, function(req, res) {
     })
 })
 
+app.get('/api/usuarios', Autentificar, function(req, res) {
+    let busqueda = {
+        $or: [{ aprobador: req.usuario._id },
+            { _id: req.usuario._id }
+        ]
+
+    };
+    if (req.usuario.role === 'DIRECTOR') {
+        busqueda = {};
+    }
+    Usuario.find(busqueda, (err, usuariosDB) => {
+        if (err) {
+            return res.status(200).json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        res.status(200).json({
+            ok: true,
+            usuarios: usuariosDB
+        })
+    })
+})
 
 //Creacion de un nuevo usuario
 
 app.post('/api/usuarios', (req, res) => {
     let body = req.body;
-    if ((!body.nombre) || (!body.clave)) {
+    if ((!body.nombre) || (!body.nombreCompleto)) {
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
-            err: 'Nombre y clave requeridos'
+            err: 'Nombre, clave y nombre completo requeridos'
         })
     }
     let usuario = new Usuario({
         nombre: body.nombre,
-        clave: bcrypt.hashSync(body.clave, 10)
+        nombreCompleto: body.nombreCompleto,
+        clave: bcrypt.hashSync(body.clave, 10),
+        role: body.role,
+        aprobador: body.aprobador
     })
     usuario.save((err, usuarioDB) => {
         if (err) {
@@ -81,6 +108,17 @@ app.post('/api/usuarios/login', (req, res) => {
                 errBaseDatos: false,
                 err: 'Usuario no existe'
             })
+        }
+        if (bcrypt.compareSync('', usuarioDB.clave)) {
+            console.log('Usuario sin clave, asumimos la clave que viene');
+            usuarioDB.clave = bcrypt.hashSync(body.clave, 10);
+            Usuario.findByIdAndUpdate(usuarioDB._id, { clave: usuarioDB.clave }, (err2, usuario2DB) => {
+                if (err2) {
+                    console.log('Error:', err2);
+                } else {
+                    console.log('Usuario:', usuario2DB);
+                }
+            });
         }
         if (!(bcrypt.compareSync(body.clave, usuarioDB.clave))) {
             return res.status(200).json({ //Contraseña incorrecta
@@ -138,7 +176,7 @@ app.delete('/api/usuarios/:id', [Autentificar, AutentificarAdmin], (req, res) =>
 app.put('/api/usuarios/:id', [Autentificar, AutentificarAdminOUser], (req, res) => {
     let body = req.body;
     let id = req.params.id;
-    body = _.pick(body, ['nombre']);
+    body = _.pick(body, ['nombre', 'nombreCompleto', 'clave']);
     Usuario.findByIdAndUpdate(id, body, { new: true }, (err, usuarioDB) => {
         if (err) {
             return res.status(200).json({
@@ -153,5 +191,6 @@ app.put('/api/usuarios/:id', [Autentificar, AutentificarAdminOUser], (req, res) 
         })
     })
 })
+
 
 module.exports = app;
