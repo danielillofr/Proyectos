@@ -2,7 +2,7 @@ const Proyecto = require('./../models/proyecto');
 const express = require('express');
 const app = express();
 const _ = require('underscore');
-const {Crear_proyecto,Eliminar_proyecto} = require ('./../dbAccess/proyectos')
+const {Crear_proyecto,Eliminar_proyecto,Completar_fase} = require ('./../dbAccess/proyectos')
 
 const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./../middlewares/Autentificar');
 
@@ -14,7 +14,7 @@ resumenProyectos = (proyectosDB) => {
         let fecha = '';
         switch(proyectosDB[i].fase) {
             case 0:{
-                fecha = (proyectosDB[i].fase1.fechaPrevista)?proyectosDB[i].fase1.fechaPrevista:'--';
+                fecha = (proyectosDB[i].fechaPrevista)?proyectosDB[i].fechaPrevista:'--';
                 break;
             }
         }
@@ -45,10 +45,28 @@ app.get('/api/proyectos/todos', [Autentificar, AutentificarAdmin], (req, res) =>
     })
 })
 
+//Detalle de un proyecto
+app.get('/api/proyectos/detalle/:id', [Autentificar], (req,res) => {
+    Proyecto.findById(req.params.id, (err, proyectoDB)=> {
+        if (err) {
+            return res.json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        return res.json({
+            ok:true,
+            proyecto: proyectoDB
+        })
+    })
+})
+
 //Crear un nuevo proyecto
 app.post('/api/proyectos', [Autentificar], (req,res) => {
     const datosProyecto = req.body;
-    if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)) {
+    if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)
+        || (!datosProyecto.fechaCreacion)) {
         return res.json({
             ok: false,
             errBaseDatos: false,
@@ -87,6 +105,32 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
                 ok: false,
                 errBaseDatos: true,
                 err
+            })
+        })
+})
+
+app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
+    let body = req.body;
+    const id = req.params.id;
+    if ((!body.fase)) {
+        return res.json({
+            ok: false,
+            errBaseDatos: false,
+            err: 'Hay que indicar la fase'
+        })
+    }
+    Completar_fase(id, body)
+        .then(proyecto => {
+            return res.json({
+                ok: true,
+                proyecto
+            })
+        })
+        .catch(error => {
+            return res.json({
+                ok: false,
+                errBaseDatos: error.errBaseDatos,
+                err: error.err
             })
         })
 })

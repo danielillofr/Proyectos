@@ -23,18 +23,30 @@ const proyectoSchema = new Schema({
         ref: 'Usuario',
         required: [true, 'El jefe de proyecto es requirido']
     },
+    fechaCreacion: {
+        type: Date,
+        required: [true, 'La fecha de creación es requerida']
+    },
+    fechaPrevista: {
+        type: Date,
+        required: [true, 'La fecha de creación es requerida']
+    },
     fase: {
         type: Number,
         default: 0
     },
     fase1: new Schema({
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
         rutaRequerimientos: {
             type: String,
             default: ''
         },
         fechaPrevista: {
             type: Date,
-            required: [true, 'La fecha prevista de requerimientos es necesaria']
+            default: '2019/01/01'
         }
     })
 })
