@@ -17,11 +17,16 @@ resumenProyectos = (proyectosDB) => {
                 fecha = (proyectosDB[i].fechaPrevista)?proyectosDB[i].fechaPrevista:'--';
                 break;
             }
+            case 1:{
+                fecha = (proyectosDB[i].fase1.fechaPrevista)?proyectosDB[i].fase1.fechaPrevista:'--';
+                break;
+            }
         }
         proyectos.push({
             _id: proyectosDB[i]._id,
             nombre: proyectosDB[i].nombre,
             descripcion: proyectosDB[i].descripcion,
+            fase: proyectosDB[i].fase,
             fechaPrevista: fecha
         })
     }
@@ -111,6 +116,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
 
 app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     let body = req.body;
+    console.log('Body:',body);
     const id = req.params.id;
     if ((!body.fase)) {
         return res.json({
@@ -127,10 +133,11 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
             })
         })
         .catch(error => {
+            console.log(error.message);
             return res.json({
                 ok: false,
-                errBaseDatos: error.errBaseDatos,
-                err: error.err
+                errBaseDatos: (error.errBaseDatos != null)?error.errBaseDatos:false,
+                err: (error.err != null)?error.err:error.message
             })
         })
 })

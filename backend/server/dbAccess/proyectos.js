@@ -1,4 +1,5 @@
 const Proyecto = require ('./../models/proyecto');
+const _ = require('underscore');
 
 Crear_proyecto = (datosProyecto) => {
     return new Promise((resolve,reject) => {
@@ -33,9 +34,46 @@ Eliminar_proyecto = (idProyecto) => {
     })
 }
 
-Completar_fase = (id,datos) => {
+Comprabar_fase_correcta = (id,fase) => {
+    return new Promise ((resolve,reject) => {
+        Proyecto.findById(id, (err, proyectoDB) => {
+            if (err) {
+                reject ({
+                    errBaseDatos: true,
+                    err
+                })
+            }else{
+                let faseProyecto = Number(proyectoDB.fase);
+                faseProyecto++;
+
+                console.log(proyectoDB.fase);
+                if (faseProyecto === Number(fase)) {
+                    resolve(true);
+                }else{
+                    resolve(false);
+                }
+            }
+        })
+    })
+    
+}
+
+
+Completar_fase = async(id,datos) => {
+    console.log('Comprobando fase')
+    const faseCorrecta = await Comprabar_fase_correcta(id,datos.fase);
+    if (!faseCorrecta) {
+        console.log('ERror en la fase')
+        throw new Error('No se puede completar la fase en la que no está el proyecto')
+    }
+    const faseCompletada = await Completar_fase_comprobada(id,datos);
+    console.log(faseCorrecta);
+    return faseCompletada;
+}
+
+
+Completar_fase_comprobada = async(id,datos) => {
     return new Promise((resolve, reject) => {
-        console.log(datos);
         switch(datos.fase) {
             case '1': {//Requerimientos
                 if ((!datos.rutaRequerimientos) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
@@ -64,6 +102,176 @@ Completar_fase = (id,datos) => {
                     })
                 }
             }break;
+            case '2': {
+                console.log('Analisis:', datos.analisis);
+                if ((!datos.analisis) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, analisis y fecha prevista necesarias'
+                    })
+                }else{
+                    let pasosAnalisis = new Array();
+                    for (let i = 0; i < datos.analisis.length; i++) {
+                        let fase = datos.analisis[i];
+                        if ((fase.fase) && (fase.recursos) && (fase.tiempo)) {
+                            fase = _.pick(fase, ['fase','recursos','tiempo']);
+                            pasosAnalisis.push(fase);
+                        }
+                    }
+                    console.log('Pasos:', pasosAnalisis);
+                    const actualizacion = {
+                        fase: 2,
+                        fase2: {
+                            fechaCreacion: datos.fechaCreacion,
+                            analisis: pasosAnalisis,
+                            fechaPrevista: datos.fechaPrevista
+                        }
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
+            case '3':{
+                if ((!datos.estadoAprobacion) || (!datos.motivo) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, estado aprobacion y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 3,
+                        fase3: {
+                            fechaCreacion: datos.fechaCreacion,
+                            estadoAprobacion: datos.estadoAprobacion,
+                            motivo: datos.motivo,
+                            fechaPrevista: datos.fechaPrevista
+                        }
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;        
+            case '4': {
+                console.log('Planificacion:', datos.planificacion);
+                if ((!datos.planificacion) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, planificacion y fecha prevista necesarias'
+                    })
+                }else{
+                    let pasosPlanificacion = new Array();
+                    for (let i = 0; i < datos.planificacion.length; i++) {
+                        let fase = datos.planificacion[i];
+                        if ((fase.fase) && (fase.fechaInicio) && (fase.fechaFin)) {
+                            fase = _.pick(fase, ['fase','fechaInicio','fechaFin']);
+                            pasosPlanificacion.push(fase);
+                        }
+                    }
+                    console.log('Pasos:', pasosPlanificacion);
+                    const actualizacion = {
+                        fase: 4,
+                        fase4: {
+                            fechaCreacion: datos.fechaCreacion,
+                            planificacion: pasosPlanificacion,
+                            fechaPrevista: datos.fechaPrevista
+                        }
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
+            case '5': {//Especificaciones
+                if ((!datos.rutaEspecificaciones) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, ruta de especificaciones y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 5,
+                        fase5: {
+                            rutaEspecificaciones: datos.rutaEspecificaciones,
+                            fechaPrevista: datos.fechaPrevista,
+                            fechaCreacion: datos.fechaCreacion
+                        }
+                    }
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;      
+            case '6': { //Ruta desarrollo
+                if ((!datos.desarrollo) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, desarrollo y fecha prevista necesarias'
+                    })
+                }else{
+                    let pasosDesarrollo = new Array();
+                    for (let i = 0; i < datos.desarrollo.length; i++) {
+                        let bloque = datos.desarrollo[i];
+                        if ((bloque.nombreBloque) && (bloque.rutaEsquematico) && (bloque.rutaPCB)
+                            && (bloque.rutaComponentes) && (bloque.rutaSoftware)) {
+                            bloque = _.pick(bloque, ['nombreBloque','rutaEsquematico','rutaPCB', 'rutaComponentes','rutaSoftware']);
+                            pasosDesarrollo.push(bloque);
+                        }
+                    }
+                    console.log('Pasos:', pasosDesarrollo);
+                    const actualizacion = {
+                        fase: 6,
+                        fase6: {
+                            fechaCreacion: datos.fechaCreacion,
+                            desarrollo: pasosDesarrollo,
+                            fechaPrevista: datos.fechaPrevista
+                        }
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;   
             default:{
                 reject({
                     errBaseDatos: false,

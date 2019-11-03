@@ -7,6 +7,49 @@ const uniqueValidator = require('mongoose-unique-validator');
 //     message: '{VALUE} no es un estado válido para el role'
 // }
 
+const faseAnalisis = new Schema({
+    fase: String,
+    recursos: String,
+    tiempo: String
+})
+
+const fasePlanificacion = new Schema({
+    fase: {
+        type: String,
+        default: ''
+    },
+    fechaInicio: {
+        type: Date,
+        default: '2019/01/01'        
+    },
+    fechaFin: {
+        type: Date,
+        default: '2019/01/01'        
+    }
+})
+
+const faseDesarrollo = new Schema({
+    nombreBloque: {
+        type: String,
+        default: ''
+    },
+    rutaEsquematico: {
+        type: String,
+        default: ''
+    },
+    rutaPCB: {
+        type: String,
+        default: ''
+    },
+    rutaComponentes: {
+        type: String,
+        default: ''
+    },
+    rutaSoftware: {
+        type: String,
+        default: ''
+    }
+})
 
 const proyectoSchema = new Schema({
     nombre: {
@@ -35,7 +78,7 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
-    fase1: new Schema({
+    fase1: {
         fechaCreacion: {
             type: Date,
             default: '2019/01/01'
@@ -48,7 +91,72 @@ const proyectoSchema = new Schema({
             type: Date,
             default: '2019/01/01'
         }
-    })
+    },
+    fase2: {
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        }, 
+        analisis: [faseAnalisis],
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase3: {
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        }, 
+        estadoAprobacion: {
+            type: Boolean,
+            default: false
+        },
+        motivo: {
+            type: String,
+            default: ''
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase4: {
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        }, 
+        planificacion: [fasePlanificacion],
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase5: {
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        rutaEspecificaciones: {
+            type: String,
+            default: ''
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase6: { //Fase desarrollo
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        desarrollo: [faseDesarrollo],
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    }
 })
 
 // proyectoSchema.methods.toJSON = function() {
