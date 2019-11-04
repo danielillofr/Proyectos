@@ -88,7 +88,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             rutaRequerimientos: datos.rutaRequerimientos,
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: datos.fechaCreacion
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
                         if (err) {
@@ -125,7 +126,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             fechaCreacion: datos.fechaCreacion,
                             analisis: pasosAnalisis,
                             fechaPrevista: datos.fechaPrevista
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     console.log(actualizacion);
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
@@ -154,7 +156,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             estadoAprobacion: datos.estadoAprobacion,
                             motivo: datos.motivo,
                             fechaPrevista: datos.fechaPrevista
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     console.log(actualizacion);
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
@@ -192,7 +195,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             fechaCreacion: datos.fechaCreacion,
                             planificacion: pasosPlanificacion,
                             fechaPrevista: datos.fechaPrevista
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     console.log(actualizacion);
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
@@ -220,7 +224,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             rutaEspecificaciones: datos.rutaEspecificaciones,
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: datos.fechaCreacion
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
                         if (err) {
@@ -257,7 +262,8 @@ Completar_fase_comprobada = async(id,datos) => {
                             fechaCreacion: datos.fechaCreacion,
                             desarrollo: pasosDesarrollo,
                             fechaPrevista: datos.fechaPrevista
-                        }
+                        },
+                        fechaPrevista: datos.fechaPrevista
                     }
                     console.log(actualizacion);
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
@@ -272,6 +278,132 @@ Completar_fase_comprobada = async(id,datos) => {
                     })
                 }
             }break;   
+            case '7':{
+                if ((!datos.documentoPrueba) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                  ||(!datos.documentoMantis) || (!datos.documentoManual) || (!datos.testProbado)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, documentos y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 7,
+                        fase7: {
+                            documentoPrueba: datos.documentoPrueba,
+                            documentoMantis: datos.documentoMantis,
+                            documentoManual: datos.documentoManual,
+                            testProbado: datos.testProbado,
+                            fechaPrevista: datos.fechaPrevista,
+                            fechaCreacion: datos.fechaCreacion
+                        },
+                        fechaPrevista: datos.fechaPrevista
+                    }
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
+            case '8':{
+                if ((!datos.documentoPrueba) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                  ||(!datos.documentoMantis) || (!datos.testProbado)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, documentos y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 8,
+                        fase8: {
+                            documentoPrueba: datos.documentoPrueba,
+                            documentoMantis: datos.documentoMantis,
+                            testProbado: datos.testProbado,
+                            fechaPrevista: datos.fechaPrevista,
+                            fechaCreacion: datos.fechaCreacion
+                        },
+                        fechaPrevista: datos.fechaPrevista
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
+            case '9':{
+                if ((!datos.primeraUnidad) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                  ||(!datos.comentarios)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, datos y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 9,
+                        fase9: {
+                            primeraUnidad: datos.primeraUnidad,
+                            comentarios: datos.comentarios,
+                            fechaPrevista: datos.fechaPrevista,
+                            fechaCreacion: datos.fechaCreacion
+                        },
+                        fechaPrevista: datos.fechaPrevista
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
+            case '10':{
+                if ((!datos.primeraUnidad) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                  ||(!datos.comentarios)) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Fecha de creación, datos y fecha prevista necesarias'
+                    })
+                }else{
+                    const actualizacion = {
+                        fase: 10,
+                        fase10: {
+                            primeraUnidad: datos.primeraUnidad,
+                            comentarios: datos.comentarios,
+                            fechaPrevista: datos.fechaPrevista,
+                            fechaCreacion: datos.fechaCreacion
+                        },
+                        fechaPrevista: datos.fechaPrevista
+                    }
+                    console.log(actualizacion);
+                    Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
+                        if (err) {
+                            reject({
+                                errBaseDatos: true,
+                                err
+                            })
+                        }else{
+                            resolve (proyectoAct);
+                        }
+                    })
+                }
+            }break;
             default:{
                 reject({
                     errBaseDatos: false,

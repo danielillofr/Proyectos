@@ -156,6 +156,90 @@ const proyectoSchema = new Schema({
             type: Date,
             default: '2019/01/01'
         }
+    },
+    fase7: { //Fase validacion interna
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        documentoPrueba: {
+            type: String,
+            default: ''
+        },
+        documentoMantis: {
+            type: String,
+            default: ''
+        },
+        documentoManual: {
+            type: String,
+            default: ''
+        },
+        testProbado: {
+            type: Boolean,
+            default: false
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase8: { //Fase validacion calidad
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        documentoPrueba: {
+            type: String,
+            default: ''
+        },
+        documentoMantis: {
+            type: String,
+            default: ''
+        },
+        testProbado: {
+            type: Boolean,
+            default: false
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase9: { //Fabricación primera unidad
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        primeraUnidad: {
+            type: Boolean,
+            default: false
+        },
+        comentarios: {
+            type: String,
+            default: ''
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
+    fase10: { //Validación primera unidad
+        fechaCreacion: {
+            type: Date,
+            default: '2019/01/01'
+        },
+        primeraUnidad: {
+            type: Boolean,
+            default: false
+        },
+        comentarios: {
+            type: String,
+            default: ''
+        },
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
     }
 })
 
