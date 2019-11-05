@@ -1,6 +1,8 @@
 const Proyecto = require ('./../models/proyecto');
 const _ = require('underscore');
 
+const {Anadir_log_proyecto_creado,Anadir_log_fase_completada,Obtener_log_proyecto,Anadir_log_proyecto_modificado} = require ('./logs')
+
 Crear_proyecto = (datosProyecto) => {
     return new Promise((resolve,reject) => {
         const nuevoProyecto = new Proyecto({
@@ -18,6 +20,44 @@ Crear_proyecto = (datosProyecto) => {
             }
         })
     })
+}
+
+
+Crear_proyecto_con_log = async(datosProyecto,usuario) => {
+    try{
+        const proyectoCreado = await Crear_proyecto (datosProyecto);
+        console.log(proyectoCreado);
+        await Anadir_log_proyecto_creado(proyectoCreado._id, usuario);
+        return proyectoCreado;
+    }catch(err){
+        throw new Error (err);
+    }
+}
+
+Obtener_proyecto = (id) => {
+    return new Promise((resolve,reject) => {
+        Proyecto.findById(id, (err, proyectoDB) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(proyectoDB)
+            }
+        })
+    })
+}
+
+
+Obterner_proyecto_completo = async(id) => {
+    try{
+        const proyecto = await Obtener_proyecto(id);
+        const logs = await Obtener_log_proyecto(id);
+        return({
+            proyecto,
+            logs
+        })
+    }catch(err){
+        throw new Error(err);
+    }
 }
 
 Eliminar_proyecto = (idProyecto) => {
@@ -59,7 +99,7 @@ Comprabar_fase_correcta = (id,fase) => {
 }
 
 
-Completar_fase = async(id,datos) => {
+Completar_fase = async(id,datos,usuario) => {
     console.log('Comprobando fase')
     const faseCorrecta = await Comprabar_fase_correcta(id,datos.fase);
     if (!faseCorrecta) {
@@ -68,6 +108,8 @@ Completar_fase = async(id,datos) => {
     }
     const faseCompletada = await Completar_fase_comprobada(id,datos);
     console.log(faseCorrecta);
+    const logDB = await Anadir_log_fase_completada(id,datos.fase,usuario);
+    console.log('Log:', logDB);
     return faseCompletada;
 }
 
@@ -414,5 +456,28 @@ Completar_fase_comprobada = async(id,datos) => {
     })
 }
 
-module.exports = {Crear_proyecto,Eliminar_proyecto,Completar_fase}
+Modificar_proyectoDB = (id, datos) => {
+    return new Promise((resolve,reject) => {
+        datos = _.pick(datos, ['nombre','fase','descripcion']);
+        Proyecto.findByIdAndUpdate(id,datos,{new:true},(err, proyectoDB) => {
+            if (err){
+                reject(err);
+            }else{
+                resolve(proyectoDB);
+            }
+        })
+    })
+}
+
+Modificar_proyecto = async(id,datos,usuario) => {
+    try{
+        const proyectoDB = await Modificar_proyectoDB(id,datos);
+        await Anadir_log_proyecto_modificado(id,usuario);
+        return proyectoDB;
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
+module.exports = {Crear_proyecto_con_log,Eliminar_proyecto,Completar_fase,Obterner_proyecto_completo,Modificar_proyecto}
 
