@@ -78,6 +78,30 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
+    versionReq: {
+        type: Number,
+        default: 0
+    },
+    versionEsp: {
+        type: Number,
+        default: 0
+    },
+    versionValInt: {
+        type: Number,
+        default: 0
+    },
+    versionValCal: {
+        type: Number,
+        default: 0
+    },
+    versionDiseno: {
+        type: Number,
+        default: 0
+    },
+    versionCambio: {
+        type: Number,
+        default: 0
+    },
     fase1: {
         fechaCreacion: {
             type: Date,
