@@ -31,6 +31,7 @@ import { AvanzaraFabpriunidadComponent } from './components/pages/subpages/proje
 import { AvanzaraValpriunidadComponent } from './components/pages/subpages/project/subpages/avanzara-valpriunidad/avanzara-valpriunidad.component';
 import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project/subpages/avanzara-desarrollo/avanzara-desarrollo.component';
 
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project
   ],
   imports: [
     BrowserModule,
-    app_routing
+    app_routing,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
