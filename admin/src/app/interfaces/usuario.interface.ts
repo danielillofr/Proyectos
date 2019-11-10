@@ -19,3 +19,8 @@ export interface RespuestaTipoLogin {
   usuario: TipoUsuario,
   token: String
 }
+
+export interface RespuestaListaUsuarios {
+  ok: boolean,
+  usuarios: TipoUsuario[]
+}

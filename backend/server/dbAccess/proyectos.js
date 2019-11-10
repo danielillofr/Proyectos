@@ -10,7 +10,7 @@ Crear_proyecto = (datosProyecto) => {
             descripcion: datosProyecto.descripcion,
             jefeProyecto: datosProyecto.jefeProyecto,
             fechaPrevista: datosProyecto.fechaPrevista,
-            fechaCreacion: datosProyecto.fechaCreacion
+            fechaCreacion: new Date()
         })
         nuevoProyecto.save((err, proyectoDB) => {
             if (err) {

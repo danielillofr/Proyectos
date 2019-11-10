@@ -74,8 +74,7 @@ app.get('/api/proyectos/detalle/:id', [Autentificar], (req,res) => {
 //Crear un nuevo proyecto
 app.post('/api/proyectos', [Autentificar], (req,res) => {
     const datosProyecto = req.body;
-    if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)
-        || (!datosProyecto.fechaCreacion)) {
+    if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)) {
         return res.json({
             ok: false,
             errBaseDatos: false,

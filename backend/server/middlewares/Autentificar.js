@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 let Autentificar = (req, res, next) => {
     let tokenRecibido = req.get('Authorization');
+    console.log('token:', tokenRecibido)
     if (!tokenRecibido) {
         return res.status(200).json({
             ok: false,

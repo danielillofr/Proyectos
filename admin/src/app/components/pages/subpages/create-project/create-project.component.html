@@ -7,27 +7,34 @@
                 <p class="card-description">
                     <!-- Rellene la información necesaria para la creación del proyecto -->
                 </p>
-                <form class="forms-sample">
+                <form class="forms-sample" [formGroup]="formCrearProyecto">
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre del proyecto</label>
-                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Nombre">
+                        <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Nombre">
                     </div>
                     <div class="form-group">
                         <label for="exampleTextarea1">Descripción del proyecto</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="2" placeholder="Descripción"></textarea>
+                        <textarea class="form-control" formControlName="descripcion" id="descripcion" rows="2" placeholder="Descripción"></textarea>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="exampleTextarea1">Jefe del proyecto</label>
                         <textarea class="form-control" id="exampleTextarea1" rows="2" placeholder="Jefe del proyecto"></textarea>
-                    </div>
-                    <div class="form-group"> <!-- Date input -->
-                        <label class="control-label" for="date">Date</label>
-                        <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                    </div> -->
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect3">Jefe de proyecto</label>
+                        <select class="form-control form-control-sm" formControlName="jefeProyecto" id="jefeProyecto">
+                          
+                          <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{usuario.nombreCompleto}}</option>
+                        </select>
+                      </div>                    
+                      <div class="form-group"> <!-- Date input -->
+                        <label class="control-label" for="date">Fecha requerimientos</label>
+                        <input class="form-control" formControlName="fechaPrevista" id="fechaPrevista" name="fechaPrevista" (change)="cambiado($event)" placeholder="DD/MM/YYYY" type="text"/>
                       </div>
          
-                    <button type="submit" class="btn btn-success mr-2" [routerLink]="['/pages']" >Guardar</button>
+                    </form>
+                    <button type="button" (click)="Guardar()" class="btn btn-success mr-2">Guardar</button>
                     <button class="btn btn-light" [routerLink]="['/pages']">Cancelar</button>
-                </form>
             </div>
         </div>
     </div>

@@ -23,12 +23,14 @@ import { AvanzaraValcalidadComponent } from './components/pages/subpages/project
 import { AvanzaraFabpriunidadComponent } from './components/pages/subpages/project/subpages/avanzara-fabpriunidad/avanzara-fabpriunidad.component';
 import { AvanzaraValpriunidadComponent } from './components/pages/subpages/project/subpages/avanzara-valpriunidad/avanzara-valpriunidad.component';
 import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project/subpages/avanzara-desarrollo/avanzara-desarrollo.component';
+import { PagesGuardGuard } from './guards/pages-guard.guard';
 
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'pages', 
         component: PagesComponent,
+        canActivate: [PagesGuardGuard],
         children:[
             {path: '', component: DefaultComponent},
             {path: 'createproject', component: CreateProjectComponent},

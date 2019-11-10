@@ -32,6 +32,7 @@ import { AvanzaraValpriunidadComponent } from './components/pages/subpages/proje
 import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project/subpages/avanzara-desarrollo/avanzara-desarrollo.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -68,7 +69,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     app_routing,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

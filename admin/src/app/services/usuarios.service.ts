@@ -22,5 +22,15 @@ export class UsuariosService {
     return this.http.post<RespuestaTipoLogin>(`${this.env}/api/usuarios/login`, {nombre: usuario, clave});
   }
 
+  soliticar_usuarios() {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.token
+      })
+    };
+    // return this.http.get(`http://localhost:3000/api/usuarios`, opciones);
+    return this.http.get<RespuestaListaUsuarios>(`${this.env}/api/usuarios/todos`, opciones);
+
+  }
 
 }

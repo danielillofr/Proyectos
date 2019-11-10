@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from './../../services/usuarios.service';
 import { TipoUsuario, RespuestaListaUsuarios,RespuestaTipoLogin } from './../../interfaces/usuario.interface';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -11,14 +12,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private usuarioservice: UsuariosService, private router: Router) { }
+  formLogin: FormGroup;
+  constructor(private usuarioservice: UsuariosService, private router: Router) {
+    this.formLogin = new FormGroup({
+      nombre: new FormControl('',[Validators.required]),
+      clave: new FormControl('', [Validators.required])
+    })
+   }
 
   ngOnInit() {
   }
 
   Loguearse = () => {
-    this.usuarioservice.solicitar_token('dfernandez','123456')
+    this.usuarioservice.solicitar_token(this.formLogin.controls['nombre'].value,this.formLogin.controls['clave'].value)
       .subscribe((datos)=>{
         const respuesta:RespuestaTipoLogin = <RespuestaTipoLogin>datos;
         if (respuesta.ok === false) {

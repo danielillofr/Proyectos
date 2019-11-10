@@ -9,7 +9,7 @@ const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./.
 
 //Obtener un listado con todos los usuarios. Solo administrador
 
-app.get('/api/usuarios/todos', Autentificar, AutentificarAdmin, function(req, res) {
+app.get('/api/usuarios/todos', Autentificar, function(req, res) {
     Usuario.find({}, (err, usuariosDB) => {
         if (err) {
             return res.status(200).json({
