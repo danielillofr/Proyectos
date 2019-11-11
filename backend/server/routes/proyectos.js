@@ -81,6 +81,7 @@ app.post('/api/proyectos', [Autentificar], (req,res) => {
             err: 'Faltan parámetros obligatorios'
         })
     }
+    console.log('A crear proyecto');
     Crear_proyecto_con_log(datosProyecto, req.usuario)
         .then(proyecto => {
             return res.json({

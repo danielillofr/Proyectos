@@ -8,7 +8,7 @@ import { environment } from './../../environments/environment';
   providedIn: 'root'
 })
 export class UsuariosService {
-  public token;
+  public token ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7InJvbGUiOiJBRE1JTklTVFJBRE9SIiwiX2lkIjoiNWQ4Zjc3NzVjZGNmN2E0OWY0M2ZjZWNhIiwibm9tYnJlIjoiZGZlcm5hbmRleiIsIm5vbWJyZUNvbXBsZXRvIjoiRGFuaWVsIEZlcm7DoW5kZXoiLCJfX3YiOjB9LCJpYXQiOjE1NzM1MDk2MjQsImV4cCI6MTU3NjEwMTYyNH0.NIaJX1tdBLHGBEWwfnPFbmpdpjKOYHnk9gn4bLPymmU';
   public logueado: Boolean = false;
   public usuarioApp: TipoUsuario;
 

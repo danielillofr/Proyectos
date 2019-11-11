@@ -30,7 +30,7 @@ const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'pages', 
         component: PagesComponent,
-        canActivate: [PagesGuardGuard],
+        // canActivate: [PagesGuardGuard],
         children:[
             {path: '', component: DefaultComponent},
             {path: 'createproject', component: CreateProjectComponent},

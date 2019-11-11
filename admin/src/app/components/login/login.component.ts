@@ -4,7 +4,7 @@ import { TipoUsuario, RespuestaListaUsuarios,RespuestaTipoLogin } from './../../
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-
+declare function swal(titulo: String, mensaje: String ,tipo: String);
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           } else {
             console.log(respuesta.err);
           }
-          alert('Error');
+          swal('Error', 'Datos incorrectos','error');
           return;
         }
         this.usuarioservice.token = respuesta.token;
@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
         console.log(this.usuarioservice.usuarioApp);
         this.router.navigate(['/pages']);
       }, (err) => {
-        console.log('Error accediendo a la base de datos');
+        swal('Error', 'Datos incorrectos','error');
+        console.log('Error accediendo a la base de datos:', err);
       });
     }
 

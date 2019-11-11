@@ -16,7 +16,7 @@
                 </div>
             </form>
                 <div class="text-center">
-                    <button (click)="Loguearse()" class="btn btn-primary btn-block enter-btn">Acceder</button>
+                    <button [disabled]="formLogin.status === 'INVALID'"  (click)="Loguearse()" class="btn btn-primary btn-block enter-btn">Acceder</button>
                 </div>
             </div>
             </div>

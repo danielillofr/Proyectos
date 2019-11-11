@@ -12,11 +12,13 @@ Crear_proyecto = (datosProyecto) => {
             fechaPrevista: datosProyecto.fechaPrevista,
             fechaCreacion: new Date()
         })
+        console.log('A ver que proyecto creamos:', nuevoProyecto);
         nuevoProyecto.save((err, proyectoDB) => {
             if (err) {
                 reject(err);
             }else{
                 resolve(proyectoDB);
+                console.log(proyectoDB);
             }
         })
     })
@@ -30,6 +32,7 @@ Crear_proyecto_con_log = async(datosProyecto,usuario) => {
         await Anadir_log_proyecto_creado(proyectoCreado._id, usuario);
         return proyectoCreado;
     }catch(err){
+        
         throw new Error (err);
     }
 }

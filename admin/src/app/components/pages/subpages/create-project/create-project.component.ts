@@ -10,6 +10,7 @@ import { AlertPromise } from 'selenium-webdriver';
 
 
 declare function $(any);
+declare function swal(titulo: String, mensaje: String ,tipo: String);
 
 @Component({
   selector: 'app-create-project',
@@ -17,7 +18,13 @@ declare function $(any);
   styles: []
 })
 export class CreateProjectComponent implements AfterContentChecked {
-  
+
+  Intercambiar_fecha = (fechaEuropa: string) => {
+    let b = fechaEuropa.split('/');
+    let fechaBD: string = b[1] + '/' + b[0] + '/' + b[2];
+    return fechaBD;
+  }
+
   formCrearProyecto: FormGroup;
   usuarios: TipoUsuario[] = null;
   constructor(private usuarioservice: UsuariosService, private proyectoservice: ProyectosService, private router:Router) {
@@ -33,29 +40,48 @@ export class CreateProjectComponent implements AfterContentChecked {
       .subscribe(usuarios=>{
         const listaUsuarios: RespuestaListaUsuarios = <RespuestaListaUsuarios>usuarios;
         if (listaUsuarios.ok === false) {
-          alert('Error obteniendo usuarios')
+          console.log(listaUsuarios.err);
+          swal('Error','Error obteniendo usuarios','error')
+            .then(()=>{
+              this.router.navigate(['/pages'])
+            })
         }else{
           this.usuarios = listaUsuarios.usuarios;
           console.log(this.usuarios);
         }
+      }, (err)=>{
+        console.log(err);
+        swal('Error','Error obteniendo usuarios','error')
+        .then(()=>{
+          this.router.navigate(['/pages'])
+        })        
       })
 
    }
   Guardar() {
     var date_input=$('input[name="fechaPrevista"]'); //our date input has the name "date"
-    this.formCrearProyecto.controls['fechaPrevista'].setValue(date_input.val());
 
     const proyecto:any = {
       nombre: this.formCrearProyecto.controls['nombre'].value,
       descripcion: this.formCrearProyecto.controls['descripcion'].value,
       jefeProyecto: this.formCrearProyecto.controls['jefeProyecto'].value,
-      fechaPrevista: this.formCrearProyecto.controls['fechaPrevista'].value
+      fechaPrevista: this.Intercambiar_fecha(this.formCrearProyecto.controls['fechaPrevista'].value)
     }
     this.proyectoservice.Crear_proyecto(proyecto)
-      .subscribe(proyecto=>{
-        console.log(proyecto);
-        this.router.navigate(['/pages']);
+      .subscribe(datos=>{
+        const respuesta: any = datos;
+        if (respuesta.ok === false)
+        {
+          swal('Error creando proyecto','No se ha podido crear el proyecto', 'error');
+          console.log('Error:', respuesta.err);
+        }else{
+          swal('Proyectos', 'Proyecto creado correctamente', 'success')
+            .then(()=>{
+              this.router.navigate(['/pages']);
+            })
+        }
       }, err=>{
+        swal('Error creando proyecto','No se ha podido crear el proyecto', 'error');
         console.log('Error:',err)
         
       })
@@ -67,8 +93,10 @@ export class CreateProjectComponent implements AfterContentChecked {
   }
 
   ngAfterContentChecked() {
+    console.log(this.formCrearProyecto);
     var date_input=$('input[name="fechaPrevista"]'); //our date input has the name "date"
-    // console.log(date_input);
+    console.log(date_input);
+    this.formCrearProyecto.controls['fechaPrevista'].setValue(date_input.val());
     var container="body";//$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     date_input.datepicker({
         format: "dd/mm/yyyy",
@@ -80,7 +108,7 @@ export class CreateProjectComponent implements AfterContentChecked {
   }
 
   cambiado(event) {
-    console.log(event);
+    console.log('Evento:', event);
   }
 
 }
