@@ -13,29 +13,29 @@ const {Obtener_todos_logs} = require ('./../dbAccess/logs')
 resumenProyectos = (proyectosDB) => {
     let proyectos = new Array();
     for (let i = 0; i < proyectosDB.length; i++) {
-        let fecha = '';
-        switch(proyectosDB[i].fase) {
-            case 0:{
-                fecha = (proyectosDB[i].fechaPrevista)?proyectosDB[i].fechaPrevista:'--';
-                break;
-            }
-            case 1:{
-                fecha = (proyectosDB[i].fase1.fechaPrevista)?proyectosDB[i].fase1.fechaPrevista:'--';
-                break;
-            }
-        }
+        // let fecha = '';
+        // switch(proyectosDB[i].fase) {
+        //     case 0:{
+        //         fecha = (proyectosDB[i].fechaPrevista)?proyectosDB[i].fechaPrevista:'--';
+        //         break;
+        //     }
+        //     case 1:{
+        //         fecha = (proyectosDB[i].fase1.fechaPrevista)?proyectosDB[i].fase1.fechaPrevista:'--';
+        //         break;
+        //     }
+        // }
         proyectos.push({
             _id: proyectosDB[i]._id,
             nombre: proyectosDB[i].nombre,
             descripcion: proyectosDB[i].descripcion,
             fase: proyectosDB[i].fase,
-            fechaPrevista: fecha
+            fechaPrevista: proyectosDB[i].fechaPrevista
         })
     }
     return proyectos;
 } 
 
-app.get('/api/proyectos/todos', [Autentificar, AutentificarAdmin], (req, res) => {
+app.get('/api/proyectos/todos', [Autentificar], (req, res) => {
     Proyecto.find({})
             .exec((err, proyectosDB) => {
         if (err) {

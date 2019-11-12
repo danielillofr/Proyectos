@@ -10,6 +10,8 @@ import { UsuariosService } from './usuarios.service';
 export class ProyectosService {
   env: String = environment.ruta_backend;
 
+  proyectoActual: any;
+
   constructor(private usuarioservice: UsuariosService, private http:HttpClient) { }
   Crear_proyecto(proyecto:any) {
     const opciones = {
@@ -17,8 +19,6 @@ export class ProyectosService {
         Authorization: this.usuarioservice.token
       })
     };
-    console.log(this.usuarioservice.token);
-    console.log("Y ahora que");
     // return this.http.get(`http://localhost:3000/api/usuarios`, opciones);
     return this.http.post(`${this.env}/api/proyectos`, proyecto, opciones);
   }
@@ -29,9 +29,17 @@ export class ProyectosService {
         Authorization: this.usuarioservice.token
       })
     };
-    console.log(this.usuarioservice.token);
-    console.log("Y ahora que");
     // return this.http.get(`http://localhost:3000/api/usuarios`, opciones);
     return this.http.get(`${this.env}/api/proyectos/todos`, opciones);
   }
+
+  Obtener_proyecto = (idProyecto: String) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return this.http.get(`${this.env}/api/proyectos/detalle/${idProyecto}`, opciones);
+  }
+
 }

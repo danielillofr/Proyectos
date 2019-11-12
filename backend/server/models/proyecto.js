@@ -267,12 +267,6 @@ const proyectoSchema = new Schema({
     }
 })
 
-// proyectoSchema.methods.toJSON = function() {
-//     let user = this;
-//     let userObject = user.toObject();
-//     // delete userObject.clave;
-//     return userObject;
-// }
 
 proyectoSchema.plugin(uniqueValidator, { message: '{PATH} debe ser unico' })
 

@@ -11,25 +11,25 @@
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre del proyecto</label>
                         <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Nombre" [ngClass]="{'is-invalid': formCrearProyecto.controls['nombre'].errors}">
+                        <small *ngIf="formCrearProyecto.controls['nombre'].errors" class="mensajeError" >El nombre debe tener una longitud mínima de 3 caracteres</small>
                     </div>
                     <div class="form-group">
                         <label for="exampleTextarea1">Descripción del proyecto</label>
                         <textarea class="form-control" formControlName="descripcion" id="descripcion" rows="2" placeholder="Descripción" [ngClass]="{'is-invalid': formCrearProyecto.controls['descripcion'].errors}"></textarea>
+                        <small *ngIf="formCrearProyecto.controls['descripcion'].errors" class="mensajeError" >La descripcion debe tener una longitud mínima de 3 caracteres</small>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="exampleTextarea1">Jefe del proyecto</label>
-                        <textarea class="form-control" id="exampleTextarea1" rows="2" placeholder="Jefe del proyecto"></textarea>
-                    </div> -->
                     <div class="form-group">
                         <label for="exampleFormControlSelect3">Jefe de proyecto</label>
                         <select class="form-control form-control-sm" formControlName="jefeProyecto" id="jefeProyecto" [ngClass]="{'is-invalid': formCrearProyecto.controls['jefeProyecto'].errors}">
                           
                           <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{usuario.nombreCompleto}}</option>
                         </select>
+                        <small *ngIf="formCrearProyecto.controls['jefeProyecto'].errors" class="mensajeError" >Jefe de proyecto es requerido</small>
                       </div>                    
                       <div class="form-group"> <!-- Date input -->
                         <label class="control-label" for="date">Fecha requerimientos</label>
-                        <input class="form-control" formControlName="fechaPrevista" id="fechaPrevista" name="fechaPrevista" (change)="cambiado($event)" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formCrearProyecto.controls['fechaPrevista'].errors}">
+                        <input class="form-control" formControlName="fechaPrevista" id="fechaPrevista" name="fechaPrevista" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formCrearProyecto.controls['fechaPrevista'].errors}">
+                        <small *ngIf="formCrearProyecto.controls['fechaPrevista'].errors" class="mensajeError" >Fecha prevista de requerimientos es requerida</small>
                       </div>
          
                     </form>

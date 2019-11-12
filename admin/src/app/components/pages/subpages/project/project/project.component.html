@@ -1,13 +1,13 @@
-<div class="row">
+<div *ngIf="proyectosservice.proyectoActual" class="row">
     <div class="col-md-12" style="text-align: center">
     <!-- Div Nombre projecto Col 11-12 -->
-    <h2>Modificaciones acuazone</h2>
+    <h2>{{proyectosservice.proyectoActual.proyecto.nombre}}</h2>
 
     </div>
 </div>
 <app-barra></app-barra>
 <hr>
-<div class="card">
+<div *ngIf="proyectosservice.proyectoActual" class="card">
     <div class="card-body">
         <router-outlet></router-outlet>
     </div>

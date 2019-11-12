@@ -29,10 +29,10 @@ export class CreateProjectComponent implements AfterContentChecked {
   usuarios: TipoUsuario[] = null;
   constructor(private usuarioservice: UsuariosService, private proyectoservice: ProyectosService, private router:Router) {
     this.formCrearProyecto = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      descripcion: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      jefeProyecto: new FormControl('', [Validators.required, Validators.minLength(2)]),
-      fechaPrevista: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      jefeProyecto: new FormControl('', [Validators.required]),
+      fechaPrevista: new FormControl('', [Validators.required]),
 
     })
 
@@ -47,7 +47,6 @@ export class CreateProjectComponent implements AfterContentChecked {
             })
         }else{
           this.usuarios = listaUsuarios.usuarios;
-          console.log(this.usuarios);
         }
       }, (err)=>{
         console.log(err);
@@ -93,9 +92,7 @@ export class CreateProjectComponent implements AfterContentChecked {
   }
 
   ngAfterContentChecked() {
-    console.log(this.formCrearProyecto);
     var date_input=$('input[name="fechaPrevista"]'); //our date input has the name "date"
-    console.log(date_input);
     this.formCrearProyecto.controls['fechaPrevista'].setValue(date_input.val());
     var container="body";//$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
     date_input.datepicker({
@@ -107,8 +104,6 @@ export class CreateProjectComponent implements AfterContentChecked {
     })
   }
 
-  cambiado(event) {
-    console.log('Evento:', event);
-  }
+ 
 
 }

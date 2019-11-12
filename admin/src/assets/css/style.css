@@ -15311,7 +15311,10 @@ dl {
     .table.table-borderless tr, .table.table-borderless td, .table.table-borderless th {
       border: none; }
 
-
+.mensajeError {
+    color: red;
+    font-style: italic;
+}
 
 
 /*-------------------------------------------------------------------*/

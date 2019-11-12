@@ -7,7 +7,7 @@
 
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Estado actual</h3>
-                                <h4 style="color: white">Creado</h4>
+                                <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAEstado}}</h4>
                         </div>
                 </div>
         </div>
@@ -17,7 +17,7 @@
 
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Fase actual</h3>
-                                <h4 style="color: white">Recopilando requerimientos</h4>
+                                <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAFase}}</h4>
                                 <button type="button" [routerLink]="['/pages','project',idProyecto,'avanzararecreq']" class="btn btn-gradient-info btn-rounded btn-fw">
                                         <i class="mdi mdi-border-color"></i>
                                         Avanzar
@@ -32,7 +32,7 @@
 
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Jefe de proyecto</h3>
-                                <h4 style="color: white">María José Barquero</h4>
+                                <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.jefeProyecto.nombreCompleto}}</h4>
                                 <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
                         </div>
                 </div>

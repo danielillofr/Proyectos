@@ -39,7 +39,9 @@ Crear_proyecto_con_log = async(datosProyecto,usuario) => {
 
 Obtener_proyecto = (id) => {
     return new Promise((resolve,reject) => {
-        Proyecto.findById(id, (err, proyectoDB) => {
+        Proyecto.findById(id)
+        .populate('jefeProyecto')
+        .exec((err, proyectoDB) => {
             if (err) {
                 reject(err);
             }else{
@@ -121,10 +123,10 @@ Completar_fase_comprobada = async(id,datos) => {
     return new Promise((resolve, reject) => {
         switch(datos.fase) {
             case '1': {//Requerimientos
-                if ((!datos.rutaRequerimientos) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.rutaRequerimientos) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, ruta de requerimientos y fecha prevista necesarias'
+                        err: 'Ruta de requerimientos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -132,7 +134,7 @@ Completar_fase_comprobada = async(id,datos) => {
                         fase1: {
                             rutaRequerimientos: datos.rutaRequerimientos,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }
@@ -150,10 +152,10 @@ Completar_fase_comprobada = async(id,datos) => {
             }break;
             case '2': {
                 console.log('Analisis:', datos.analisis);
-                if ((!datos.analisis) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.analisis) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, analisis y fecha prevista necesarias'
+                        err: 'Analisis y fecha prevista necesarias'
                     })
                 }else{
                     let pasosAnalisis = new Array();
@@ -168,7 +170,7 @@ Completar_fase_comprobada = async(id,datos) => {
                     const actualizacion = {
                         fase: 2,
                         fase2: {
-                            fechaCreacion: datos.fechaCreacion,
+                            fechaCreacion: new Date(),
                             analisis: pasosAnalisis,
                             fechaPrevista: datos.fechaPrevista
                         },
@@ -188,16 +190,16 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;
             case '3':{
-                if ((!datos.estadoAprobacion) || (!datos.motivo) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.estadoAprobacion) || (!datos.motivo) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, estado aprobacion y fecha prevista necesarias'
+                        err: 'Estado aprobacion y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
                         fase: 3,
                         fase3: {
-                            fechaCreacion: datos.fechaCreacion,
+                            fechaCreacion: new Date(),
                             estadoAprobacion: datos.estadoAprobacion,
                             motivo: datos.motivo,
                             fechaPrevista: datos.fechaPrevista
@@ -219,10 +221,10 @@ Completar_fase_comprobada = async(id,datos) => {
             }break;        
             case '4': {
                 console.log('Planificacion:', datos.planificacion);
-                if ((!datos.planificacion) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.planificacion) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, planificacion y fecha prevista necesarias'
+                        err: 'Planificacion y fecha prevista necesarias'
                     })
                 }else{
                     let pasosPlanificacion = new Array();
@@ -237,7 +239,7 @@ Completar_fase_comprobada = async(id,datos) => {
                     const actualizacion = {
                         fase: 4,
                         fase4: {
-                            fechaCreacion: datos.fechaCreacion,
+                            fechaCreacion: new Date(),
                             planificacion: pasosPlanificacion,
                             fechaPrevista: datos.fechaPrevista
                         },
@@ -257,10 +259,10 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;
             case '5': {//Especificaciones
-                if ((!datos.rutaEspecificaciones) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.rutaEspecificaciones) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, ruta de especificaciones y fecha prevista necesarias'
+                        err: 'Ruta de especificaciones y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -268,7 +270,7 @@ Completar_fase_comprobada = async(id,datos) => {
                         fase5: {
                             rutaEspecificaciones: datos.rutaEspecificaciones,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }
@@ -285,10 +287,10 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;      
             case '6': { //Ruta desarrollo
-                if ((!datos.desarrollo) || (!datos.fechaPrevista) || (!datos.fechaCreacion)) {
+                if ((!datos.desarrollo) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, desarrollo y fecha prevista necesarias'
+                        err: 'Desarrollo y fecha prevista necesarias'
                     })
                 }else{
                     let pasosDesarrollo = new Array();
@@ -304,7 +306,7 @@ Completar_fase_comprobada = async(id,datos) => {
                     const actualizacion = {
                         fase: 6,
                         fase6: {
-                            fechaCreacion: datos.fechaCreacion,
+                            fechaCreacion: new Date(),
                             desarrollo: pasosDesarrollo,
                             fechaPrevista: datos.fechaPrevista
                         },
@@ -324,11 +326,11 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;   
             case '7':{
-                if ((!datos.documentoPrueba) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                if ((!datos.documentoPrueba) || (!datos.fechaPrevista)
                   ||(!datos.documentoMantis) || (!datos.documentoManual) || (!datos.testProbado)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, documentos y fecha prevista necesarias'
+                        err: 'Documentos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -339,7 +341,7 @@ Completar_fase_comprobada = async(id,datos) => {
                             documentoManual: datos.documentoManual,
                             testProbado: datos.testProbado,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }
@@ -356,11 +358,11 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;
             case '8':{
-                if ((!datos.documentoPrueba) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                if ((!datos.documentoPrueba) || (!datos.fechaPrevista)
                   ||(!datos.documentoMantis) || (!datos.testProbado)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, documentos y fecha prevista necesarias'
+                        err: 'Documentos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -370,7 +372,7 @@ Completar_fase_comprobada = async(id,datos) => {
                             documentoMantis: datos.documentoMantis,
                             testProbado: datos.testProbado,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }
@@ -388,11 +390,11 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;
             case '9':{
-                if ((!datos.primeraUnidad) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                if ((!datos.primeraUnidad) || (!datos.fechaPrevista)
                   ||(!datos.comentarios)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, datos y fecha prevista necesarias'
+                        err: 'Datos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -401,7 +403,7 @@ Completar_fase_comprobada = async(id,datos) => {
                             primeraUnidad: datos.primeraUnidad,
                             comentarios: datos.comentarios,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }
@@ -419,11 +421,11 @@ Completar_fase_comprobada = async(id,datos) => {
                 }
             }break;
             case '10':{
-                if ((!datos.primeraUnidad) || (!datos.fechaPrevista) || (!datos.fechaCreacion)
+                if ((!datos.primeraUnidad) || (!datos.fechaPrevista)
                   ||(!datos.comentarios)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Fecha de creación, datos y fecha prevista necesarias'
+                        err: 'Datos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
@@ -432,7 +434,7 @@ Completar_fase_comprobada = async(id,datos) => {
                             primeraUnidad: datos.primeraUnidad,
                             comentarios: datos.comentarios,
                             fechaPrevista: datos.fechaPrevista,
-                            fechaCreacion: datos.fechaCreacion
+                            fechaCreacion: new Date()
                         },
                         fechaPrevista: datos.fechaPrevista
                     }

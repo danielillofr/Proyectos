@@ -33,6 +33,10 @@ import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project
 
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FaseABarraPipe } from './pipes/fase-abarra.pipe';
+import { FaseAFasePipe } from './pipes/fase-afase.pipe';
+import { FaseAEstadoPipe } from './pipes/fase-aestado.pipe';
+import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 
 
 @NgModule({
@@ -64,7 +68,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     AvanzaraValcalidadComponent,
     AvanzaraFabpriunidadComponent,
     AvanzaraValpriunidadComponent,
-    AvanzaraDesarrolloComponent
+    AvanzaraDesarrolloComponent,
+    FaseABarraPipe,
+    FaseAFasePipe,
+    FaseAEstadoPipe,
+    FechaAFormatoPipe
   ],
   imports: [
     BrowserModule,
