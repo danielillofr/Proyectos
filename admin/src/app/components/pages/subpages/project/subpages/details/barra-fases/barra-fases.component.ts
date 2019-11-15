@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProyectosService } from 'src/app/services/proyectos.service';
 
 @Component({
   selector: 'app-barra-fases',
@@ -10,9 +11,11 @@ export class BarraFasesComponent implements OnInit {
 
   @Input() idProyecto: String = '';
 
-
-
-  constructor() {  }
+  numFase: Number;
+  
+  constructor(private proyectosservice: ProyectosService) { 
+    this.numFase = Number(proyectosservice.proyectoActual.proyecto.fase);
+   }
 
   ngOnInit() {
   }

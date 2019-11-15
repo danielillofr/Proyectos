@@ -6,6 +6,9 @@ const path = require('path');
 const app = express();
 const mongoose = require('mongoose');
 
+const serveIndex = require('serve-index');
+
+
 mongoose.connect(process.env.URLDB, (err) => {
     if (err) throw err;
     console.log('BASE DE DATOS ONLINE');
@@ -20,6 +23,7 @@ app.use(bodyParser.json());
 
 
 app.use(express.static(path.resolve(__dirname, '../public')));
+app.use('/documents/', express.static(path.resolve(__dirname, '../documents')), serveIndex(path.resolve(__dirname, '../documents'), {icons: true}));
 // app.use(express.static(path.resolve(__dirname, './../../TodoList/dist/ftsock')));
 
 app.use(require('./routes/usuarios'));

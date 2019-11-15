@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as configFases from './../../../../../../../../configs/config';
+import { ProyectosService } from 'src/app/services/proyectos.service';
 
 
 @Component({
@@ -16,7 +17,10 @@ export class FaseComponent implements OnInit {
 
   confFase: any = null;
 
-  constructor(private _activatedRoute: ActivatedRoute) { 
+  proyecto: any = null;
+
+  constructor(private _activatedRoute: ActivatedRoute, private proyectosservice: ProyectosService) { 
+    // this.proyecto = proyectosservice.proyectoActual;
     _activatedRoute.parent.parent.params.subscribe (params=>{
       this.idProyecto = params.idProyecto;
     })

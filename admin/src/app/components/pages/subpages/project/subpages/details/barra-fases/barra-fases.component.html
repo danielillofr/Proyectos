@@ -1,31 +1,32 @@
+{{numFase}}
 <div class="row">
         <div class="col-md-12 barraAccesoFases">
                 <button [routerLink]="['/pages','project',idProyecto,'detail','fase','1']" type="button" class="btn btn-primary btn-rounded  btn-fw">Creación</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','2']" type="button" class="btn btn-primary btn-rounded  btn-fw">Recop.</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 0),'btn-primary':!(numFase == 0)}" [disabled]="numFase < 1" [routerLink]="['/pages','project',idProyecto,'detail','fase','2']" type="button" class="btn btn-primary btn-rounded  btn-fw">Recop.</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','3']" type="button" class="btn btn-primary btn-rounded  btn-fw">Análisis</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 1),'btn-primary':!(numFase == 1)}" [disabled]="numFase < 2" [routerLink]="['/pages','project',idProyecto,'detail','fase','3']" type="button" class="btn btn-rounded  btn-fw">Análisis</button>
                 <!-- <button type="button" class="btn btn-secundary btn-rounded  btn-fw" style="cursor:default" disabled>Análisis</button> -->
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','4']" type="button" class="btn btn-primary btn-rounded  btn-fw">Aprobación</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 2),'btn-primary':!(numFase == 2)}" [disabled]="numFase < 3" [routerLink]="['/pages','project',idProyecto,'detail','fase','4']" type="button" class="btn btn-rounded  btn-fw">Aprobación</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','5']" type="button" class="btn btn-primary btn-rounded  btn-fw">Plani.</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 3),'btn-primary':!(numFase == 3)}" [disabled]="numFase < 4" [routerLink]="['/pages','project',idProyecto,'detail','fase','5']" type="button" class="btn btn-rounded  btn-fw">Plani.</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','6']" type="button" class="btn btn-primary btn-rounded  btn-fw">Espec.</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 4),'btn-primary':!(numFase == 4)}" [disabled]="numFase < 5" [routerLink]="['/pages','project',idProyecto,'detail','fase','6']" type="button" class="btn btn-rounded  btn-fw">Espec.</button>
                 <i class="mdi mdi-chevron-double-right"></i>
         </div>
 </div>
 <div class="row" style="padding-top: 10px;min-width: 805px">
         <div class="col-md-12 barraAccesoFases">
 
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','7']" type="button" class="btn btn-primary btn-rounded btn-fw">Desa.</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 5),'btn-primary':!(numFase == 5)}" [disabled]="numFase < 6" [routerLink]="['/pages','project',idProyecto,'detail','fase','7']" type="button" class="btn btn-rounded btn-fw">Desa.</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','8']" type="button" class="btn btn-primary btn-rounded btn-fw">Vali.Int</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 6),'btn-primary':!(numFase == 6)}" [disabled]="numFase < 7" [routerLink]="['/pages','project',idProyecto,'detail','fase','8']" type="button" class="btn btn-rounded btn-fw">Vali.Int</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','9']" type="button" class="btn btn-primary btn-rounded btn-fw">Vali.Cal</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 7),'btn-primary':!(numFase == 7)}" [disabled]="numFase < 8" [routerLink]="['/pages','project',idProyecto,'detail','fase','9']" type="button" class="btn btn-rounded btn-fw">Vali.Cal</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','10']" type="button" class="btn btn-primary btn-rounded btn-fw">Prim.Uni</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 8),'btn-primary':!(numFase == 8)}" [disabled]="numFase < 9" [routerLink]="['/pages','project',idProyecto,'detail','fase','10']" type="button" class="btn btn-rounded btn-fw">Prim.Uni</button>
                 <i class="mdi mdi-chevron-double-right"></i>
-                <button [routerLink]="['/pages','project',idProyecto,'detail','fase','11']" type="button" class="btn btn-primary btn-rounded btn-fw">Vali.PUn</button>
+                <button [ngClass]="{'btn-secundary': (numFase == 9),'btn-primary':!(numFase == 9)}" [disabled]="numFase < 10" [routerLink]="['/pages','project',idProyecto,'detail','fase','11']" type="button" class="btn btn-rounded btn-fw">Vali.PUn</button>
         </div>
 </div>
