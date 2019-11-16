@@ -102,6 +102,12 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
+    fase0: {
+        fechaPrevista: {
+            type: Date,
+            default: '2019/01/01'
+        }
+    },
     fase1: {
         fechaCreacion: {
             type: Date,

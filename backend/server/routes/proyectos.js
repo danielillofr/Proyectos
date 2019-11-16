@@ -120,6 +120,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
 
 app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     let body = req.body;
+    console.log('Req:', req);
     console.log('Body:',body);
     const id = req.params.id;
     if ((!body.fase)) {
@@ -163,6 +164,7 @@ app.get('/api/proyectos/logs', [Autentificar], (req,res) => {
 })
 
 app.put('/api/proyectos/:id', [Autentificar], (req,res) => {
+    console.log(req.body);
     Modificar_proyecto(req.params.id, req.body, req.usuario)
         .then(proyecto => {
             return res.json({

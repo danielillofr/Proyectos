@@ -25,7 +25,8 @@ export const confFaseCreacion = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'recopilación'
+    siguienteFase: 'recopilación',
+    responsableSiguienteFase: 'Jefatura de producto'
 }
 
 export const confFaseRecopilacion = {
@@ -51,7 +52,8 @@ export const confFaseRecopilacion = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'análisis'
+    siguienteFase: 'análisis',
+    responsableSiguienteFase: 'I+D'
 }
 
 export const confFaseAnalisis = {
@@ -78,6 +80,7 @@ export const confFaseAnalisis = {
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
     siguienteFase: 'aprobación',
+    responsableSiguienteFase: 'Jefe de proyecto'
 }
 export const confFaseAprobacion = {
     mostrarTitulo: true,
@@ -101,7 +104,8 @@ export const confFaseAprobacion = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'planificación'
+    siguienteFase: 'planificación',
+    responsableSiguienteFase: 'I+D'
 }
 export const confFasePlanificacion = {
     mostrarTitulo: true,
@@ -126,7 +130,8 @@ export const confFasePlanificacion = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'especificación'
+    siguienteFase: 'especificación',
+    responsableSiguienteFase: 'Jefatura de producto'
 }
 export const confFaseEspecificacion = {
     mostrarTitulo: true,
@@ -151,7 +156,8 @@ export const confFaseEspecificacion = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'desarrollo'
+    siguienteFase: 'desarrollo',
+    responsableSiguienteFase: 'I+D'
 }
 export const confFaseDesarrollo = {
     mostrarTitulo: true,
@@ -176,7 +182,8 @@ export const confFaseDesarrollo = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'validación interna'
+    siguienteFase: 'validación interna',
+    responsableSiguienteFase: 'I+D'
 }
 export const confFaseValidacionInterna = {
     mostrarTitulo: true,
@@ -201,7 +208,8 @@ export const confFaseValidacionInterna = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'validación calidad'
+    siguienteFase: 'validación calidad',
+    responsableSiguienteFase: 'Calidad de producto'
 }
 export const confFaseValidacionCalidad = {
     mostrarTitulo: true,
@@ -226,7 +234,8 @@ export const confFaseValidacionCalidad = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'fabricación primera unidad'
+    siguienteFase: 'fabricación primera unidad',
+    responsableSiguienteFase: 'Fábrica'
 }
 export const confFaseFabPrimeraUnidad = {
     mostrarTitulo: true,
@@ -251,7 +260,8 @@ export const confFaseFabPrimeraUnidad = {
     mostrarPrimeraUnidadTesteada: false,
     mostrarComentariosValPrimeraUnidad: false,
     mostrarFechaResponsableSigFase: true,
-    siguienteFase: 'validación primera unidad'
+    siguienteFase: 'validación primera unidad',
+    responsableSiguienteFase: 'Calidad de producto'
 }
 export const confFaseValidacionPrimeraUnidad = {
     mostrarTitulo: true,
@@ -275,5 +285,5 @@ export const confFaseValidacionPrimeraUnidad = {
     mostrarComentariosFabPrimeraUnidad: false,
     mostrarPrimeraUnidadTesteada: true,
     mostrarComentariosValPrimeraUnidad: true,
-    mostrarFechaResponsableSigFase: true
+    mostrarFechaResponsableSigFase: false
 }

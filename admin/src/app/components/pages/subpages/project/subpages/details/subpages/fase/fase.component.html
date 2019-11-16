@@ -13,7 +13,7 @@
                             <h4>
                                 Fecha {{confFase.titulo}}:
                                 <small class="text-muted">
-                                    {{proyectosservice.proyectoActual.proyecto.fechaCreacion | fechaAFormato}}
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoAFecha:fase:'creacion'}}
                                 </small>
                             </h4>
                             
@@ -22,7 +22,7 @@
                             <h4>
                                 Jefe de proyecto:
                                 <small class="text-muted">
-                                    María José Barquero
+                                    {{proyectosservice.proyectoActual.proyecto.jefeProyecto.nombreCompleto}}
                                 </small>
                             </h4>
                             
@@ -36,7 +36,7 @@
                             <h4>
                                 Descripción:
                                 <small class="text-muted">
-                                        Este proyecto consiste en crear algo de alguna cosa que haga cosas muy chulas,Este proyecto consiste en crear algo de alguna cosa que haga cosas muy chulas
+                                        {{proyectosservice.proyectoActual.proyecto.descripcion}}
                                 </small>
                             </h4>
                         </div>
@@ -345,9 +345,9 @@
                     <div *ngIf="confFase.mostrarFechaResponsableSigFase" class="row margenSup">
                         <div class="col-md-6">
                             <h4>
-                                Fecha prevista recopilación:
+                                Fecha prevista {{confFase.siguienteFase}}:
                                 <small class="text-muted">
-                                    09/09/2019
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoAFecha:fase:'prevista'}}
                                 </small>
                             </h4>
                             
@@ -356,7 +356,7 @@
                             <h4>
                                 Resposable:
                                 <small class="text-muted">
-                                    Jefatura de producto
+                                    {{confFase.responsableSiguienteFase}}
                                 </small>
                             </h4>
                             

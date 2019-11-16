@@ -19,6 +19,8 @@ export class FaseComponent implements OnInit {
 
   proyecto: any = null;
 
+  numFase: Number = null;
+
   constructor(private _activatedRoute: ActivatedRoute, private proyectosservice: ProyectosService) { 
     // this.proyecto = proyectosservice.proyectoActual;
     _activatedRoute.parent.parent.params.subscribe (params=>{
@@ -27,38 +29,39 @@ export class FaseComponent implements OnInit {
     _activatedRoute.params
       .subscribe(params=>{
         this.fase = this.fase = params.fase;
+        this.numFase = Number(this.fase);
         switch (this.fase) {
-          case '1':{
+          case '0':{
             this.confFase = configFases.confFaseCreacion;
           }break;
-          case '2':{
+          case '1':{
             this.confFase = configFases.confFaseRecopilacion;
           }break;
-          case '3':{
+          case '2':{
             this.confFase = configFases.confFaseAnalisis;
           }break;
-          case '4':{
+          case '3':{
             this.confFase = configFases.confFaseAprobacion;
           }break;
-          case '5':{
+          case '4':{
             this.confFase = configFases.confFasePlanificacion;
           }break;
-          case '6':{
+          case '5':{
             this.confFase = configFases.confFaseEspecificacion;
           }break;
-          case '7':{
+          case '6':{
             this.confFase = configFases.confFaseDesarrollo;
           }break;
-          case '8':{
+          case '7':{
             this.confFase = configFases.confFaseValidacionInterna;
           }break;
-          case '9':{
+          case '8':{
             this.confFase = configFases.confFaseValidacionCalidad;
           }break;
-          case '10':{
+          case '9':{
             this.confFase = configFases.confFaseFabPrimeraUnidad;
           }break;
-          case '11':{
+          case '10':{
             this.confFase = configFases.confFaseValidacionPrimeraUnidad;
           }break;
 

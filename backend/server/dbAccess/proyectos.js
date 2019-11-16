@@ -10,7 +10,10 @@ Crear_proyecto = (datosProyecto) => {
             descripcion: datosProyecto.descripcion,
             jefeProyecto: datosProyecto.jefeProyecto,
             fechaPrevista: datosProyecto.fechaPrevista,
-            fechaCreacion: new Date()
+            fechaCreacion: new Date(),
+            fase0: {
+                fechaPrevista: datosProyecto.fechaPrevista
+            }
         })
         console.log('A ver que proyecto creamos:', nuevoProyecto);
         nuevoProyecto.save((err, proyectoDB) => {
