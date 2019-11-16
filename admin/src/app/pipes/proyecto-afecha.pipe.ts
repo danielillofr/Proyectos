@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ProyectoAFechaPipe implements PipeTransform {
 
-  transform(proyecto: any, fase: string, tipo: string): String {
+  transform(proyecto: any, fase: String, tipo: String): string {
     let cadena: string = '';
     switch(fase) {
       case '0': {//creación

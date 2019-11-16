@@ -8,6 +8,7 @@ const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./.
 
 const {Obtener_todos_logs} = require ('./../dbAccess/logs')
 
+
 //Obtener un listado con todos los proyectos. Solo administrador
 
 resumenProyectos = (proyectosDB) => {
@@ -120,6 +121,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
 
 app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     let body = req.body;
+    let archivo = null;
     console.log('Req:', req);
     console.log('Body:',body);
     const id = req.params.id;
@@ -130,7 +132,12 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
             err: 'Hay que indicar la fase'
         })
     }
-    Completar_fase(id, body, req.usuario)
+    if ((req.files) && (req.files.archivo))
+    {
+        archivo = req.files.archivo;
+        console.log('Archivo:', archivo)
+    } 
+    Completar_fase(id, body, req.usuario,archivo)
         .then(proyecto => {
             return res.json({
                 ok: true,

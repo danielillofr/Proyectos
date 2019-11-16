@@ -8,7 +8,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private usuarioservice: UsuariosService) {
+  constructor(public usuarioservice: UsuariosService) {
     
    }
 

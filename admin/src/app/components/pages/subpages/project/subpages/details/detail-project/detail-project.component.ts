@@ -11,7 +11,7 @@ export class DetailProjectComponent implements OnInit {
 
   idProyecto: String = '';
 
-  constructor(private _router: ActivatedRoute, private proyectosservice: ProyectosService) { }
+  constructor(private _router: ActivatedRoute, public proyectosservice: ProyectosService) { }
 
   ngOnInit() {
     this._router.parent.params.subscribe((params) => {

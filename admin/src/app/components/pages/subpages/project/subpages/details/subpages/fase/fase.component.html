@@ -47,11 +47,11 @@
                     <div *ngIf="confFase.mostrarDocReq" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Documento requerimientos:
+                                Versión requerimientos:
                                 <small class="text-muted">
-                                        Requerimientos.doc
+                                        {{proyectosservice.proyectoActual.proyecto.versionReq}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.versionReq}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>

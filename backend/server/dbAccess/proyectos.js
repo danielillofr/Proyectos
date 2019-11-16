@@ -3,6 +3,8 @@ const _ = require('underscore');
 
 const {Anadir_log_proyecto_creado,Anadir_log_fase_completada,Obtener_log_proyecto,Anadir_log_proyecto_modificado} = require ('./logs')
 
+const {Subir_fichero} = require('./documentos')
+
 Crear_proyecto = (datosProyecto) => {
     return new Promise((resolve,reject) => {
         const nuevoProyecto = new Proyecto({
@@ -106,30 +108,36 @@ Comprabar_fase_correcta = (id,fase) => {
     
 }
 
+faseATipo = (fase) => {
 
-Completar_fase = async(id,datos,usuario) => {
-    console.log('Comprobando fase')
+}
+
+Completar_fase = async(id,datos,usuario,fichero) => {
+    console.log('Comprobando fase:', fichero)
     const faseCorrecta = await Comprabar_fase_correcta(id,datos.fase);
     if (!faseCorrecta) {
         console.log('ERror en la fase')
         throw new Error('No se puede completar la fase en la que no está el proyecto')
     }
-    const faseCompletada = await Completar_fase_comprobada(id,datos);
+    let proyectoCompletado = await Completar_fase_comprobada(id,datos,fichero);
     console.log(faseCorrecta);
+    if (datos.fase == '1') {
+        proyectoCompletado = await Subir_fichero(id,fichero,'REQUERIMIENTOS',usuario)
+    }
     const logDB = await Anadir_log_fase_completada(id,datos.fase,usuario);
     console.log('Log:', logDB);
-    return faseCompletada;
+    return proyectoCompletado;
 }
 
 
-Completar_fase_comprobada = async(id,datos) => {
+Completar_fase_comprobada = async(id,datos,fichero) => {
     return new Promise((resolve, reject) => {
         switch(datos.fase) {
             case '1': {//Requerimientos
-                if ((!datos.rutaRequerimientos) || (!datos.fechaPrevista)) {
+                if ((!datos.fechaPrevista) || (!fichero)) {
                     reject({
                         errBaseDatos: false,
-                        err: 'Ruta de requerimientos y fecha prevista necesarias'
+                        err: 'Requerimientos y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
