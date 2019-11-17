@@ -4,20 +4,20 @@
         <h3>Completar la fase de recopilación de requerimientos</h3>
         <form class="forms-sample">
             <blockquote  class="blockquote blockquote-primary">
-                <h4>Fichero seleccionado:<small>Ninguno</small></h4>
+                <h4>Fichero seleccionado:<small *ngIf="ficheroSeleccionado">{{ficheroSeleccionado}}</small></h4>
                 <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
                     <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
-                    <input type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                    <input type="file" (change)="selecDocum($event.target.files[0])" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
                 </div>
                 <hr>
                 <div class="form-group">
                     <label>Fecha prevista entrega análisis</label>
-                    <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                    <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formulario.controls['fechaPrevista'].errors}"/>
                 </div>
             </blockquote>
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
-                    <button type="submit" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
+                    <button [disabled]="(!ficheroSeleccionado) || formulario.controls['fechaPrevista'].errors" (click)="avanzarFase()" type="submit" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
                 </div>
             </div>
         </form>

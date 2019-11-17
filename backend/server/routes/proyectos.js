@@ -122,8 +122,6 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
 app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     let body = req.body;
     let archivo = null;
-    console.log('Req:', req);
-    console.log('Body:',body);
     const id = req.params.id;
     if ((!body.fase)) {
         return res.json({
@@ -139,11 +137,26 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     } 
     Completar_fase(id, body, req.usuario,archivo)
         .then(proyecto => {
-            return res.json({
-                ok: true,
-                proyecto
+            // return res.json({
+            //     ok: true,
+            //     proyecto
+            // })
+            Obterner_proyecto_completo(id)
+                .then(proyecto => {
+                    return res.json({
+                        ok: true,
+                        proyecto
+                    })
+                })
+                .catch(err => {
+                    console.log('Error capturado 2:',err)
+                    return res.json({
+                        ok: false,
+                        errBaseDatos: true,
+                        err: err.message
+                    })
+                })
             })
-        })
         .catch(error => {
             console.log(error.message);
             return res.json({

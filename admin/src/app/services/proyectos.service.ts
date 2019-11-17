@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { UsuariosService } from './usuarios.service';
+import { datosHeader } from '../configs/config';
 
 
 @Injectable({
@@ -33,13 +34,26 @@ export class ProyectosService {
     return this.http.get(`${this.env}/api/proyectos/todos`, opciones);
   }
 
+
   Obtener_proyecto = (idProyecto: String) => {
     const opciones = {
       headers: new HttpHeaders ({
         Authorization: this.usuarioservice.token
       })
     };
-    return this.http.get(`${this.env}/api/proyectos/detalle/${idProyecto}`, opciones);
+    return new Promise((resolve,reject) => {
+      this.http.get(`${this.env}/api/proyectos/detalle/${idProyecto}`, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
   }
-
 }
