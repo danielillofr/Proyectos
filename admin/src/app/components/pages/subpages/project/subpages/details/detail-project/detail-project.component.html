@@ -18,7 +18,7 @@
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Fase actual</h3>
                                 <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAFase}}</h4>
-                                <button type="button" [routerLink]="['/pages','project',idProyecto,'avanzararecreq']" class="btn btn-gradient-info btn-rounded btn-fw">
+                                <button type="button" (click)="avanzar()" class="btn btn-gradient-info btn-rounded btn-fw">
                                         <i class="mdi mdi-border-color"></i>
                                         Avanzar
                                 </button>

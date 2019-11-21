@@ -1,29 +1,33 @@
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { UsuariosService } from './usuarios.service';
-import { ProyectosService } from './proyectos.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubidaFicherosService {
 
-  constructor(private usuariosservice: UsuariosService, private proyectosservice: ProyectosService) { }
+  constructor(private usuariosservice: UsuariosService) { }
 
-  subirDocumento = (fichero: File, idProyecto: String, fechaPrevista: string, fase: string) => {
+
+
+  subirDocumento = (formData: FormData, idProyecto: String) => {
     return new Promise((resolve,reject)=>{
-      let formData = new FormData();
+      // let formData = new FormData();
       let xhr = new XMLHttpRequest();
-      formData.append('archivo',fichero,fichero.name);
-      formData.append('fechaPrevista',fechaPrevista);
-      formData.append('fase', fase);
+      // formData.append('archivo',fichero,fichero.name);
+      // formData.append('fechaPrevista',fechaPrevista);
+      // formData.append('fase', fase);
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
             console.log('Imagen ok');
             const respuesta: any = JSON.parse(xhr.response);
-            this.proyectosservice.proyectoActual = respuesta.proyecto;
-            resolve(respuesta);
+            if (respuesta.ok === false) {
+              reject(respuesta.err);
+            }else{
+              resolve(respuesta.proyecto);
+            }
           }else{
             console.log('Imagen mal');
             reject(xhr.response);

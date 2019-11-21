@@ -1,34 +1,33 @@
 <div class="row">
     <div class="col-md-12">
-        <h3>Completar la fase de Análisis</h3>
-        <form class="forms-sample">
+        <h3>Completar la fase de Aprobación</h3>
+        <form [formGroup]="formulario" class="forms-sample">
             <blockquote  class="blockquote blockquote-primary">
                 <div class="row">
                     <div class="col-md-6">
                         <label>Aprobación</label>
-                        <select class="form-control">
+                        <select formControlName="estadoAprobacion" class="form-control" [ngClass]="{'is-invalid': formulario.controls['estadoAprobacion'].errors}">
                             <option>Aprobado</option>
                             <option>Cancelado</option>
-                            <option>Retrasado</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Motivo</label>
-                        <input class="form-control" placeholder="Motivo" type="text"/>                        
+                        <input formControlName="motivo" class="form-control" placeholder="Motivo" type="text" [ngClass]="{'is-invalid': formulario.controls['motivo'].errors}"/>                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <label>Fecha prevista entrega planificación</label>
-                        <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                        <input formControlName="fechaPrevista" [ngClass]="{'is-invalid': formulario.controls['fechaPrevista'].errors}" class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
                     </div>
                 </div>
                 <hr>    
                 <div class="row">
                     <div class="col-md-12" style="text-align: center">
-                        <button class="btn btn-success mr-2" style="width: 50%">Avanzar</button>
+                        <button [disabled]="(formulario.status === 'INVALID')" (click)="Avanzar()" class="btn btn-success mr-2" style="width: 50%">Avanzar</button>
                     </div>
                 </div>
             </blockquote>

@@ -121,7 +121,8 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
 
 app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
     let body = req.body;
-    let archivo = null;
+    console.log(body);
+    let archivos = null;
     const id = req.params.id;
     if ((!body.fase)) {
         return res.json({
@@ -130,12 +131,11 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
             err: 'Hay que indicar la fase'
         })
     }
-    if ((req.files) && (req.files.archivo))
+    if (req.files)
     {
-        archivo = req.files.archivo;
-        console.log('Archivo:', archivo)
+        archivos = req.files
     } 
-    Completar_fase(id, body, req.usuario,archivo)
+    Completar_fase(id, body, req.usuario,archivos)
         .then(proyecto => {
             // return res.json({
             //     ok: true,
@@ -158,7 +158,7 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
                 })
             })
         .catch(error => {
-            console.log(error.message);
+            console.log(error);
             return res.json({
                 ok: false,
                 errBaseDatos: (error.errBaseDatos != null)?error.errBaseDatos:false,

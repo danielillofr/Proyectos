@@ -112,17 +112,16 @@ faseATipo = (fase) => {
 
 }
 
-Completar_fase = async(id,datos,usuario,fichero) => {
-    console.log('Comprobando fase:', fichero)
+Completar_fase = async(id,datos,usuario,ficheros) => {
     const faseCorrecta = await Comprabar_fase_correcta(id,datos.fase);
     if (!faseCorrecta) {
         console.log('ERror en la fase')
         throw new Error('No se puede completar la fase en la que no está el proyecto')
     }
-    let proyectoCompletado = await Completar_fase_comprobada(id,datos,fichero);
+    let proyectoCompletado = await Completar_fase_comprobada(id,datos,ficheros);
     console.log(faseCorrecta);
     if (datos.fase == '1') {
-        proyectoCompletado = await Subir_fichero(id,fichero,'REQUERIMIENTOS',usuario)
+        proyectoCompletado = await Subir_fichero(id,ficheros.docReq,'REQUERIMIENTOS',usuario)
     }
     const logDB = await Anadir_log_fase_completada(id,datos.fase,usuario);
     console.log('Log:', logDB);
@@ -130,11 +129,12 @@ Completar_fase = async(id,datos,usuario,fichero) => {
 }
 
 
-Completar_fase_comprobada = async(id,datos,fichero) => {
+Completar_fase_comprobada = async(id,datos,ficheros) => {
+    console.log('Datos:', datos);
     return new Promise((resolve, reject) => {
         switch(datos.fase) {
             case '1': {//Requerimientos
-                if ((!datos.fechaPrevista) || (!fichero)) {
+                if ((!datos.fechaPrevista) || (!ficheros) || (!ficheros.docReq)) {
                     reject({
                         errBaseDatos: false,
                         err: 'Requerimientos y fecha prevista necesarias'
@@ -201,12 +201,14 @@ Completar_fase_comprobada = async(id,datos,fichero) => {
                 }
             }break;
             case '3':{
-                if ((!datos.estadoAprobacion) || (!datos.motivo) || (!datos.fechaPrevista)) {
+                console.log('Aqui era');
+                if ((datos.estadoAprobacion === undefined) || (!datos.motivo) || (!datos.fechaPrevista)) {
                     reject({
                         errBaseDatos: false,
                         err: 'Estado aprobacion y fecha prevista necesarias'
                     })
                 }else{
+                    console.log('Aqui si');
                     const actualizacion = {
                         fase: 3,
                         fase3: {

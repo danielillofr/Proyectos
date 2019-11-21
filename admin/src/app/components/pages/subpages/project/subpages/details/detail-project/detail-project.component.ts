@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class DetailProjectComponent implements OnInit {
 
   idProyecto: String = '';
 
-  constructor(private _router: ActivatedRoute, public proyectosservice: ProyectosService) { }
+  constructor(private _router: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) { }
 
   ngOnInit() {
     this._router.parent.params.subscribe((params) => {
@@ -19,4 +19,23 @@ export class DetailProjectComponent implements OnInit {
     })
   }
 
+  avanzar = () => {
+    let ruta = '';
+    switch (Number(this.proyectosservice.proyectoActual.proyecto.fase)) {
+      case 0:{
+        ruta = 'avanzararecreq';
+      }break;
+      case 1:{
+        ruta = 'avanzaraanalisis';
+      }break;
+      case 2:{
+        ruta = 'avanzaraaprobacion';
+      }break;
+      case 3:{
+        ruta = 'avanzaraplanificacion';
+      }break;
+    }
+    console.log('Ruta:', ruta)
+    this.router.navigate(['/pages','project',this.idProyecto,ruta]);
+  }
 }

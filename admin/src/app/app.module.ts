@@ -38,6 +38,7 @@ import { FaseAFasePipe } from './pipes/fase-afase.pipe';
 import { FaseAEstadoPipe } from './pipes/fase-aestado.pipe';
 import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 import { ProyectoAFechaPipe } from './pipes/proyecto-afecha.pipe';
+import { EstadoAprobacionPipe } from './pipes/estado-aprobacion.pipe';
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import { ProyectoAFechaPipe } from './pipes/proyecto-afecha.pipe';
     FaseAFasePipe,
     FaseAEstadoPipe,
     FechaAFormatoPipe,
-    ProyectoAFechaPipe
+    ProyectoAFechaPipe,
+    EstadoAprobacionPipe
   ],
   imports: [
     BrowserModule,

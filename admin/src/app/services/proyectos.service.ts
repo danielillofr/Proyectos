@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { UsuariosService } from './usuarios.service';
 import { datosHeader } from '../configs/config';
+import { SubidaFicherosService } from './subida-ficheros.service';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class ProyectosService {
 
   proyectoActual: any;
 
-  constructor(private usuarioservice: UsuariosService, private http:HttpClient) { }
+  constructor(private usuarioservice: UsuariosService, private http:HttpClient, private subidaficherosservice: SubidaFicherosService) { }
   Crear_proyecto(proyecto:any) {
     const opciones = {
       headers: new HttpHeaders ({
@@ -49,6 +50,7 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -56,4 +58,104 @@ export class ProyectosService {
         })
     })
   }
+
+  Completar_requerimientos = async(docReq: File, fechaPrevista: string) => {
+    try{
+      let formData = new FormData();
+      formData.append('docReq',docReq,docReq.name);
+      formData.append('fechaPrevista',fechaPrevista);
+      formData.append('fase', '1');
+      this.proyectoActual = await this.subidaficherosservice.subirDocumento(formData, this.proyectoActual.proyecto._id);
+      console.log('Proyecto Actual:', this.proyectoActual);
+      return this.proyectoActual;
+    }catch(err){
+      throw new Error (err);
+    }
+  }
+
+  Completar_analisis = async(analisis:any, fechaPrevista: string) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    const datos = {
+      fase: '2',
+      fechaPrevista,
+      analisis
+    }
+    console.log(datos);
+    return new Promise((resolve,reject) => {
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+
+  }
+
+  Completar_aprobacion = async(datos: any) => {
+    datos.fase = '3';
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
+
+  Completar_planificacion = async(planificacion:any, fechaPrevista: string) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    const datos = {
+      fase: '4',
+      fechaPrevista,
+      planificacion
+    }
+    console.log(datos);
+    return new Promise((resolve,reject) => {
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+
+  }
+
+
 }

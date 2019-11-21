@@ -68,20 +68,10 @@
                                         <th>Tiempo</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Especificación</td>
-                                            <td>2 I+D, 2 Jefatura, 1 Calidad</td>
-                                            <td>1 mes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Desarrollo</td>
-                                            <td>2 I+D</td>
-                                            <td>2 meses</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Validación</td>
-                                            <td>1 Calidad</td>
-                                            <td>1 mes</td>
+                                        <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase2.analisis">
+                                            <td>{{fase.fase}}</td>
+                                            <td>{{fase.recursos}}</td>
+                                            <td>{{fase.tiempo}}</td>
                                         </tr>
                                     </tbody>
                                 </table>                        
@@ -97,7 +87,7 @@
                             <h4>
                                 Estado aprobación:
                                 <small class="text-muted">
-                                    Aprobado
+                                    {{proyectosservice.proyectoActual.proyecto.fase3.estadoAprobacion | estadoAprobacion}}
                                 </small>
                             </h4>
                             
@@ -110,7 +100,7 @@
                             <h4>
                                 Motivo:
                                 <small class="text-muted">
-                                        No merece la pena
+                                        {{proyectosservice.proyectoActual.proyecto.fase3.motivo}}
                                 </small>
                             </h4>
                         </div>
@@ -129,20 +119,10 @@
                                         <th>Fecha fin</th>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Especificación</td>
-                                            <td>01/01/2019</td>
-                                            <td>01/04/2019</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Desarrollo</td>
-                                            <td>01/04/2019</td>
-                                            <td>01/06/2019</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Validación</td>
-                                            <td>01/06/2019</td>
-                                            <td>01/08/2019</td>
+                                        <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase4.planificacion"> 
+                                            <td>{{fase.fase}}</td>
+                                            <td>{{fase.fechaInicio | fechaAFormato}}</td>
+                                            <td>{{fase.fechaFin | fechaAFormato}}</td>
                                         </tr>
                                     </tbody>
                                 </table>                        

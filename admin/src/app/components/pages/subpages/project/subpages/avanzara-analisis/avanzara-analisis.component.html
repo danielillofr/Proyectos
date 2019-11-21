@@ -2,20 +2,20 @@
 <div class="row">
     <div class="col-md-12">
         <h3>Completar la fase de Análisis</h3>
-        <form class="forms-sample">
+        <form [formGroup]="formulario" class="forms-sample">
             <blockquote  class="blockquote blockquote-primary">
                 <h4>Añadir fase</h4>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fase</label>
-                            <input class="form-control" placeholder="Fase" type="text"/>
+                            <input formControlName="fase" [ngClass]="{'is-invalid': formulario.controls['fase'].errors}" class="form-control" placeholder="Fase" type="text"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Recursos</label>
-                            <input class="form-control" placeholder="Recursos" type="text"/>
+                            <input formControlName="recursos" [ngClass]="{'is-invalid': formulario.controls['recursos'].errors}" class="form-control" placeholder="Recursos" type="text"/>
                         </div>
                     </div>
                 </div>
@@ -23,20 +23,20 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Tiempo</label>
-                            <input class="form-control" placeholder="Tiempo" type="text"/>
+                            <input formControlName="tiempo" [ngClass]="{'is-invalid': formulario.controls['tiempo'].errors}" class="form-control" placeholder="Tiempo" type="text"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12" style="text-align: center">
                         <div class="form-group">
-                            <button class="btn btn-primary">Añadir fase</button>
+                            <button [disabled]="formulario.status === 'INVALID'" (click)="AnadirFase()" class="btn btn-primary">Añadir fase</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Tabla de análisis y tiempos -->
-                <div class="row margenSup">
+                <div class="row margenSup" *ngIf="analisis">
                     <div class="col-md-12">
                         <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
                             <table class="table">
@@ -47,23 +47,11 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Especificación</td>
-                                        <td>2 I+D, 2 Jefatura, 1 Calidad</td>
-                                        <td>1 mes</td>
-                                        <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-delete"></i> Eliminar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Desarrollo</td>
-                                        <td>2 I+D</td>
-                                        <td>2 meses</td>
-                                        <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-delete"></i> Eliminar</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Validación</td>
-                                        <td>1 Calidad</td>
-                                        <td>1 mes</td>
-                                        <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-delete"></i> Eliminar</button></td>
+                                    <tr *ngFor="let fase of analisis; let i=index">
+                                        <td>{{fase.fase}}</td>
+                                        <td>{{fase.recursos}}</td>
+                                        <td>{{fase.tiempo}}</td>
+                                        <td><button (click)="Eliminar(i)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-delete"></i> Eliminar</button></td>
                                     </tr>
                                 </tbody>
                             </table>                        
@@ -81,11 +69,11 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row">
+                <div class="row" [formGroup]="formulario2" >
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Fecha prevista entrega aprobación</label>
-                            <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                            <input [ngClass]="{'is-invalid': formulario2.controls['fechaPrevista'].errors}" class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
                         </div>
                     </div>
                 </div>
@@ -93,7 +81,7 @@
             </blockquote>
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
-                    <button type="submit" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
+                    <button (click)="Avanzar()" [disabled]="(formulario2.status === 'INVALID') || (analisis.length == 0)" type="submit" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
                 </div>
             </div>
         </form>

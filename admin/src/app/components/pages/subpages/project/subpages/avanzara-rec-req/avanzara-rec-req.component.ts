@@ -48,15 +48,23 @@ export class AvanzaraRecReqComponent implements OnInit, AfterContentChecked {
   }
 
   avanzarFase = () => {
-    this.subidaficherosservice.subirDocumento(this.fichero,this.proyectosservice.proyectoActual.proyecto._id,this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value),'1')
+    // this.subidaficherosservice.subirDocumento(this.fichero,this.proyectosservice.proyectoActual.proyecto._id,this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value),'1')
+    //   .then((respuesta) => {
+    //     console.log(respuesta);
+    //     console.log(this.proyectosservice.proyectoActual);
+    //     this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
+    //   })
+    //   .catch((err)=>{
+    //     console.log('Error:',err)
+    //   })
+    this.proyectosservice.Completar_requerimientos(this.fichero,this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value))
       .then((respuesta) => {
-        console.log(respuesta);
-        console.log(this.proyectosservice.proyectoActual);
         this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
       })
       .catch((err)=>{
         console.log('Error:',err)
       })
+      
   }
 
   selecDocum = (archivo) => {
