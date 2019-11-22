@@ -137,9 +137,9 @@
                             <h4>
                                 Documento especificaciones:
                                 <small class="text-muted">
-                                        Especificaciones.doc
+                                        {{proyectosservice.proyectoActual.proyecto.versionEsp}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/ESPECIFICACIONES/{{proyectosservice.proyectoActual.proyecto.versionEsp}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>

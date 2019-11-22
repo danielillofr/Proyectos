@@ -157,5 +157,19 @@ export class ProyectosService {
 
   }
 
+  Completar_especificaciones = async(docReq: File, fechaPrevista: string) => {
+    try{
+      let formData = new FormData();
+      formData.append('docEsp',docReq,docReq.name);
+      formData.append('fechaPrevista',fechaPrevista);
+      formData.append('fase', '5');
+      this.proyectoActual = await this.subidaficherosservice.subirDocumento(formData, this.proyectoActual.proyecto._id);
+      console.log('Proyecto Actual:', this.proyectoActual);
+      return this.proyectoActual;
+    }catch(err){
+      throw new Error (err);
+    }
+  }
+
 
 }

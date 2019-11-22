@@ -113,10 +113,6 @@ const proyectoSchema = new Schema({
             type: Date,
             default: '2019/01/01'
         },
-        rutaRequerimientos: {
-            type: String,
-            default: ''
-        },
         fechaPrevista: {
             type: Date,
             default: '2019/01/01'
@@ -166,10 +162,6 @@ const proyectoSchema = new Schema({
         fechaCreacion: {
             type: Date,
             default: '2019/01/01'
-        },
-        rutaEspecificaciones: {
-            type: String,
-            default: ''
         },
         fechaPrevista: {
             type: Date,

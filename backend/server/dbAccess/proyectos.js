@@ -122,6 +122,8 @@ Completar_fase = async(id,datos,usuario,ficheros) => {
     console.log(faseCorrecta);
     if (datos.fase == '1') {
         proyectoCompletado = await Subir_fichero(id,ficheros.docReq,'REQUERIMIENTOS',usuario)
+    }else if(datos.fase == '5') {
+        proyectoCompletado = await Subir_fichero(id,ficheros.docEsp,'ESPECIFICACIONES',usuario)
     }
     const logDB = await Anadir_log_fase_completada(id,datos.fase,usuario);
     console.log('Log:', logDB);
@@ -143,7 +145,6 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     const actualizacion = {
                         fase: 1,
                         fase1: {
-                            rutaRequerimientos: datos.rutaRequerimientos,
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()
                         },
@@ -272,16 +273,18 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                 }
             }break;
             case '5': {//Especificaciones
-                if ((!datos.rutaEspecificaciones) || (!datos.fechaPrevista)) {
+                console.log('Ficheros:',ficheros);
+                if ((!datos.fechaPrevista) || (!ficheros)||
+                   (!ficheros.docEsp))
+                     {
                     reject({
                         errBaseDatos: false,
-                        err: 'Ruta de especificaciones y fecha prevista necesarias'
+                        err: 'Especificaciones y fecha prevista necesarias'
                     })
                 }else{
                     const actualizacion = {
                         fase: 5,
                         fase5: {
-                            rutaEspecificaciones: datos.rutaEspecificaciones,
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()
                         },
