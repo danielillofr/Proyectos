@@ -65,7 +65,7 @@ export class ProyectosService {
       formData.append('docReq',docReq,docReq.name);
       formData.append('fechaPrevista',fechaPrevista);
       formData.append('fase', '1');
-      this.proyectoActual = await this.subidaficherosservice.subirDocumento(formData, this.proyectoActual.proyecto._id);
+      this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
       console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
@@ -163,7 +163,7 @@ export class ProyectosService {
       formData.append('docEsp',docReq,docReq.name);
       formData.append('fechaPrevista',fechaPrevista);
       formData.append('fase', '5');
-      this.proyectoActual = await this.subidaficherosservice.subirDocumento(formData, this.proyectoActual.proyecto._id);
+      this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
       console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
@@ -171,5 +171,47 @@ export class ProyectosService {
     }
   }
 
+  Completar_desarrollo_conSOO = async(desarrollo:any,fechaPrevista: string, docSOO: File) => {
+    let formData = new FormData();
+    try{
+      await this.Completar_desarrollo(desarrollo,fechaPrevista);
+      formData.append('archivo',docSOO,docSOO.name);
+      this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno');
+      console.log('Proyecto recibido:', this.proyectoActual);
+      return this.proyectoActual;
+    }catch(err){
+      throw new Error (err);
+    }
+  }
+
+  Completar_desarrollo = (desarrollo:any, fechaPrevista: string) => {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    const datos = {
+      fase: '6',
+      fechaPrevista,
+      desarrollo
+    }
+    console.log(datos);
+    return new Promise((resolve,reject) => {
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((datos: any) => {
+          // const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+
+  }
 
 }

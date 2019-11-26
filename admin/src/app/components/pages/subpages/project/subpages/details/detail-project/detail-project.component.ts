@@ -37,6 +37,9 @@ export class DetailProjectComponent implements OnInit {
       case 4:{
         ruta = 'avanzaraespecificaciones';
       }break;
+      case 5:{
+        ruta = 'avanzaradesarrollo';
+      }break;
     }
     console.log('Ruta:', ruta)
     this.router.navigate(['/pages','project',this.idProyecto,ruta]);

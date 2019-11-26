@@ -2,143 +2,125 @@
 <div class="row">
     <div class="col-md-12">
         <h3>Completar la fase de desarrollo</h3>
-        <form class="forms-sample">
             <blockquote  class="blockquote blockquote-primary">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                         <label>Descripción general</label>
-                        <input class="form-control" placeholder="Descripción" type="text"/>
+                        <input formControlName="nombreBloque" [ngClass]="{'is-invalid': formulario.controls['nombreBloque'].errors}" class="form-control" placeholder="Descripción" type="text"/>
                     </div>
                 </div>
+                <hr> -->
+                <h4>Añadir Bloque</h4>
+                <form [formGroup]="formulario" class="forms-sample">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Descripción del bloque</label>
+                                <input formControlName="nombreBloque" [ngClass]="{'is-invalid': formulario.controls['nombreBloque'].errors}" class="form-control" placeholder="Descripción" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ruta esquemático</label>
+                                <input formControlName="rutaEsquematico" [ngClass]="{'is-invalid': formulario.controls['rutaEsquematico'].errors}" class="form-control" placeholder="Ruta" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ruta PCB</label>
+                                <input formControlName="rutaPCB" [ngClass]="{'is-invalid': formulario.controls['rutaPCB'].errors}" class="form-control" placeholder="Ruta" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ruta componentes</label>
+                                <input formControlName="rutaComponentes" [ngClass]="{'is-invalid': formulario.controls['rutaComponentes'].errors}" class="form-control" placeholder="Ruta" type="text"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Ruta firmware</label>
+                                <input formControlName="rutaSoftware" [ngClass]="{'is-invalid': formulario.controls['rutaSoftware'].errors}" class="form-control" placeholder="Ruta" type="text"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <div class="form-group">
+                                <button [disabled]="formulario.status === 'INVALID'" (click)="AnadirBloque()" class="btn btn-primary">Añadir bloque</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <hr>
-                <h4>Añadir fase</h4>
-                <div class="row">
+                <!-- Tabla de análisis y tiempos -->
+                <div *ngFor="let bloque of desarrollo; let i=index">
+                    <div  class="row margenSup">
+                    <h4>{{bloque.nombreBloque}}</h4>
                     <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Descripción del bloque</label>
-                            <input class="form-control" placeholder="Descripción" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Ruta esquemático</label>
-                            <input class="form-control" placeholder="Ruta" type="text"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Ruta PCB</label>
-                            <input class="form-control" placeholder="Ruta" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Ruta componentes</label>
-                            <input class="form-control" placeholder="Ruta" type="text"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Ruta firmware</label>
-                            <input class="form-control" placeholder="Ruta" type="text"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12" style="text-align: center">
-                        <div class="form-group">
-                            <button class="btn btn-primary">Añadir fase</button>
+                        <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                            <table class="table">
+                                <thead>
+                                    <th>Tipo</th>
+                                    <th>ruta</th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Esquemático</td>
+                                        <td>{{bloque.rutaEsquematico}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PCB</td>
+                                        <td>{{bloque.rutaPCB}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Componentes</td>
+                                        <td>{{bloque.rutaComponentes}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Software</td>
+                                        <td>{{bloque.rutaSoftware}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>                        
                         </div>
                     </div>
                 </div>
 
-                <hr>
-                <h4>Bloque A</h4>
-                <!-- Tabla de análisis y tiempos -->
-                <div class="row margenSup">
-                    <div class="col-md-12">
-                        <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
-                            <table class="table">
-                                <thead>
-                                    <th>Tipo</th>
-                                    <th>ruta</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Esquemático</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PCB</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Componentes</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Software</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                </tbody>
-                            </table>                        
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <h4>Bloque B</h4>
-                <!-- Tabla de análisis y tiempos -->
-                <div class="row margenSup">
-                    <div class="col-md-12">
-                        <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
-                            <table class="table">
-                                <thead>
-                                    <th>Tipo</th>
-                                    <th>ruta</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Esquemático</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>PCB</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Componentes</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Software</td>
-                                        <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
-                                    </tr>
-                                </tbody>
-                            </table>                        
-                        </div>
-                    </div>
-                </div>
-            <hr>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Fecha prevista entrega validación interna</label>
-                            <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                    <div class="col-md-12" style="text-align: center">
+                        <button type="button" (click)="Eliminar(i)" class="btn btn-primary btn-sm btn-rounded btn-fw" style="width: 25%">Eliminar bloque</button>                
+                    </div>
+                </div>    
+                </div>                
+                <hr>
+                <form class="form-sample" [formGroup]="formulario2">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Fecha prevista entrega validación interna</label>
+                                <input formControlName="fechaPrevista" [ngClass]="{'is-invalid': formulario.controls['rutaSoftware'].errors}" class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                            </div>
                         </div>
                     </div>
+                </form>
+                <h4>SOO - Fichero seleccionado:<small *ngIf="ficheroSeleccionado">{{ficheroSeleccionado}}</small></h4>
+                <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                    <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
+                    <input (change)="selecDocum($event.target.files[0])" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
                 </div>
 
             </blockquote>
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
-                    <button type="submit" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
+                    <button (click)="Avanzar()" type="submit" [disabled]="(formulario2.status === 'INVALID') || (desarrollo.length == 0)" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
                 </div>
             </div>
-        </form>
 
     </div>
 </div>
