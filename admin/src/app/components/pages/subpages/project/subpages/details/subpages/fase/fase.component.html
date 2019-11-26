@@ -147,7 +147,7 @@
 <!-- FASE DESARROLLO -->
                     <!-- Para la fase de desarrollo -->
                     <!-- Descripción general Diseño-->
-                    <div *ngIf="confFase.mostrarDescDiseno" class="row margenSup">
+                    <!-- <div *ngIf="confFase.mostrarDescDiseno" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
                                 Descripción general:
@@ -156,15 +156,16 @@
                                 </small>
                             </h4>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END-Descripción general-->
                     <!-- Descripción bloque 1-->
+                    <div *ngFor="let bloque of proyectosservice.proyectoActual.proyecto.fase6.desarrollo; let i=index">
                     <div *ngIf="confFase.mostrarInformeDiseno" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Descripción bloque 1:
+                                Descripción bloque {{i}}:
                                 <small class="text-muted">
-                                    Descripción del desarrollo
+                                    {{bloque.nombreBloque}}
                                 </small>
                             </h4>
                         </div>
@@ -182,35 +183,36 @@
                                     <tbody>
                                         <tr>
                                             <td>Esquemático</td>
-                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                            <td>{{bloque.rutaEsquematico}}</td>
                                         </tr>
                                         <tr>
                                             <td>PCB</td>
-                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                            <td>{{bloque.rutaPCB}}</td>
                                         </tr>
                                         <tr>
                                             <td>Componentes</td>
-                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                            <td>{{bloque.rutaComponentes}}</td>
                                         </tr>
                                         <tr>
                                             <td>Software</td>
-                                            <td>C:\proyectos\Gestion\proyectos\ProyectosAdmin</td>
+                                            <td>{{bloque.rutaSoftware}}</td>
                                         </tr>
                                     </tbody>
                                 </table>                        
                             </div>
                         </div>
                     </div>
+                    </div>
                     <!-- END-Tabla bloque 1 -->
                     <!-- Documentos de SOO -->
                     <div *ngIf="confFase.mostrarDocSOO" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Documento SOO:
+                                Versión SOO:
                                 <small class="text-muted">
-                                        SOO.doc
+                                        {{proyectosservice.proyectoActual.proyecto.versionDiseno}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/DISENO/{{proyectosservice.proyectoActual.proyecto.versionDiseno}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
