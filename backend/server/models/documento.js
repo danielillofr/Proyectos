@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
 
 let documentosValidos = {
-    values: ['REQUERIMIENTOS', 'ESPECIFICACIONES', 'VALINT', 'VALCAL','DISENO','CAMBIO'],
+    values: ['REQUERIMIENTOS', 'ESPECIFICACIONES', 'VALINT', 'VALCAL','DISENO','CAMBIO','PRUINT','PRUCAL','MANUAL'],
     message: '{VALUE} no es un estado válido para el role'
 }
 

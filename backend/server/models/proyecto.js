@@ -94,11 +94,23 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
+    versionPruInt: {
+        type: Number,
+        default: 0
+    },
+    versionPruCal: {
+        type: Number,
+        default: 0
+    },
     versionDiseno: {
         type: Number,
         default: 0
     },
     versionCambio: {
+        type: Number,
+        default: 0
+    },
+    versionManual: {
         type: Number,
         default: 0
     },
@@ -183,18 +195,6 @@ const proyectoSchema = new Schema({
         fechaCreacion: {
             type: Date,
             default: '2019/01/01'
-        },
-        documentoPrueba: {
-            type: String,
-            default: ''
-        },
-        documentoMantis: {
-            type: String,
-            default: ''
-        },
-        documentoManual: {
-            type: String,
-            default: ''
         },
         testProbado: {
             type: Boolean,

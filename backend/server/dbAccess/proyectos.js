@@ -124,6 +124,10 @@ Completar_fase = async(id,datos,usuario,ficheros) => {
         proyectoCompletado = await Subir_fichero(id,ficheros.docReq,'REQUERIMIENTOS',usuario)
     }else if(datos.fase == '5') {
         proyectoCompletado = await Subir_fichero(id,ficheros.docEsp,'ESPECIFICACIONES',usuario)
+    }else if(datos.fase == '7') {
+        await Subir_fichero(id,ficheros.docPruebas,'PRUINT',usuario);
+        await Subir_fichero(id,ficheros.docMantis,'VALINT',usuario);
+        proyectoCompletado = await Subir_fichero(id,ficheros.docManual,'MANUAL',usuario);
     }
     const logDB = await Anadir_log_fase_completada(id,datos.fase,usuario);
     console.log('Log:', logDB);
@@ -342,8 +346,9 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                 }
             }break;   
             case '7':{
-                if ((!datos.documentoPrueba) || (!datos.fechaPrevista)
-                  ||(!datos.documentoMantis) || (!datos.documentoManual) || (!datos.testProbado)) {
+                if ((!datos.fechaPrevista) || (!datos.testProbado)
+                || (!ficheros) || (!ficheros.docPruebas) || (!ficheros.docMantis)
+                || (!ficheros.docManual)) {
                     reject({
                         errBaseDatos: false,
                         err: 'Documentos y fecha prevista necesarias'
@@ -352,9 +357,6 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     const actualizacion = {
                         fase: 7,
                         fase7: {
-                            documentoPrueba: datos.documentoPrueba,
-                            documentoMantis: datos.documentoMantis,
-                            documentoManual: datos.documentoManual,
                             testProbado: datos.testProbado,
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()

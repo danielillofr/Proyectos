@@ -45,6 +45,15 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                     case 'CAMBIO':{
                         resolve(proyectoDB.versionCambio);
                     }break;
+                    case 'PRUINT':{
+                        resolve(proyectoDB.versionPruInt);
+                    }break;
+                    case 'PRUVAL':{
+                        resolve(proyectoDB.versionPruVal);
+                    }break;
+                    case 'MANUAL':{
+                        resolve(proyectoDB.versionManual);
+                    }break;
                 }
                 reject('no hay tipo');
             }
@@ -97,6 +106,18 @@ Actualizar_proyecto = (idProyecto,tipo,version) => {
             }break;
             case 'CAMBIO':{
                 actualizacion = {versionCambio: version};
+                console.log(actualizacion);
+            }break;
+            case 'PRUINT':{
+                actualizacion = {versionPruInt: version};
+                console.log(actualizacion);
+            }break;
+            case 'PRUVAL':{
+                actualizacion = {versionPruVal: version};
+                console.log(actualizacion);
+            }break;
+            case 'MANUAL':{
+                actualizacion = {versionManual: version};
                 console.log(actualizacion);
             }break;
         }
