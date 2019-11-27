@@ -21,6 +21,7 @@ export class DetailProjectComponent implements OnInit {
 
   avanzar = () => {
     let ruta = '';
+    // console.log(this.proyectosservice.proyectoActual.proyecto.fase);
     switch (Number(this.proyectosservice.proyectoActual.proyecto.fase)) {
       case 0:{
         ruta = 'avanzararecreq';
@@ -42,6 +43,9 @@ export class DetailProjectComponent implements OnInit {
       }break;
       case 6:{
         ruta = 'avanzaravalinterna';
+      }break;
+      case 7:{
+        ruta = 'avanzaravalcalidad';
       }break;
     }
     console.log('Ruta:', ruta)

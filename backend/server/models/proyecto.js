@@ -210,14 +210,6 @@ const proyectoSchema = new Schema({
             type: Date,
             default: '2019/01/01'
         },
-        documentoPrueba: {
-            type: String,
-            default: ''
-        },
-        documentoMantis: {
-            type: String,
-            default: ''
-        },
         testProbado: {
             type: Boolean,
             default: false
