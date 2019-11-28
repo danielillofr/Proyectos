@@ -42,6 +42,7 @@ import { EstadoAprobacionPipe } from './pipes/estado-aprobacion.pipe';
 import { ProyectoADocPruebasPipe } from './pipes/proyecto-adoc-pruebas.pipe';
 import { ProyectoADocMantisPipe } from './pipes/proyecto-adoc-mantis.pipe';
 import { ProyectoATestProbadoPipe } from './pipes/proyecto-atest-probado.pipe';
+import { ProyectoAFabunidadunoPipe } from './pipes/proyecto-afabunidaduno.pipe';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { ProyectoATestProbadoPipe } from './pipes/proyecto-atest-probado.pipe';
     EstadoAprobacionPipe,
     ProyectoADocPruebasPipe,
     ProyectoADocMantisPipe,
-    ProyectoATestProbadoPipe
+    ProyectoATestProbadoPipe,
+    ProyectoAFabunidadunoPipe
   ],
   imports: [
     BrowserModule,

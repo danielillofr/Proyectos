@@ -46,7 +46,7 @@ export class AvanzaraAprobacionComponent implements OnInit, AfterContentChecked 
   Avanzar = () => {
     const datos = {
       fechaPrevista: this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value),
-      estadoAprobacion: (this.formulario.controls['estadoAprobacion'].value == 'Aprobado')?true:false,
+      estadoAprobacion: (this.formulario.controls['estadoAprobacion'].value == 'Aprobado')?'true':'false',
       motivo: this.formulario.controls['motivo'].value
     }
     this.proyectosservice.Completar_aprobacion(datos)

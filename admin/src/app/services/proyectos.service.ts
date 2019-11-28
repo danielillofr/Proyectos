@@ -247,5 +247,28 @@ export class ProyectosService {
     }
   }
 
+  Completar_fab_unidad1 = async(datos: any) => {
+    datos.fase = '9';
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
 
 }
