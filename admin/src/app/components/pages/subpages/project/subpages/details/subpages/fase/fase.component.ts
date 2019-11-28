@@ -73,4 +73,20 @@ export class FaseComponent implements OnInit {
   ngOnInit() {
   }
 
+  Doc_pruebas(){
+    console.log(this.proyectosservice.proyectoActual.proyecto);
+    if (this.fase == '7'){
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
+    }else if (this.fase == '8'){
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUCAL/${this.proyectosservice.proyectoActual.proyecto.versionPruCal}.pdf`, '_blank');
+    }
+  }
+  Doc_mantis(){
+    console.log(this.proyectosservice.proyectoActual.proyecto);
+    if (this.fase == '7'){
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
+    }else if (this.fase == '8'){
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALCAL/${this.proyectosservice.proyectoActual.proyecto.versionPruCal}.pdf`, '_blank');
+    }
+  }
 }

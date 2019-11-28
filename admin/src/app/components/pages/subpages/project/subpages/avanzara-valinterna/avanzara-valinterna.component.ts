@@ -67,7 +67,7 @@ export class AvanzaraValinternaComponent implements OnInit, AfterContentChecked 
   }
 
   avanzarFase = () => {
-    this.proyectosservice.Completar_validacion_interna(this.ficPru,this.ficManual,this.ficMantis,this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value),(this.formulario.controls['testProbado'].value)?'true':'false')
+    this.proyectosservice.Completar_validacion_interna(this.ficPru,this.ficManual,this.ficMantis,this.Intercambiar_fecha(this.formulario.controls['fechaPrevista'].value),(this.formulario.controls['testProbado'].value==='Si')?'true':'false')
     .then((respuesta) => {
       this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
     })

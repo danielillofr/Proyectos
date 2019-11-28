@@ -39,6 +39,9 @@ import { FaseAEstadoPipe } from './pipes/fase-aestado.pipe';
 import { FechaAFormatoPipe } from './pipes/fecha-aformato.pipe';
 import { ProyectoAFechaPipe } from './pipes/proyecto-afecha.pipe';
 import { EstadoAprobacionPipe } from './pipes/estado-aprobacion.pipe';
+import { ProyectoADocPruebasPipe } from './pipes/proyecto-adoc-pruebas.pipe';
+import { ProyectoADocMantisPipe } from './pipes/proyecto-adoc-mantis.pipe';
+import { ProyectoATestProbadoPipe } from './pipes/proyecto-atest-probado.pipe';
 
 
 @NgModule({
@@ -76,7 +79,10 @@ import { EstadoAprobacionPipe } from './pipes/estado-aprobacion.pipe';
     FaseAEstadoPipe,
     FechaAFormatoPipe,
     ProyectoAFechaPipe,
-    EstadoAprobacionPipe
+    EstadoAprobacionPipe,
+    ProyectoADocPruebasPipe,
+    ProyectoADocMantisPipe,
+    ProyectoATestProbadoPipe
   ],
   imports: [
     BrowserModule,

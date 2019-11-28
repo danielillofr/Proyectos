@@ -231,6 +231,21 @@ export class ProyectosService {
     }
   }
 
+  Completar_validacion_calidad = async(docPruebas: File,docMantis: File, fechaPrevista: string, testProbado: string) => {
+    try{
+      let formData = new FormData();
+      formData.append('docPruebas',docPruebas,docPruebas.name);
+      formData.append('docMantis',docMantis,docMantis.name);
+      formData.append('fechaPrevista',fechaPrevista);
+      formData.append('fase', '8');
+      formData.append('testProbado', testProbado);
+      this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
+      console.log('Proyecto Actual:', this.proyectoActual);
+      return this.proyectoActual;
+    }catch(err){
+      throw new Error (err);
+    }
+  }
 
 
 }

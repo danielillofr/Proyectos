@@ -223,11 +223,11 @@
                     <div *ngIf="confFase.mostrarDocPruebas" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Documento Pruebas:
+                                Version Pruebas:
                                 <small class="text-muted">
-                                        Pruebas.doc
+                                        {{proyectosservice.proyectoActual.proyecto | proyectoADocPruebas:fase}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <button (click)="Doc_pruebas()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
                             </h4>
                         </div>
                     </div>
@@ -236,11 +236,11 @@
                     <div *ngIf="confFase.mostrarDocMantis" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Documento Mantis:
+                                Versión documento mantis:
                                 <small class="text-muted">
-                                        mantis.doc
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoADocPruebas:fase}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <button (click)="Doc_mantis()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
                             </h4>
                         </div>
                     </div>
@@ -249,9 +249,9 @@
                     <div *ngIf="confFase.mostrarManual" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Manual:
+                                Versión manual:
                                 <small class="text-muted">
-                                        manual.doc
+                                        {{proyectosservice.proyectoActual.proyecto.versionManual}}
                                 </small>
                                 <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
                             </h4>
@@ -264,7 +264,7 @@
                             <h4>
                                 Test probado:
                                 <small class="text-muted">
-                                    SI
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoATestProbado:fase}}
                                 </small>
                             </h4>
                             
