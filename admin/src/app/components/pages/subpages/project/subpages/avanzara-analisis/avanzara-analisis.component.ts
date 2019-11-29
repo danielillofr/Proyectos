@@ -41,7 +41,6 @@ export class AvanzaraAnalisisComponent implements OnInit, AfterContentChecked {
     var date_input=$('input[name="fecha"]'); //our date input has the name "date"
     this.formulario2.controls['fechaPrevista'].setValue(date_input.val());
     var container="body";//$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-    console.log(date_input);
     date_input.datepicker({
         format: "dd/mm/yyyy",
         language: "es",
@@ -68,7 +67,6 @@ export class AvanzaraAnalisisComponent implements OnInit, AfterContentChecked {
     this.formulario.controls['fase'].setValue('');
     this.formulario.controls['recursos'].setValue('');
     this.formulario.controls['tiempo'].setValue('');
-    console.log(this.analisis);
   }
   Avanzar = () =>{
     this.proyectosservice.Completar_analisis(this.analisis, this.Intercambiar_fecha(this.formulario2.controls['fechaPrevista'].value))

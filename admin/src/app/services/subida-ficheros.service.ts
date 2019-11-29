@@ -46,7 +46,6 @@ export class SubidaFicherosService {
       xhr.onreadystatechange = () => {
         if (xhr.readyState === 4) {
           if (xhr.status === 200) {
-            console.log('Imagen ok');
             const respuesta: any = JSON.parse(xhr.response);
             if (respuesta.ok === false) {
               reject(respuesta.err);

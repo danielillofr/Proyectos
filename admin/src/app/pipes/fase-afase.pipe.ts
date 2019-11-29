@@ -34,10 +34,10 @@ export class FaseAFasePipe implements PipeTransform {
         cadena = 'Validando Cal';
       }break;
       case 8:{
-        cadena = 'Fabricando 1';
+        cadena = 'Fabricando 1ª';
       }break;
       case 9:{
-        cadena = 'Validando 1';
+        cadena = 'Validando 1ª';
       }break;
       case 10:{
         cadena = '--';

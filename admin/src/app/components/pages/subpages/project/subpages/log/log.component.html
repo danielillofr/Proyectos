@@ -10,25 +10,10 @@
                         <th>Cambio</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>14/10/19</td>
-                            <td>Daniel Fdez.</td>
-                            <td>Se crea el proyecto</td>
-                        </tr>
-                        <tr>
-                            <td>14/10/19</td>
-                            <td>María José</td>
-                            <td>Se añaden los requerimientos</td>
-                        </tr>
-                        <tr>
-                            <td>14/10/19</td>
-                            <td>Daniel Fdez.</td>
-                            <td>Se añaden las especificaiones</td>
-                        </tr>
-                        <tr>
-                            <td>14/10/19</td>
-                            <td>Daniel Fdez.</td>
-                            <td>Se añade el diseño</td>
+                        <tr *ngFor="let log of proyectosservice.proyectoActual.logs">
+                            <td>{{log.fecha | fechaAFormato}}</td>
+                            <td>{{log.usuario.nombre}}</td>
+                            <td>{{log.texto}}</td>
                         </tr>
                     </tbody>
                 </table>

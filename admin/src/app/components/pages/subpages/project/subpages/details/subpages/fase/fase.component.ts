@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as configFases from './../../../../../../../../configs/config';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { environment } from './../../../../../../../../../environments/environment'
+
+declare function swal(any);
 
 @Component({
   selector: 'app-fase',
@@ -13,7 +15,7 @@ export class FaseComponent implements OnInit {
 
   idProyecto: String = '';
 
-  fase: String = '';
+  fase: string = '';
 
   confFase: any = null;
 
@@ -22,7 +24,7 @@ export class FaseComponent implements OnInit {
   numFase: Number = null;
   rutaBackend = environment.ruta_backend;
 
-  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService) { 
+  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) { 
     // this.proyecto = proyectosservice.proyectoActual;
     _activatedRoute.parent.parent.params.subscribe (params=>{
       this.idProyecto = params.idProyecto;
@@ -74,7 +76,6 @@ export class FaseComponent implements OnInit {
   }
 
   Doc_pruebas(){
-    console.log(this.proyectosservice.proyectoActual.proyecto);
     if (this.fase == '7'){
       window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
     }else if (this.fase == '8'){
@@ -82,11 +83,38 @@ export class FaseComponent implements OnInit {
     }
   }
   Doc_mantis(){
-    console.log(this.proyectosservice.proyectoActual.proyecto);
     if (this.fase == '7'){
       window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
     }else if (this.fase == '8'){
       window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALCAL/${this.proyectosservice.proyectoActual.proyecto.versionPruCal}.pdf`, '_blank');
     }
   }
+  volverAFase(){
+    swal({
+      text: 'Nueva fecha prevista',
+      content: 'input',
+      button: {
+        text: 'Aceptar'
+      }
+    })
+    .then(fechaPrevista=>{
+      this.proyectosservice.VolverAFase(this.fase, this.Intercambiar_fecha(fechaPrevista))
+        .then(respuesta=>{
+          this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
+        })
+        .catch((err)=>{
+          console.log(err);
+        })
+      });
+  }
+  Intercambiar_fecha = (fechaEuropa: string) => {
+    let b = fechaEuropa.split('/');
+    let fechaBD: string = b[1] + '/' + b[0] + '/' + b[2];
+    return fechaBD;
+  }
+  noFaseCreacion(){
+    const faseNum: number = Number(this.fase);
+    if (faseNum != 0) return true;
+    return false;
+  }  
 }

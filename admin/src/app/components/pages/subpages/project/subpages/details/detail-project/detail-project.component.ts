@@ -21,7 +21,6 @@ export class DetailProjectComponent implements OnInit {
 
   avanzar = () => {
     let ruta = '';
-    // console.log(this.proyectosservice.proyectoActual.proyecto.fase);
     switch (Number(this.proyectosservice.proyectoActual.proyecto.fase)) {
       case 0:{
         ruta = 'avanzararecreq';
@@ -50,8 +49,14 @@ export class DetailProjectComponent implements OnInit {
       case 8:{
         ruta = 'avanzarafabpriunidad';
       }break;
+      case 9:{
+        ruta = 'avanzaravalpriunidad';
+      }break;
     }
-    console.log('Ruta:', ruta)
     this.router.navigate(['/pages','project',this.idProyecto,ruta]);
+  }
+  ProyectoNoFinalizado(){
+    let faseNum: number = Number(this.proyectosservice.proyectoActual.proyecto.fase);
+    return (faseNum != 10);
   }
 }

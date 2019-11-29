@@ -40,7 +40,7 @@ export class FaseAEstadoPipe implements PipeTransform {
         cadena = 'Fabricada 1';
       }break;
       case 10:{
-        cadena = 'Validada 1';
+        cadena = 'Finalizado';
       }break;
     }
     return cadena;

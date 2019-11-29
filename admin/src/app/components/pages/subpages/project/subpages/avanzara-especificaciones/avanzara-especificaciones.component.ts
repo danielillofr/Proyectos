@@ -32,7 +32,6 @@ export class AvanzaraEspecificacionesComponent implements OnInit, AfterContentCh
     var date_input=$('input[name="fecha"]'); //our date input has the name "date"
     this.formulario.controls['fechaPrevista'].setValue(date_input.val());
     var container="body";//$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-    console.log(date_input);
     date_input.datepicker({
         format: "dd/mm/yyyy",
         language: "es",
@@ -54,7 +53,6 @@ export class AvanzaraEspecificacionesComponent implements OnInit, AfterContentCh
   }
 
   selecDocum = (archivo) => {
-    console.log('Fichero:',archivo);
     if (!archivo) return;
     this.ficheroSeleccionado = archivo.name;
     this.fichero = archivo;

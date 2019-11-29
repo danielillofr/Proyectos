@@ -41,91 +41,33 @@
                   <thead>
                     <tr>
                       <th>
-                        #
-                      </th>
-                      <th>
                         Proyecto
                       </th>
                       <th>
-                        Progreso
+                        Usuario
                       </th>
                       <th>
-                        Estado
+                        Información
                       </th>
                       <th>
                         Fecha
                       </th>
-                      <th>
-                        Próximo vencimiento
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
+                    <tr *ngFor="let log of logsservice.logs">
                       <td>
-                        1
+                        {{log.proyecto.nombre}}
                       </td>
                       <td>
-                        DKN
+                        {{log.usuario.nombre}}
                       </td>
                       <td>
-                        <div class="progress">
-                          <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                        {{log.texto}}
                       </td>
                       <td>
-                        Especificado
+                        {{log.fecha | fechaAFormato}}
                       </td>
-                      <td>
-                        26/08/2019
-                      </td>
-                      <td>
-                        10/09/2019
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        1
-                      </td>
-                      <td>
-                        Acuazone Daikin
-                      </td>
-                      <td>
-                        <div class="progress">
-                          <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </td>
-                      <td>
-                        Desarrollo
-                      </td>
-                      <td>
-                        24/08/2019
-                      </td>
-                      <td>
-                        11/10/2019
-                      </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            Alexa
-                        </td>
-                        <td>
-                            <div class="progress">
-                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </td>
-                        <td>
-                            Validación
-                        </td>
-                        <td>
-                            26/08/2019
-                        </td>
-                        <td>
-                            10/09/2019
-                        </td>
                     </tr>
                   </tbody>
                 </table>

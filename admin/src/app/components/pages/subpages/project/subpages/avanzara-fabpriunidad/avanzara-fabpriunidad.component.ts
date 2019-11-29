@@ -21,7 +21,6 @@ export class AvanzaraFabpriunidadComponent implements OnInit, AfterContentChecke
       fechaPrevista: new FormControl('01/01/2019', [Validators.required])
     })
 
-    this.formulario.statusChanges.subscribe(vaalor=>console.log(vaalor));
 
   }
 
@@ -32,7 +31,6 @@ export class AvanzaraFabpriunidadComponent implements OnInit, AfterContentChecke
     var date_input=$('input[name="fecha"]'); //our date input has the name "date"
     this.formulario.controls['fechaPrevista'].setValue(date_input.val());
     var container="body";//$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-    console.log(date_input);
     date_input.datepicker({
         format: "dd/mm/yyyy",
         language: "es",

@@ -249,10 +249,6 @@ const proyectoSchema = new Schema({
         comentarios: {
             type: String,
             default: ''
-        },
-        fechaPrevista: {
-            type: Date,
-            default: '2019/01/01'
         }
     }
 })

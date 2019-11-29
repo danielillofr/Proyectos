@@ -50,7 +50,6 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -66,7 +65,6 @@ export class ProyectosService {
       formData.append('fechaPrevista',fechaPrevista);
       formData.append('fase', '1');
       this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
-      console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
@@ -84,7 +82,6 @@ export class ProyectosService {
       fechaPrevista,
       analisis
     }
-    console.log(datos);
     return new Promise((resolve,reject) => {
       this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
         .subscribe((respuesta) => {
@@ -93,7 +90,6 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -118,7 +114,6 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -138,7 +133,6 @@ export class ProyectosService {
       fechaPrevista,
       planificacion
     }
-    console.log(datos);
     return new Promise((resolve,reject) => {
       this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
         .subscribe((respuesta) => {
@@ -147,7 +141,6 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -164,7 +157,6 @@ export class ProyectosService {
       formData.append('fechaPrevista',fechaPrevista);
       formData.append('fase', '5');
       this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
-      console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
@@ -177,7 +169,6 @@ export class ProyectosService {
       await this.Completar_desarrollo(desarrollo,fechaPrevista);
       formData.append('archivo',docSOO,docSOO.name);
       this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno');
-      console.log('Proyecto recibido:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
@@ -195,7 +186,6 @@ export class ProyectosService {
       fechaPrevista,
       desarrollo
     }
-    console.log(datos);
     return new Promise((resolve,reject) => {
       this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
         .subscribe((datos: any) => {
@@ -204,7 +194,6 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
             resolve();
           }
         }, (err)=>{
@@ -224,7 +213,6 @@ export class ProyectosService {
       formData.append('fase', '7');
       formData.append('testProbado', testProbado);
       this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
-      console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
@@ -240,7 +228,6 @@ export class ProyectosService {
       formData.append('fase', '8');
       formData.append('testProbado', testProbado);
       this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
-      console.log('Proyecto Actual:', this.proyectoActual);
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
@@ -262,7 +249,57 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
-            console.log(this.proyectoActual);
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
+  Completar_val_unidad1 = async(datos: any) => {
+    datos.fase = '10';
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.put(`${this.env}/api/proyectos/completar/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
+
+  VolverAFase (fase: string, fechaPrevista: string) {
+    let faseNum:number = Number(fase);
+    faseNum = faseNum - 1;//Para volver a la fase anterior
+    const datos:any = {
+      fase: String(faseNum),
+      fechaPrevista
+    }
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.put(`${this.env}/api/proyectos/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            console.log('Error:',datos);
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
             resolve();
           }
         }, (err)=>{

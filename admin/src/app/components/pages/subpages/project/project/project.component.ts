@@ -19,11 +19,9 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.proyectosservice.proyectoActual = null;
     this._activatedRoute.params.subscribe((params) => {
-      console.log('Desde el component projecto:', params);
       this.idProjecto = params.idProyecto;
       this.proyectosservice.Obtener_proyecto(this.idProjecto)
         .then(()=>{
-          console.log('Proyecto cargado correctamente');          
         })
         .catch((err)=>{
           console.log('Error:', err);

@@ -83,7 +83,6 @@ export class AvanzaraPlanificacionComponent implements OnInit, AfterContentCheck
     this.formulario.controls['fase'].setValue('');
     this.formulario.controls['fechaInicio'].setValue('');
     this.formulario.controls['fechaFin'].setValue('');
-    console.log(this.planificacion);
   }
 
   Avanzar = () =>{

@@ -440,7 +440,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                 }
             }break;
             case '10':{
-                if ((!datos.primeraUnidad) || (!datos.fechaPrevista)
+                if ((!datos.primeraUnidad)
                   ||(!datos.comentarios)) {
                     reject({
                         errBaseDatos: false,
@@ -452,10 +452,8 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                         fase10: {
                             primeraUnidad: datos.primeraUnidad,
                             comentarios: datos.comentarios,
-                            fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()
-                        },
-                        fechaPrevista: datos.fechaPrevista
+                        }
                     }
                     console.log(actualizacion);
                     Proyecto.findByIdAndUpdate (id, actualizacion, {new: true},(err, proyectoAct) => {
@@ -482,7 +480,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
 
 Modificar_proyectoDB = (id, datos) => {
     return new Promise((resolve,reject) => {
-        datos = _.pick(datos, ['nombre','fase','descripcion']);
+        datos = _.pick(datos, ['nombre','fase','descripcion','fechaPrevista']);
         Proyecto.findByIdAndUpdate(id,datos,{new:true},(err, proyectoDB) => {
             if (err){
                 reject(err);

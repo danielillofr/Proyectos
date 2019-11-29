@@ -184,14 +184,25 @@ app.get('/api/proyectos/logs', [Autentificar], (req,res) => {
 })
 
 app.put('/api/proyectos/:id', [Autentificar], (req,res) => {
-    console.log(req.body);
-    Modificar_proyecto(req.params.id, req.body, req.usuario)
+    const id=req.params.id;
+    Modificar_proyecto(id, req.body, req.usuario)
         .then(proyecto => {
-            return res.json({
-                ok: true,
-                proyecto
+            Obterner_proyecto_completo(id)
+                .then(proyecto => {
+                    return res.json({
+                        ok: true,
+                        proyecto
+                    })
+                })
+                .catch(err => {
+                    console.log('Error capturado 2:',err)
+                    return res.json({
+                        ok: false,
+                        errBaseDatos: true,
+                        err: err.message
+                    })
+                })
             })
-        })
         .catch(err => {
             return res.json({
                 ok: false,

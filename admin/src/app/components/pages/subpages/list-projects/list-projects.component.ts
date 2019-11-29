@@ -22,7 +22,6 @@ export class ListProjectsComponent implements OnInit {
             })
         }else{
           this.proyectos = respuesta.proyectos;
-          console.log(this.proyectos);
         }
       },(err)=>{
         swal('Error', 'Error obteniendo el listado de proyectos','error')

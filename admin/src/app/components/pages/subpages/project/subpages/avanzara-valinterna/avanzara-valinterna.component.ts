@@ -50,7 +50,6 @@ export class AvanzaraValinternaComponent implements OnInit, AfterContentChecked 
   }   
 
   selecFicPruebas = (archivo) => {
-    console.log(archivo);
     if (!archivo) return;
     this.ficPruebasSeleccionado = archivo.name;
     this.ficPru = archivo;

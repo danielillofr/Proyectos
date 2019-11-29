@@ -32,6 +32,7 @@ app.use(fileUpload());
 app.use(require('./routes/usuarios'));
 app.use(require('./routes/proyectos'));
 app.use(require('./routes/documentos'));
+app.use(require('./routes/logs'))
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', 3000);

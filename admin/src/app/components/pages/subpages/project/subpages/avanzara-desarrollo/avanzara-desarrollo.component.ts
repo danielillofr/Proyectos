@@ -91,7 +91,6 @@ export class AvanzaraDesarrolloComponent implements OnInit {
     this.desarrollo.splice(i,1);
   }
   selecDocum = (archivo) => {
-    console.log('Fichero:',archivo);
     if (!archivo) return;
     this.ficheroSeleccionado = archivo.name;
     this.fichero = archivo;

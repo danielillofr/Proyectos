@@ -305,7 +305,7 @@
                             <h4>
                                 Validada primera unidad:
                                 <small class="text-muted">
-                                    NO
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoAValunidaduno}}
                                 </small>
                             </h4>
                             
@@ -316,7 +316,7 @@
                             <h4>
                                 Comentarios:
                                 <small class="text-muted">
-                                        No ha habido problemas montándolo
+                                        {{proyectosservice.proyectoActual.proyecto.fase10.comentarios}}
                                 </small>
                             </h4>
                         </div>
@@ -341,7 +341,12 @@
                                     {{confFase.responsableSiguienteFase}}
                                 </small>
                             </h4>
-                            
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center;">
+                            <button *ngIf="noFaseCreacion()" (click)="volverAFase()" type="submit" class="btn btn-success mr-2" style="width: 25%">Volver a esta fase</button>                
                         </div>
                     </div>
                 </div>

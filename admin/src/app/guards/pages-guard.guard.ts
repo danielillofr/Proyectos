@@ -15,11 +15,9 @@ export class PagesGuardGuard implements CanActivate {
 
   canActivate() {
     if (this.usuarioservice.logueado) {
-      console.log('Como está logueado, pasa el guard');
       return true;
     }else{
       this.router.navigate(['/']);
-      console.log('Como no está logueado, no pasa el guard');
       return false;
     }
   }
