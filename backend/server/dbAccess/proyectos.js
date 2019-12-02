@@ -46,6 +46,14 @@ Obtener_proyecto = (id) => {
     return new Promise((resolve,reject) => {
         Proyecto.findById(id)
         .populate('jefeProyecto')
+        .populate('documentoReq')
+        .populate('documentoEsp')
+        .populate('documentoDiseno')
+        .populate('documentoValInt')
+        .populate('documentoPruInt')
+        .populate('documentoManual')
+        .populate('documentoPruCal')
+        .populate('documentoValCal')
         .exec((err, proyectoDB) => {
             if (err) {
                 reject(err);
@@ -93,14 +101,21 @@ Comprabar_fase_correcta = (id,fase) => {
                     err
                 })
             }else{
-                let faseProyecto = Number(proyectoDB.fase);
-                faseProyecto++;
-
-                console.log(proyectoDB.fase);
-                if (faseProyecto === Number(fase)) {
-                    resolve(true);
+                if (!proyectoDB) {
+                    reject({
+                        errBaseDatos: false,
+                        err: 'Proyecto no encontrado'
+                    })
                 }else{
-                    resolve(false);
+                    let faseProyecto = Number(proyectoDB.fase);
+                    faseProyecto++;
+    
+                    console.log(proyectoDB.fase);
+                    if (faseProyecto === Number(fase)) {
+                        resolve(true);
+                    }else{
+                        resolve(false);
+                    }
                 }
             }
         })

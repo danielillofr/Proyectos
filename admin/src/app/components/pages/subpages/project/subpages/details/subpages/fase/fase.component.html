@@ -47,11 +47,11 @@
                     <div *ngIf="confFase.mostrarDocReq" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
-                                Versión requerimientos:
+                                Requerimientos:
                                 <small class="text-muted">
-                                        {{proyectosservice.proyectoActual.proyecto.versionReq}}
+                                        {{proyectosservice.proyectoActual.proyecto.documentoReq.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoReq.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.versionReq}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}{{proyectosservice.proyectoActual.proyecto.documentoReq.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
@@ -137,9 +137,9 @@
                             <h4>
                                 Documento especificaciones:
                                 <small class="text-muted">
-                                        {{proyectosservice.proyectoActual.proyecto.versionEsp}}
+                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/ESPECIFICACIONES/{{proyectosservice.proyectoActual.proyecto.versionEsp}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/ESPECIFICACIONES/{{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
@@ -210,9 +210,9 @@
                             <h4>
                                 Versión SOO:
                                 <small class="text-muted">
-                                        {{proyectosservice.proyectoActual.proyecto.versionDiseno}}
+                                        {{proyectosservice.proyectoActual.proyecto.documentoDiseno.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/DISENO/{{proyectosservice.proyectoActual.proyecto.versionDiseno}}.pdf"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/DISENO/{{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                             <h4>
                                 Versión documento mantis:
                                 <small class="text-muted">
-                                    {{proyectosservice.proyectoActual.proyecto | proyectoADocPruebas:fase}}
+                                    {{proyectosservice.proyectoActual.proyecto | proyectoADocMantis:fase}}
                                 </small>
                                 <button (click)="Doc_mantis()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
                             </h4>
@@ -251,9 +251,9 @@
                             <h4>
                                 Versión manual:
                                 <small class="text-muted">
-                                        {{proyectosservice.proyectoActual.proyecto.versionManual}}
+                                        {{proyectosservice.proyectoActual.proyecto.documentoManual.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoManual.version}}
                                 </small>
-                                <button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/MANUAL/{{proyectosservice.proyectoActual.proyecto.documentoManual.version}}{{proyectosservice.proyectoActual.proyecto.documentoManual.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>

@@ -32,9 +32,17 @@ const documentoSchema = new Schema({
         type: String,
         required: [true, 'Ruta requerida']
     },
+    extension: {
+        type: String,
+        required: [true, 'Extension requerida']
+    },
     version: {
         type: Number,
-        defauld: 0
+        default: 0
+    },
+    nombre: {
+        type: String,
+        required: [true, '']
     }
 })
 

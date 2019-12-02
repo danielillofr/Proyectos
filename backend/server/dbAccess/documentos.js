@@ -2,7 +2,7 @@ const Documento = require('./../models/documento');
 const Proyecto = require('./../models/proyecto')
 const fs = require('fs');
 const {Anadir_log_cambio_documento} = require('./../dbAccess/logs');
-
+const path = require('path');
 
 Mover_fichero = (fichero,ruta) => {
     return new Promise((resolve,reject) => {
@@ -18,7 +18,16 @@ Mover_fichero = (fichero,ruta) => {
 
 Obtener_version_proyecto = (idProyecto,tipo) => {
     return new Promise((resolve,reject) => {
-        Proyecto.findById(idProyecto, (err, proyectoDB) => {
+        Proyecto.findById(idProyecto)
+                .populate('documentoReq','version')
+                .populate('documentoEsp','version')
+                .populate('documentoDiseno','version')
+                .populate('documentoValInt','version')
+                .populate('documentoPruInt','version')
+                .populate('documentoManual','version')
+                .populate('documentoPruCal','version')
+                .populate('documentoValCal','version')
+                .exec((err, proyectoDB) => {
             if (err){
                 reject(err);
             }else{
@@ -28,31 +37,31 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                 }
                 switch(tipo) {
                     case 'REQUERIMIENTOS':{
-                        resolve(proyectoDB.versionReq);
+                        resolve((proyectoDB.documentoReq)?proyectoDB.documentoReq.version:0);
                     }break;
                     case 'ESPECIFICACIONES':{
-                        resolve(proyectoDB.versionEsp);
+                        resolve((proyectoDB.documentoEsp)?proyectoDB.documentoEsp.version:0);
                     }break;
                     case 'VALINT':{
-                        resolve(proyectoDB.versionValInt);
+                        resolve((proyectoDB.documentoValInt)?proyectoDB.documentoValInt.version:0);
                     }break;
                     case 'VALCAL':{
-                        resolve(proyectoDB.versionValCal);
+                        resolve((proyectoDB.documentoValCal)?proyectoDB.documentoValCal.version:0);
                     }break;
                     case 'DISENO':{
-                        resolve(proyectoDB.versionDiseno);
+                        resolve((proyectoDB.documentoDiseno)?proyectoDB.documentoDiseno.version:0);
                     }break;
                     case 'CAMBIO':{
                         resolve(proyectoDB.versionCambio);
                     }break;
                     case 'PRUINT':{
-                        resolve(proyectoDB.versionPruInt);
+                        resolve((proyectoDB.documentoPruInt)?proyectoDB.documentoPruInt.version:0);
                     }break;
                     case 'PRUCAL':{
-                        resolve(proyectoDB.versionPruCal);
+                        resolve((proyectoDB.documentoPruCal)?proyectoDB.documentoPruCal.version:0);
                     }break;
                     case 'MANUAL':{
-                        resolve(proyectoDB.versionManual);
+                        resolve((proyectoDB.documentoManual)?proyectoDB.documentoManual.version:0);
                     }break;
                 }
                 reject('no hay tipo:', tipo);
@@ -61,7 +70,7 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
     })
 }
 
-Anadir_documento_a_base = (idProyecto, idUsuario, tipo, ruta, version) => {
+Anadir_documento_a_base = (idProyecto, idUsuario, tipo, ruta, version,nombre,extension) => {
     return new Promise((resolve,reject) => {
         const documento = new Documento({
             proyecto: idProyecto,
@@ -69,7 +78,9 @@ Anadir_documento_a_base = (idProyecto, idUsuario, tipo, ruta, version) => {
             usuario: idUsuario,
             tipo,
             ruta,
-            version
+            version,
+            extension,
+            nombre
         });
         documento.save((err, documentoDB) => {
             if (err){
@@ -81,27 +92,27 @@ Anadir_documento_a_base = (idProyecto, idUsuario, tipo, ruta, version) => {
     })
 }
 
-Actualizar_proyecto = (idProyecto,tipo,version) => {
+Actualizar_proyecto = (idProyecto,tipo,idDocumento) => {
     return new Promise((resolve,reject) => {
         let actualizacion;
         switch(tipo) {
             case 'REQUERIMIENTOS':{
-                actualizacion = {versionReq: version};
+                actualizacion = {documentoReq: idDocumento};
             }break;
             case 'ESPECIFICACIONES':{
-                actualizacion = {versionEsp: version};
+                actualizacion = {documentoEsp: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'VALINT':{
-                actualizacion = {versionValInt: version};
+                actualizacion = {documentoValInt: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'VALCAL':{
-                actualizacion = {versionValCal: version};
+                actualizacion = {documentoValCal: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'DISENO':{
-                actualizacion = {versionDiseno: version};
+                actualizacion = {documentoDiseno: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'CAMBIO':{
@@ -109,15 +120,15 @@ Actualizar_proyecto = (idProyecto,tipo,version) => {
                 console.log(actualizacion);
             }break;
             case 'PRUINT':{
-                actualizacion = {versionPruInt: version};
+                actualizacion = {documentoPruInt: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'PRUCAL':{
-                actualizacion = {versionPruCal: version};
+                actualizacion = {documentoPruCal: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'MANUAL':{
-                actualizacion = {versionManual: version};
+                actualizacion = {documentoManual: idDocumento};
                 console.log(actualizacion);
             }break;
         }
@@ -144,10 +155,12 @@ Subir_fichero = async(idProyecto, fichero,tipo,usuario) => {
             fs.mkdirSync(`./documents/${idProyecto}/${tipo}`);
         }
     //Se incrementa en uno
-        const ruta = `./documents/${idProyecto}/${tipo}/${versionN}.pdf`;           //Se calcula la ruta
+        const extension = path.extname(fichero.name);
+        console.log(extension);
+        const ruta = `./documents/${idProyecto}/${tipo}/${versionN}${extension}`;           //Se calcula la ruta
         await Mover_fichero (fichero,ruta);                                         //Se mueve le fichero a su ruta correspondiente
-        await Anadir_documento_a_base(idProyecto,usuario._id,tipo,ruta,versionN);   //Se añade a la base de datos de documentos
-        const proyecto = await Actualizar_proyecto(idProyecto,tipo,versionN);                        //Se actualiza la versión del documento en proyectos
+        const documento = await Anadir_documento_a_base(idProyecto,usuario._id,tipo,ruta,versionN,fichero.name,extension);   //Se añade a la base de datos de documentos
+        const proyecto = await Actualizar_proyecto(idProyecto,tipo,documento._id);                        //Se actualiza la versión del documento en proyectos
         await Anadir_log_cambio_documento(idProyecto,usuario,tipo,versionN);        //Se añade al log
         return proyecto;
     }catch(err){

@@ -16,8 +16,8 @@ export class AvanzaraFabpriunidadComponent implements OnInit, AfterContentChecke
 
   constructor(private proyectosservice: ProyectosService, private router: Router) {
     this.formulario = new FormGroup({
-      primeraUnidad: new FormControl('', [Validators.required]),
-      comentarios: new FormControl('', [Validators.minLength(3)]),
+      primeraUnidad: new FormControl('Si', [Validators.required]),
+      comentarios: new FormControl('', [Validators.required,Validators.minLength(3)]),
       fechaPrevista: new FormControl('01/01/2019', [Validators.required])
     })
 

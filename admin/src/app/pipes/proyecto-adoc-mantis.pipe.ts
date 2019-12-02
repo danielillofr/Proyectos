@@ -8,10 +8,10 @@ export class ProyectoADocMantisPipe implements PipeTransform {
   transform(proyecto: any, fase: string): string {
     switch (fase) {
       case '7':{
-        return proyecto.versionValInt;
+        return `${proyecto.documentoValInt.nombre} Versión ${proyecto.documentoValInt.version}`;
       }break;
       case '8':{
-        return proyecto.versionValCal;
+        return `${proyecto.documentoValCal.nombre} Versión ${proyecto.documentoValCal.version}`;
       }break;
     }
     return '';

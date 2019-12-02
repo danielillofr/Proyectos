@@ -50,6 +50,8 @@ export class ProyectosService {
             reject();
           }else{
             this.proyectoActual = datos.proyecto;
+            console.log(this.proyectoActual);
+
             resolve();
           }
         }, (err)=>{

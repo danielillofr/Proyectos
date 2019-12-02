@@ -8,10 +8,10 @@ export class ProyectoADocPruebasPipe implements PipeTransform {
   transform(proyecto: any, fase: string): string {
     switch (fase) {
       case '7':{
-        return proyecto.versionPruInt;
+        return `${proyecto.documentoPruInt.nombre} Versión ${proyecto.documentoPruInt.version}`;
       }break;
       case '8':{
-        return proyecto.versionPruCal;
+        return `${proyecto.documentoPruCal.nombre} Versión ${proyecto.documentoPruCal.version}`;
       }break;
     }
     return '';

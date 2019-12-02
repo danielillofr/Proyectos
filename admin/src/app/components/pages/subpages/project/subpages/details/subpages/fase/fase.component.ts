@@ -77,16 +77,16 @@ export class FaseComponent implements OnInit {
 
   Doc_pruebas(){
     if (this.fase == '7'){
-      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUINT/${this.proyectosservice.proyectoActual.proyecto.documentoPruInt.version}${this.proyectosservice.proyectoActual.proyecto.documentoPruInt.extension}`, '_blank');
     }else if (this.fase == '8'){
-      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUCAL/${this.proyectosservice.proyectoActual.proyecto.versionPruCal}.pdf`, '_blank');
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/PRUCAL/${this.proyectosservice.proyectoActual.proyecto.documentoPruCal.version}${this.proyectosservice.proyectoActual.proyecto.documentoPruCal.extension}`, '_blank');
     }
   }
   Doc_mantis(){
     if (this.fase == '7'){
-      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALINT/${this.proyectosservice.proyectoActual.proyecto.versionPruInt}.pdf`, '_blank');
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALINT/${this.proyectosservice.proyectoActual.proyecto.documentoValInt.version}${this.proyectosservice.proyectoActual.proyecto.documentoValInt.extension}`, '_blank');
     }else if (this.fase == '8'){
-      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALCAL/${this.proyectosservice.proyectoActual.proyecto.versionPruCal}.pdf`, '_blank');
+      window.open(`${this.rutaBackend}/documents/${this.idProyecto}/VALCAL/${this.proyectosservice.proyectoActual.proyecto.documentoValCal.version}${this.proyectosservice.proyectoActual.proyecto.documentoValCal.extension}`, '_blank');
     }
   }
   volverAFase(){

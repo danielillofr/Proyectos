@@ -78,41 +78,69 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
-    versionReq: {
-        type: Number,
-        default: 0
+    // versionReq: {
+    //     type: Number,
+    //     default: 0
+    // },
+    documentoReq: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionEsp: {
-        type: Number,
-        default: 0
+    documentoEsp: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionValInt: {
-        type: Number,
-        default: 0
+    documentoValInt: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionValCal: {
-        type: Number,
-        default: 0
+    // versionValInt: {
+    //     type: Number,
+    //     default: 0
+    // },
+    // versionValCal: {
+    //     type: Number,
+    //     default: 0
+    // },
+    // versionPruInt: {
+    //     type: Number,
+    //     default: 0
+    // },
+    documentoPruInt: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionPruInt: {
-        type: Number,
-        default: 0
+    documentoPruCal: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionPruCal: {
-        type: Number,
-        default: 0
+    documentoValCal: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
-    versionDiseno: {
-        type: Number,
-        default: 0
+    // versionPruCal: {
+    //     type: Number,
+    //     default: 0
+    // },
+    // versionDiseno: {
+    //     type: Number,
+    //     default: 0
+    // },
+    documentoDiseno: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
     versionCambio: {
         type: Number,
         default: 0
     },
-    versionManual: {
-        type: Number,
-        default: 0
+    // versionManual: {
+    //     type: Number,
+    //     default: 0
+    // },
+    documentoManual: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
     },
     fase0: {
         fechaPrevista: {
