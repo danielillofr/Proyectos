@@ -16,46 +16,35 @@
                         <th>Historial</th>
                     </thead>
                     <tbody>
-                        <tr>
+                        <!-- <tr *ngIf="proyectosservice.proyectoActual.proyecto.documentoReq">
                             <td>Requerimientos</td>
-                            <td>Requerimietnos.doc</td>
-                            <td>1.0</td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-upload"></i> Nueva</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></td>
-                        </tr>
-                        <tr>
-                            <td>Especificaciones</td>
-                            <td>Especificaciones.doc</td>
-                            <td>1.0</td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-upload"></i> Nueva</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></td>
-                        </tr>
-                        <tr>
-                            <td>Validación interna</td>
-                            <td>MantisInt.pdf</td>
-                            <td>1.0</td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-upload"></i> Nueva</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></td>
-                        </tr>
-                        <tr>
-                            <td>Validación calidad</td>
-                            <td>MatisCalidad.pdf</td>
-                            <td>1.0</td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-upload"></i> Nueva</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></td>
-                        </tr>
-                        <tr>
-                            <td>Diseño</td>
-                            <td>SOO.doc</td>
-                            <td>1.0</td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-upload"></i> Nueva</button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></td>
-                        </tr>
+                            <td>{{proyectosservice.proyectoActual.proyecto.documentoReq.nombre}}</td>
+                            <td>{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}</td>
+                            <td><a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoReq.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
+                            <td>   
+                                <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                                        <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
+                                        <input type="file" (change)="selecDocum($event.target.files[0],'req')" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                                    </div>
+                            </td>
+                            <td><a target="_blank" href="{{rutaBackend}}/documents/{{proyectosservice.proyectoActual.proyecto._id}}/REQUERIMIENTOS"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
+                        </tr> -->
+
+                        <tr *ngFor="let documento of documentos">
+                                <td>{{documento.titulo}}</td>
+                                <td>{{documento.nombre}}</td>
+                                <td>{{documento.version}}</td>
+                                <td><a target="_blank" href="{{documento.rutaDescarga}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
+                                <td>   
+                                    <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                                            <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
+                                            <input type="file" (change)="selecDocum($event.target.files[0],documento.tipoDoc)" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                                        </div>
+                                </td>
+                                <td><a target="_blank" href="{{documento.rutaHist}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
+                            </tr>
+    
+
                     </tbody>
                 </table>
             </div>
@@ -64,3 +53,4 @@
 
     </div>
 </div>
+

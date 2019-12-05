@@ -17,11 +17,13 @@ export class SubidaFicherosService {
           if (xhr.status === 200) {
             const respuesta: any = JSON.parse(xhr.response);
             if (respuesta.ok === false) {
+              console.log(respuesta.err);
               reject(respuesta.err);
             }else{
               resolve(respuesta.proyecto);
             }
           }else{
+            console.log(xhr);
             reject(xhr.response);
           }
         }

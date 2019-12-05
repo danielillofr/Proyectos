@@ -51,7 +51,8 @@
                                 <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoReq.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoReq.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}{{proyectosservice.proyectoActual.proyecto.documentoReq.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <!-- <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}{{proyectosservice.proyectoActual.proyecto.documentoReq.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a> -->
+                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoReq.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
@@ -139,7 +140,7 @@
                                 <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoEsp.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/ESPECIFICACIONES/{{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>
@@ -212,7 +213,7 @@
                                 <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoDiseno.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/DISENO/{{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                             </h4>
                         </div>
                     </div>

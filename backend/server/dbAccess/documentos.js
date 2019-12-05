@@ -154,11 +154,14 @@ Subir_fichero = async(idProyecto, fichero,tipo,usuario) => {
         if (!fs.existsSync(`./documents/${idProyecto}/${tipo}`)) {
             fs.mkdirSync(`./documents/${idProyecto}/${tipo}`);
         }
+        if (!fs.existsSync(`./documents/${idProyecto}/${tipo}/${versionN}`)) {
+            fs.mkdirSync(`./documents/${idProyecto}/${tipo}/${versionN}`);
+        }
     //Se incrementa en uno
         const extension = path.extname(fichero.name);
         console.log(extension);
-        const ruta = `./documents/${idProyecto}/${tipo}/${versionN}${extension}`;           //Se calcula la ruta
-        await Mover_fichero (fichero,ruta);                                         //Se mueve le fichero a su ruta correspondiente
+        const ruta = `/documents/${idProyecto}/${tipo}/${versionN}/${fichero.name}`;           //Se calcula la ruta
+        await Mover_fichero (fichero,`.${ruta}`);                                         //Se mueve le fichero a su ruta correspondiente
         const documento = await Anadir_documento_a_base(idProyecto,usuario._id,tipo,ruta,versionN,fichero.name,extension);   //Se añade a la base de datos de documentos
         const proyecto = await Actualizar_proyecto(idProyecto,tipo,documento._id);                        //Se actualiza la versión del documento en proyectos
         await Anadir_log_cambio_documento(idProyecto,usuario,tipo,versionN);        //Se añade al log
