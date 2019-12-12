@@ -54,6 +54,7 @@ Obtener_proyecto = (id) => {
         .populate('documentoManual')
         .populate('documentoPruCal')
         .populate('documentoValCal')
+        .populate('documentoCambio')
         .exec((err, proyectoDB) => {
             if (err) {
                 reject(err);

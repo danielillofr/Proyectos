@@ -34,14 +34,14 @@
                                 <td>{{documento.titulo}}</td>
                                 <td>{{documento.nombre}}</td>
                                 <td>{{documento.version}}</td>
-                                <td><a target="_blank" href="{{documento.rutaDescarga}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
+                                <td><a target="_blank" href="{{documento.rutaDescarga}}"><button [disabled]="!(documento.existente)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
                                 <td>   
                                     <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
                                             <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
                                             <input type="file" (change)="selecDocum($event.target.files[0],documento.tipoDoc)" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
                                         </div>
                                 </td>
-                                <td><a target="_blank" href="{{documento.rutaHist}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
+                                <td><a target="_blank" href="{{documento.rutaHist}}"><button [disabled]="!(documento.existente)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
                             </tr>
     
 

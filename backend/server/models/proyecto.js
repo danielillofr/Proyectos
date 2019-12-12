@@ -130,10 +130,14 @@ const proyectoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
-    versionCambio: {
+    documentoCambio: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+/*    versionCambio: {
         type: Number,
         default: 0
-    },
+    },*/
     // versionManual: {
     //     type: Number,
     //     default: 0

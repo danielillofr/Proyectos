@@ -27,6 +27,7 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                 .populate('documentoManual','version')
                 .populate('documentoPruCal','version')
                 .populate('documentoValCal','version')
+                .populate('documentoCambio','version')
                 .exec((err, proyectoDB) => {
             if (err){
                 reject(err);
@@ -52,7 +53,7 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                         resolve((proyectoDB.documentoDiseno)?proyectoDB.documentoDiseno.version:0);
                     }break;
                     case 'CAMBIO':{
-                        resolve(proyectoDB.versionCambio);
+                        resolve((proyectoDB.documentoCambio)?proyectoDB.documentoCambio.version:0);
                     }break;
                     case 'PRUINT':{
                         resolve((proyectoDB.documentoPruInt)?proyectoDB.documentoPruInt.version:0);
@@ -116,7 +117,7 @@ Actualizar_proyecto = (idProyecto,tipo,idDocumento) => {
                 console.log(actualizacion);
             }break;
             case 'CAMBIO':{
-                actualizacion = {versionCambio: version};
+                actualizacion = {documentoCambio: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'PRUINT':{

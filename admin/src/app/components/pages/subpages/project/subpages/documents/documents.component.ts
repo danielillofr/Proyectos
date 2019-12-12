@@ -9,7 +9,8 @@ interface tipoDocumento {
   version: string,
   rutaDescarga: string,
   tipoDoc: string,
-  rutaHist: string
+  rutaHist: string,
+  existente: boolean
 }
 
 @Component({
@@ -61,21 +62,23 @@ export class DocumentsComponent implements OnInit {
         this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoDiseno, 'SOO','diseno','DISENO'));
         console.log(this.documentos);
        }
-      if (this.proyectosservice.proyectoActual.proyecto.versionCambio) {
-        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.versionCambio, 'Cambio','cambio','CAMBIO'));
+      if (this.proyectosservice.proyectoActual.proyecto.documentoCambio) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoCambio, 'Cambio','cambio','CAMBIO'));
         console.log(this.documentos);
+       }else{
+        this.documentos.push(this.Crear_documento(null, 'Cambio','cambio','CAMBIO'));
        }
      }
 
-    Crear_documento (doc: any, titulo: string, tipoDoc: string, pathRuta: string ): tipoDocumento {
+    Crear_documento (doc: any, titulo: string, tipoDoc: string, pathRuta: string): tipoDocumento {
       const documento: tipoDocumento = {
         titulo: titulo,
-        nombre: doc.nombre,
-        version: doc.version,
-        rutaDescarga: `${this.rutaBackend}${doc.ruta}`,
+        nombre: (doc)?doc.nombre:'--',
+        version: (doc)?doc.version:'--',
+        rutaDescarga: (doc)?`${this.rutaBackend}${doc.ruta}`:'',
         tipoDoc,
-        rutaHist: `${this.rutaBackend}/documents/${this.proyectosservice.proyectoActual.proyecto._id}/${pathRuta}`
-    
+        rutaHist: `${this.rutaBackend}/documents/${this.proyectosservice.proyectoActual.proyecto._id}/${pathRuta}`,
+        existente: (doc)?true:false
       }
       return documento;
     }
