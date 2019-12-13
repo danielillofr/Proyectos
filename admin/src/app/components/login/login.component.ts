@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
   }
 
   Loguearse = () => {
-    this.usuarioservice.solicitar_token('dfernandez','123456')//this.formLogin.controls['nombre'].value,this.formLogin.controls['clave'].value)
+    // this.usuarioservice.solicitar_token('dfernandez','123456')//this.formLogin.controls['nombre'].value,this.formLogin.controls['clave'].value)
+    this.usuarioservice.solicitar_token(this.formLogin.controls['nombre'].value,this.formLogin.controls['clave'].value)
       .subscribe((datos)=>{
         const respuesta:RespuestaTipoLogin = <RespuestaTipoLogin>datos;
         if (respuesta.ok === false) {

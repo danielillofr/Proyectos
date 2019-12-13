@@ -36,6 +36,36 @@ resumenProyectos = (proyectosDB) => {
     return proyectos;
 } 
 
+estadisticas = (proyectosDB) => {
+    let proyectosEnFase = [0,0,0,0,0,0,0,0,0,0,0];
+    for (let i = 0; i < proyectosDB.length; i++) {
+        let fase = Number(proyectosDB[i].fase);
+        if (fase < 11) {
+            proyectosEnFase[fase]++;
+        }
+    }
+    console.log(proyectosEnFase)
+    return proyectosEnFase;
+}
+
+app.get('/api/proyectos/estadisticas', [Autentificar], (req, res) => {
+    Proyecto.find({})
+            .exec((err, proyectosDB) => {
+        if (err) {
+            return res.json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        return res.json({
+            ok: true,
+            estadisticas: estadisticas(proyectosDB)
+        })
+    })
+})
+
+
 app.get('/api/proyectos/todos', [Autentificar], (req, res) => {
     Proyecto.find({})
             .exec((err, proyectosDB) => {

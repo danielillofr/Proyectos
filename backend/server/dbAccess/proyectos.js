@@ -539,5 +539,15 @@ Modificar_proyecto = async(id,datos,usuario) => {
     }
 }
 
+
+
+Devolver_estadisticas = async(idProyecto) => {
+    try{
+        const proyecto = await Obtener_proyecto(id);
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
 module.exports = {Crear_proyecto_con_log,Eliminar_proyecto,Completar_fase,Obterner_proyecto_completo,Modificar_proyecto}
 

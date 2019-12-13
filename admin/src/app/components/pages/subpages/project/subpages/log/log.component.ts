@@ -8,7 +8,7 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 })
 export class LogComponent implements OnInit {
 
-  constructor(private proyectosservice: ProyectosService) { }
+  constructor(public proyectosservice: ProyectosService) { }
 
   ngOnInit() {
   }

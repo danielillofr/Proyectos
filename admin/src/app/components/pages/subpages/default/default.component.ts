@@ -13,7 +13,7 @@ export class DefaultComponent implements OnInit {
 
   logsCargados: boolean = false;
 
-  constructor(private logsservice: LogsService, private router: Router) {
+  constructor(public logsservice: LogsService, private router: Router) {
     //Solicitamos los logs
     logsservice.Obtener_ultimos_logs()
       .then(()=>{

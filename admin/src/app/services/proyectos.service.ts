@@ -310,4 +310,25 @@ export class ProyectosService {
     })
   }
 
+  SolicitarEstadisticas () {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.get(`${this.env}/api/proyectos/estadisticas`, opciones)
+        .subscribe((respuesta: any) => {
+          if (respuesta.ok === false) {
+            console.log('Error:',respuesta);
+            reject();
+          }else{
+            resolve(respuesta.estadisticas);
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
 }
+
