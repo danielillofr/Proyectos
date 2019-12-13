@@ -22,13 +22,26 @@ export class AvanzaraPlanificacionComponent implements OnInit, AfterContentCheck
   formulario: FormGroup;
   formulario2: FormGroup;  
   constructor(private proyectosservice: ProyectosService, private router: Router) {
+    let actualizacion: boolean = ((Number(proyectosservice.proyectoActual.proyecto.fase)) > 3);
+    if (actualizacion) {
+
+      this.planificacion = proyectosservice.proyectoActual.proyecto.fase4.planificacion;
+
+      for (let i = 0; i < this.planificacion.length; i++){
+        let fecha = new Date();
+        fecha.setTime(Date.parse(this.planificacion[i].fechaInicio));
+        this.planificacion[i].fechaInicio = fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
+        fecha.setTime(Date.parse(this.planificacion[i].fechaFin));
+        this.planificacion[i].fechaFin = fecha.getDate() + '/' + (fecha.getMonth() + 1) + '/' + fecha.getFullYear();
+      }
+    }
     this.formulario = new FormGroup({
       fase: new FormControl('', [Validators.required]),
       fechaInicio: new FormControl('', [Validators.required]),
       fechaFin: new FormControl('', [Validators.required])
     })
     this.formulario2 = new FormGroup({
-      fechaPrevista: new FormControl('01/01/2019',[Validators.required])
+      fechaPrevista: new FormControl((actualizacion)?(proyectosservice.proyectoActual.proyecto.fase4.fechaPrevista):('01/01/2019'),[Validators.required])
     })    
    }
 

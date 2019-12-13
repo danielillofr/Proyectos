@@ -1,5 +1,6 @@
 const Proyecto = require ('./../models/proyecto');
 const _ = require('underscore');
+const Planificacion = require('./../models/planificacion')
 
 const {Anadir_log_proyecto_creado,Anadir_log_fase_completada,Obtener_log_proyecto,Anadir_log_proyecto_modificado} = require ('./logs')
 
@@ -109,13 +110,12 @@ Comprabar_fase_correcta = (id,fase) => {
                     })
                 }else{
                     let faseProyecto = Number(proyectoDB.fase);
-                    faseProyecto++;
-    
-                    console.log(proyectoDB.fase);
-                    if (faseProyecto === Number(fase)) {
-                        resolve(true);
+                    if (Number(fase) === (faseProyecto + 1)){//avanzamos a la nueva fase
+                        resolve(Number(fase));
+                    }else if (Number(fase) <= faseProyecto) {
+                        resolve(faseProyecto);//Nos quedamos en la fase en la que estamos
                     }else{
-                        resolve(false);
+                        resolve(0);//Si no, no podemos avanzar
                     }
                 }
             }
@@ -128,16 +128,38 @@ faseATipo = (fase) => {
 
 }
 
+Guardar_planificacion_actual = (idProyecto, plan) => {
+    console.log('Planificacion.......:', plan);
+    return new Promise((resolve,reject) => {
+        const planificacion = new Planificacion ({
+            proyecto: idProyecto,
+            fecha: new Date(),
+            planificacion: plan
+        })
+        planificacion.save((err, planificacionDB) => {
+            if (err) {
+                console.log(err);
+                reject(err);
+            }else{
+                resolve(planificacionDB);
+            }
+        })
+    })
+}
+
 Completar_fase = async(id,datos,usuario,ficheros) => {
     const faseCorrecta = await Comprabar_fase_correcta(id,datos.fase);
-    if (!faseCorrecta) {
-        console.log('ERror en la fase')
+    if (faseCorrecta === 0) {
+        console.log('ERror en la fase:', faseCorrecta);
         throw new Error('No se puede completar la fase en la que no está el proyecto')
     }
-    let proyectoCompletado = await Completar_fase_comprobada(id,datos,ficheros);
+    let proyectoCompletado = await Completar_fase_comprobada(id,datos,ficheros,faseCorrecta);
     console.log(faseCorrecta);
     if (datos.fase == '1') {
         proyectoCompletado = await Subir_fichero(id,ficheros.docReq,'REQUERIMIENTOS',usuario)
+    }else if(datos.fase == '4') {
+        console.log('Datos::::', datos)
+        await Guardar_planificacion_actual(id, datos.planificacion);
     }else if(datos.fase == '5') {
         proyectoCompletado = await Subir_fichero(id,ficheros.docEsp,'ESPECIFICACIONES',usuario)
     }else if(datos.fase == '7') {
@@ -154,7 +176,7 @@ Completar_fase = async(id,datos,usuario,ficheros) => {
 }
 
 
-Completar_fase_comprobada = async(id,datos,ficheros) => {
+Completar_fase_comprobada = async(id,datos,ficheros,faseCorrecta) => {
     console.log('Datos:', datos);
     return new Promise((resolve, reject) => {
         switch(datos.fase) {
@@ -166,7 +188,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 1,
+                        fase: faseCorrecta,
                         fase1: {
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()
@@ -203,7 +225,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     }
                     console.log('Pasos:', pasosAnalisis);
                     const actualizacion = {
-                        fase: 2,
+                        fase: faseCorrecta,
                         fase2: {
                             fechaCreacion: new Date(),
                             analisis: pasosAnalisis,
@@ -234,7 +256,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                 }else{
                     console.log('Aqui si');
                     const actualizacion = {
-                        fase: 3,
+                        fase: faseCorrecta,
                         fase3: {
                             fechaCreacion: new Date(),
                             estadoAprobacion: datos.estadoAprobacion,
@@ -274,7 +296,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     }
                     console.log('Pasos:', pasosPlanificacion);
                     const actualizacion = {
-                        fase: 4,
+                        fase: faseCorrecta,
                         fase4: {
                             fechaCreacion: new Date(),
                             planificacion: pasosPlanificacion,
@@ -306,7 +328,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 5,
+                        fase: faseCorrecta,
                         fase5: {
                             fechaPrevista: datos.fechaPrevista,
                             fechaCreacion: new Date()
@@ -343,7 +365,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     }
                     console.log('Pasos:', pasosDesarrollo);
                     const actualizacion = {
-                        fase: 6,
+                        fase: faseCorrecta,
                         fase6: {
                             fechaCreacion: new Date(),
                             desarrollo: pasosDesarrollo,
@@ -374,7 +396,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 7,
+                        fase: faseCorrecta,
                         fase7: {
                             testProbado: datos.testProbado,
                             fechaPrevista: datos.fechaPrevista,
@@ -403,7 +425,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 8,
+                        fase: faseCorrecta,
                         fase8: {
                             testProbado: datos.testProbado,
                             fechaPrevista: datos.fechaPrevista,
@@ -433,7 +455,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 9,
+                        fase: faseCorrecta,
                         fase9: {
                             primeraUnidad: datos.primeraUnidad,
                             comentarios: datos.comentarios,
@@ -464,7 +486,7 @@ Completar_fase_comprobada = async(id,datos,ficheros) => {
                     })
                 }else{
                     const actualizacion = {
-                        fase: 10,
+                        fase: faseCorrecta,
                         fase10: {
                             primeraUnidad: datos.primeraUnidad,
                             comentarios: datos.comentarios,

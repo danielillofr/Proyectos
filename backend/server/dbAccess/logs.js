@@ -21,37 +21,37 @@ Anadir_log_proyecto_creado = (idProyecto,usuario) => {
 function FaseATexto(fase) {
     const faseNum = Number(fase);
     switch (faseNum){
-        case 0:{
+        case 1:{
           cadena = 'Recopilando';
         }break;
-        case 1:{
+        case 2:{
           cadena = 'Analizando';
         }break;
-        case 2:{
+        case 3:{
           cadena = 'Aprobando';
         }break;
-        case 3:{
+        case 4:{
           cadena = 'Planificando';
         }break;
-        case 4:{
+        case 5:{
           cadena = 'Especificando';
         }break;
-        case 5:{
+        case 6:{
           cadena = 'Desarrolando';
         }break;
-        case 6:{
+        case 7:{
           cadena = 'Validando Int';
         }break;
-        case 7:{
+        case 8:{
           cadena = 'Validando Cal';
         }break;
-        case 8:{
+        case 9:{
           cadena = 'Fabricando 1ª';
         }break;
-        case 9:{
+        case 10:{
           cadena = 'Validando 1ª';
         }break;
-        case 10:{
+        case 11:{
           cadena = '--';
         }break;
       }
