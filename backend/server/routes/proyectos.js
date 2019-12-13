@@ -44,7 +44,6 @@ estadisticas = (proyectosDB) => {
             proyectosEnFase[fase]++;
         }
     }
-    console.log(proyectosEnFase)
     return proyectosEnFase;
 }
 
