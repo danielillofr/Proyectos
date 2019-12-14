@@ -104,6 +104,14 @@ export class FaseComponent implements OnInit {
         })
         .catch((err)=>{
           console.log(err);
+          swal({
+            title: 'Error',
+            text: `Error estableciendo la fecha ${fechaPrevista}`,
+            icon: 'error',
+            button: {
+              text: 'Aceptar'
+            }
+          })
         })
       });
   }

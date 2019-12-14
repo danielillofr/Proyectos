@@ -233,6 +233,7 @@ app.put('/api/proyectos/:id', [Autentificar], (req, res) => {
                 })
         })
         .catch(err => {
+            console.log('Error:', err.message)
             return res.json({
                 ok: false,
                 err: err.message

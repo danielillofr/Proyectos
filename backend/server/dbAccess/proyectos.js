@@ -541,7 +541,7 @@ Modificar_proyectoDB = (id, datos) => {
         datos = _.pick(datos, ['nombre', 'fase', 'descripcion', 'fechaPrevista']);
         Proyecto.findByIdAndUpdate(id, datos, { new: true }, (err, proyectoDB) => {
             if (err) {
-                reject(err);
+                reject(new Error(err));
             } else {
                 resolve(proyectoDB);
             }
