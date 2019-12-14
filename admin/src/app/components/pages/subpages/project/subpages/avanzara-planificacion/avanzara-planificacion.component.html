@@ -1,21 +1,20 @@
-
 <div class="row">
     <div class="col-md-12">
         <h3>Completar la fase de planificación</h3>
         <form [formGroup]="formulario" class="forms-sample">
-            <blockquote  class="blockquote blockquote-primary">
+            <blockquote class="blockquote blockquote-primary">
                 <h4>Añadir fase</h4>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fase</label>
-                            <input formControlName="fase" class="form-control" placeholder="Fase" type="text" [ngClass]="{'is-invalid': formulario.controls['fase'].errors}"/>
+                            <input formControlName="fase" class="form-control" placeholder="Fase" type="text" [ngClass]="{'is-invalid': formulario.controls['fase'].errors}" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fecha inicio</label>
-                            <input formControlName="fechaInicio" class="form-control" id="fechaInicio" name="fechaInicio" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formulario.controls['fechaInicio'].errors}"/>
+                            <input formControlName="fechaInicio" class="form-control" id="fechaInicio" name="fechaInicio" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formulario.controls['fechaInicio'].errors}" />
                         </div>
                     </div>
                 </div>
@@ -23,7 +22,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Fecha fin</label>
-                            <input formControlName="fechaFin" class="form-control" id="fechaFin" name="fechaFin" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formulario.controls['fechaFin'].errors}"/>
+                            <input formControlName="fechaFin" class="form-control" id="fechaFin" name="fechaFin" placeholder="DD/MM/YYYY" type="text" [ngClass]="{'is-invalid': formulario.controls['fechaFin'].errors}" />
                         </div>
                     </div>
                 </div>
@@ -47,14 +46,14 @@
                                     <th></th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let fase of planificacion; let i=index"> 
+                                    <tr *ngFor="let fase of planificacion; let i=index">
                                         <td>{{fase.fase}}</td>
                                         <td>{{fase.fechaInicio}}</td>
                                         <td>{{fase.fechaFin}}</td>
                                         <td><button (click)="Eliminar(i)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-delete"></i> Eliminar</button></td>
                                     </tr>
                                 </tbody>
-                            </table>                        
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -64,7 +63,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>Fecha prevista entrega aprobación</label>
-                            <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text"/>
+                            <input class="form-control" id="fecha" name="fecha" placeholder="DD/MM/YYYY" type="text" />
                         </div>
                     </div>
                 </div>
@@ -72,11 +71,10 @@
             </blockquote>
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
-                    <button type="submit" (click)="Avanzar()" [disabled]="(formulario2.status === 'INVALID') || (planificacion.length == 0)" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>                
+                    <button type="submit" (click)="Avanzar()" [disabled]="(formulario2.status === 'INVALID') || (planificacion.length == 0)" class="btn btn-success mr-2" style="width: 25%">Avanzar fase</button>
                 </div>
             </div>
         </form>
 
     </div>
 </div>
-

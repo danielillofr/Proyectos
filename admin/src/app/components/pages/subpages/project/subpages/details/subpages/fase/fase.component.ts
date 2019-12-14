@@ -24,7 +24,7 @@ export class FaseComponent implements OnInit {
   numFase: Number = null;
   rutaBackend = environment.ruta_backend;
 
-  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) { 
+  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) {
     // this.proyecto = proyectosservice.proyectoActual;
     _activatedRoute.parent.parent.params.subscribe (params=>{
       this.idProyecto = params.idProyecto;
@@ -116,5 +116,5 @@ export class FaseComponent implements OnInit {
     const faseNum: number = Number(this.fase);
     if (faseNum != 0) return true;
     return false;
-  }  
+  }
 }

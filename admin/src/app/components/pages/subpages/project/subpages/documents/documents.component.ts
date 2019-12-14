@@ -3,6 +3,8 @@ import { ProyectosService } from 'src/app/services/proyectos.service';
 import { environment } from './../../../../../../../environments/environment';
 import { SubidaFicherosService } from 'src/app/services/subida-ficheros.service';
 
+declare function swal(titulo: String, mensaje: String ,tipo: String);
+
 interface tipoDocumento {
   titulo: string,
   nombre: string,
@@ -24,8 +26,17 @@ export class DocumentsComponent implements OnInit {
 
   documentos: tipoDocumento[] = [];
 
+  planificaciones: any[] = [];
+
+
+
   constructor(private proyectosservice: ProyectosService, private subidaficherosservice: SubidaFicherosService) {
-    this.Calcular_documentos();
+      this.Calcular_documentos();
+      proyectosservice.Solicitar_planificaciones(proyectosservice.proyectoActual.proyecto._id)
+        .then((planificaciones: any[]) => {
+          this.planificaciones = planificaciones;
+          console.log('Planificaciones:', this.planificaciones);
+        })
     }
 
     Calcular_documentos () {
@@ -95,6 +106,7 @@ export class DocumentsComponent implements OnInit {
       .then(proyecto=>{
         this.proyectosservice.proyectoActual = proyecto;
         this.Calcular_documentos();
+        swal('Documento subido',`${archivo.name} subido correctamente`,'success');
       })
       .catch(err=>console.log('Error:',err))
 

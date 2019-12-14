@@ -1,12 +1,13 @@
 const Proyecto = require('./../models/proyecto');
+const Planificacion = require('./../models/planificacion')
 const express = require('express');
 const app = express();
 const _ = require('underscore');
-const {Crear_proyecto_con_log,Eliminar_proyecto,Completar_fase,Obterner_proyecto_completo,Modificar_proyecto} = require ('./../dbAccess/proyectos')
+const { Crear_proyecto_con_log, Eliminar_proyecto, Completar_fase, Obterner_proyecto_completo, Modificar_proyecto } = require('./../dbAccess/proyectos')
 
 const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./../middlewares/Autentificar');
 
-const {Obtener_todos_logs} = require ('./../dbAccess/logs')
+const { Obtener_todos_logs } = require('./../dbAccess/logs')
 
 
 //Obtener un listado con todos los proyectos. Solo administrador
@@ -34,10 +35,10 @@ resumenProyectos = (proyectosDB) => {
         })
     }
     return proyectos;
-} 
+}
 
 estadisticas = (proyectosDB) => {
-    let proyectosEnFase = [0,0,0,0,0,0,0,0,0,0,0];
+    let proyectosEnFase = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let i = 0; i < proyectosDB.length; i++) {
         let fase = Number(proyectosDB[i].fase);
         if (fase < 11) {
@@ -49,42 +50,42 @@ estadisticas = (proyectosDB) => {
 
 app.get('/api/proyectos/estadisticas', [Autentificar], (req, res) => {
     Proyecto.find({})
-            .exec((err, proyectosDB) => {
-        if (err) {
+        .exec((err, proyectosDB) => {
+            if (err) {
+                return res.json({
+                    ok: false,
+                    errBaseDatos: true,
+                    err
+                })
+            }
             return res.json({
-                ok: false,
-                errBaseDatos: true,
-                err
+                ok: true,
+                estadisticas: estadisticas(proyectosDB)
             })
-        }
-        return res.json({
-            ok: true,
-            estadisticas: estadisticas(proyectosDB)
         })
-    })
 })
 
 
 app.get('/api/proyectos/todos', [Autentificar], (req, res) => {
     Proyecto.find({})
-            .exec((err, proyectosDB) => {
-        if (err) {
+        .exec((err, proyectosDB) => {
+            if (err) {
+                return res.json({
+                    ok: false,
+                    errBaseDatos: true,
+                    err
+                })
+            }
             return res.json({
-                ok: false,
-                errBaseDatos: true,
-                err
+                ok: true,
+                proyectos: resumenProyectos(proyectosDB)
             })
-        }
-        return res.json({
-            ok: true,
-            proyectos: resumenProyectos(proyectosDB)
         })
-    })
 })
 
 //Detalle de un proyecto
-app.get('/api/proyectos/detalle/:id', [Autentificar], (req,res) => {
-    Obterner_proyecto_completo (req.params.id)
+app.get('/api/proyectos/detalle/:id', [Autentificar], (req, res) => {
+    Obterner_proyecto_completo(req.params.id)
         .then(proyecto => {
             return res.json({
                 ok: true,
@@ -92,17 +93,17 @@ app.get('/api/proyectos/detalle/:id', [Autentificar], (req,res) => {
             })
         })
         .catch(err => {
-            console.log('Error capturado 2:',err)
+            console.log('Error capturado 2:', err)
             return res.json({
                 ok: false,
                 errBaseDatos: true,
                 err: err.message
             })
         })
-    })
+})
 
 //Crear un nuevo proyecto
-app.post('/api/proyectos', [Autentificar], (req,res) => {
+app.post('/api/proyectos', [Autentificar], (req, res) => {
     const datosProyecto = req.body;
     if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)) {
         return res.json({
@@ -130,7 +131,7 @@ app.post('/api/proyectos', [Autentificar], (req,res) => {
 
 //Eliminar proyecto
 
-app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
+app.delete('/api/proyectos/:id', [Autentificar], (req, res) => {
     const id = req.params.id;
     Eliminar_proyecto(id)
         .then(borrado => {
@@ -139,7 +140,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
                 borrado
             })
         })
-        .catch(err=>{
+        .catch(err => {
             return res.json({
                 ok: false,
                 errBaseDatos: true,
@@ -148,7 +149,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req,res) => {
         })
 })
 
-app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
+app.put('/api/proyectos/completar/:id', [Autentificar], (req, res) => {
     let body = req.body;
     console.log(body);
     let archivos = null;
@@ -160,11 +161,10 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
             err: 'Hay que indicar la fase'
         })
     }
-    if (req.files)
-    {
+    if (req.files) {
         archivos = req.files
-    } 
-    Completar_fase(id, body, req.usuario,archivos)
+    }
+    Completar_fase(id, body, req.usuario, archivos)
         .then(proyecto => {
             // return res.json({
             //     ok: true,
@@ -178,33 +178,33 @@ app.put('/api/proyectos/completar/:id', [Autentificar], (req,res) => {
                     })
                 })
                 .catch(err => {
-                    console.log('Error capturado 2:',err)
+                    console.log('Error capturado 2:', err)
                     return res.json({
                         ok: false,
                         errBaseDatos: true,
                         err: err.message
                     })
                 })
-            })
+        })
         .catch(error => {
             console.log(error);
             return res.json({
                 ok: false,
-                errBaseDatos: (error.errBaseDatos != null)?error.errBaseDatos:false,
-                err: (error.err != null)?error.err:error.message
+                errBaseDatos: (error.errBaseDatos != null) ? error.errBaseDatos : false,
+                err: (error.err != null) ? error.err : error.message
             })
         })
 })
 
-app.get('/api/proyectos/logs', [Autentificar], (req,res) => {
+app.get('/api/proyectos/logs', [Autentificar], (req, res) => {
     Obtener_todos_logs()
         .then(logsDB => {
             return res.json({
-                ok:true,
+                ok: true,
                 logsDB
             })
         })
-        .catch(err=>{
+        .catch(err => {
             return res.json({
                 ok: false,
                 err
@@ -212,8 +212,8 @@ app.get('/api/proyectos/logs', [Autentificar], (req,res) => {
         })
 })
 
-app.put('/api/proyectos/:id', [Autentificar], (req,res) => {
-    const id=req.params.id;
+app.put('/api/proyectos/:id', [Autentificar], (req, res) => {
+    const id = req.params.id;
     Modificar_proyecto(id, req.body, req.usuario)
         .then(proyecto => {
             Obterner_proyecto_completo(id)
@@ -224,20 +224,37 @@ app.put('/api/proyectos/:id', [Autentificar], (req,res) => {
                     })
                 })
                 .catch(err => {
-                    console.log('Error capturado 2:',err)
+                    console.log('Error capturado 2:', err)
                     return res.json({
                         ok: false,
                         errBaseDatos: true,
                         err: err.message
                     })
                 })
-            })
+        })
         .catch(err => {
             return res.json({
                 ok: false,
                 err: err.message
             })
         })
+})
+
+app.get('/api/proyectos/:id/planificaciones', [Autentificar], (req, res) => {
+    const id = req.params.id;
+    Planificacion.find({ proyecto: id }, (err, planificacionesDB) => {
+        if (err) {
+            return res.json({
+                ok: false,
+                errBaseDatos: true,
+                err
+            })
+        }
+        return res.json({
+            ok: true,
+            planificaciones: planificacionesDB
+        })
+    })
 })
 
 module.exports = app;

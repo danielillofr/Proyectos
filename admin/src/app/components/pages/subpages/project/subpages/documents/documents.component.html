@@ -1,27 +1,25 @@
-
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <h4 class="card-title">Documentos del proyecto</h4>
-        <blockquote class="blockquote blockquote-primary">
-            <div class="card-body">
-                <table class="table" style="text-align: center">
-                    <thead>
-                        <th>Fase</th>
-                        <th>Documento</th>
-                        <th>Versión</th>
-                        <th>Descarga</th>
-                        <th>Nueva</th>
-                        <th>Historial</th>
-                    </thead>
-                    <tbody>
-                        <!-- <tr *ngIf="proyectosservice.proyectoActual.proyecto.documentoReq">
+            <blockquote class="blockquote blockquote-primary">
+                <div class="card-body">
+                    <table class="table" style="text-align: center">
+                        <thead>
+                            <th>Fase</th>
+                            <th>Documento</th>
+                            <th>Versión</th>
+                            <th>Descarga</th>
+                            <th>Nueva</th>
+                            <th>Historial</th>
+                        </thead>
+                        <tbody>
+                            <!-- <tr *ngIf="proyectosservice.proyectoActual.proyecto.documentoReq">
                             <td>Requerimientos</td>
                             <td>{{proyectosservice.proyectoActual.proyecto.documentoReq.nombre}}</td>
                             <td>{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}</td>
                             <td><a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoReq.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
-                            <td>   
+                            <td>
                                 <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
                                         <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
                                         <input type="file" (change)="selecDocum($event.target.files[0],'req')" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
@@ -30,27 +28,55 @@
                             <td><a target="_blank" href="{{rutaBackend}}/documents/{{proyectosservice.proyectoActual.proyecto._id}}/REQUERIMIENTOS"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
                         </tr> -->
 
-                        <tr *ngFor="let documento of documentos">
+                            <tr *ngFor="let documento of documentos">
                                 <td>{{documento.titulo}}</td>
                                 <td>{{documento.nombre}}</td>
                                 <td>{{documento.version}}</td>
                                 <td><a target="_blank" href="{{documento.rutaDescarga}}"><button [disabled]="!(documento.existente)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
-                                <td>   
+                                <td>
                                     <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
-                                            <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
-                                            <input type="file" (change)="selecDocum($event.target.files[0],documento.tipoDoc)" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
-                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
+                                        <input type="file" (change)="selecDocum($event.target.files[0],documento.tipoDoc)" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                                    </div>
                                 </td>
                                 <td><a target="_blank" href="{{documento.rutaHist}}"><button [disabled]="!(documento.existente)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-history"></i> Historial</button></a></td>
                             </tr>
-    
 
-                    </tbody>
-                </table>
-            </div>
-        </blockquote>
+
+                        </tbody>
+                    </table>
+                </div>
+            </blockquote>
         </div>
-
     </div>
 </div>
 
+<div class="row" *ngIf="planificaciones.length > 0">
+    <div class="col-md-12">
+        <div class="card">Histórico de planificaciones
+            <h4 class="card-title"></h4>
+            <blockquote class="blockquote blockquote-primary">
+                <div *ngFor="let planificacion of planificaciones; let i=index" class="card-body">
+                    <h4>Fecha:{{planificacion.fecha | fechaAFormato}}</h4>
+                    <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                        <table class="table">
+                            <thead>
+                                <th>Fase</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fase of planificacion.planificacion">
+                                    <td>{{fase.fase}}</td>
+                                    <td>{{fase.fechaInicio | fechaAFormato}}</td>
+                                    <td>{{fase.fechaFin | fechaAFormato}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </blockquote>
+        </div>
+    </div>
+</div>

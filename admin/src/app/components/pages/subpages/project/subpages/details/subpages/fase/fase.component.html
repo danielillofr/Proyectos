@@ -1,157 +1,156 @@
-
 <div class="row" *ngIf="confFase">
-        <div class="col-md-12">
-            <div class="card cardFases">
-                <div class="card-title cardTitleCenter" *ngIf="confFase.mostrarTitulo">
-                    <h3><i class="mdi mdi-clock-start"></i>{{confFase.titulo}}</h3>
-                </div>
-                <div class="card-body">
-<!-- TODAS LAS FASES -->
-                    <!-- Fecha de creación y Jefe de proyecto -->
-                    <div class="row" *ngIf="confFase.mostrarFechaInicio || confFase.mostrarJefeProyecto">
-                        <div class="col-md-6" *ngIf="confFase.mostrarFechaInicio">
-                            <h4>
-                                Fecha {{confFase.titulo}}:
-                                <small class="text-muted">
+    <div class="col-md-12">
+        <div class="card cardFases">
+            <div class="card-title cardTitleCenter" *ngIf="confFase.mostrarTitulo">
+                <h3><i class="mdi mdi-clock-start"></i>{{confFase.titulo}}</h3>
+            </div>
+            <div class="card-body">
+                <!-- TODAS LAS FASES -->
+                <!-- Fecha de creación y Jefe de proyecto -->
+                <div class="row" *ngIf="confFase.mostrarFechaInicio || confFase.mostrarJefeProyecto">
+                    <div class="col-md-6" *ngIf="confFase.mostrarFechaInicio">
+                        <h4>
+                            Fecha {{confFase.titulo}}:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoAFecha:fase:'creacion'}}
                                 </small>
-                            </h4>
-                            
-                        </div>
-                        <div class="col-md-6" *ngIf="confFase.mostrarJefeProyecto">
-                            <h4>
-                                Jefe de proyecto:
-                                <small class="text-muted">
+                        </h4>
+
+                    </div>
+                    <div class="col-md-6" *ngIf="confFase.mostrarJefeProyecto">
+                        <h4>
+                            Jefe de proyecto:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto.jefeProyecto.nombreCompleto}}
                                 </small>
-                            </h4>
-                            
-                        </div>
+                        </h4>
+
                     </div>
-                    <!-- END-Fecha de creación y Jefe de proyecto -->
-<!-- FASE CREACION -->
-                    <!-- Descripción -->
-                    <div *ngIf="confFase.mostrarDescripcion" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Descripción:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Fecha de creación y Jefe de proyecto -->
+                <!-- FASE CREACION -->
+                <!-- Descripción -->
+                <div *ngIf="confFase.mostrarDescripcion" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Descripción:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.descripcion}}
                                 </small>
-                            </h4>
-                        </div>
+                        </h4>
                     </div>
-                    <!-- END-Descripción -->
-<!-- FASE REQUERIMIENTOS -->
-                    <!-- Documentos de requerimientos -->
-                    <div *ngIf="confFase.mostrarDocReq" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Requerimientos:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Descripción -->
+                <!-- FASE REQUERIMIENTOS -->
+                <!-- Documentos de requerimientos -->
+                <div *ngIf="confFase.mostrarDocReq" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Requerimientos:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoReq.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoReq.version}}
                                 </small>
-                                <!-- <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}{{proyectosservice.proyectoActual.proyecto.documentoReq.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a> -->
-                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoReq.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
-                            </h4>
+                            <!-- <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/REQUERIMIENTOS/{{proyectosservice.proyectoActual.proyecto.documentoReq.version}}{{proyectosservice.proyectoActual.proyecto.documentoReq.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a> -->
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoReq.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                    </div>
+                </div>
+                <!-- END-Documentos de requerimientos -->
+                <!-- FASE ANALISIS -->
+                <!-- Tabla de análisis y tiempos -->
+                <div *ngIf="confFase.mostrarAnalisis" class="row margenSup">
+                    <div class="col-md-12">
+                        <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                            <table class="table">
+                                <thead>
+                                    <th>Fase</th>
+                                    <th>Recursos</th>
+                                    <th>Tiempo</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase2.analisis">
+                                        <td>{{fase.fase}}</td>
+                                        <td>{{fase.recursos}}</td>
+                                        <td>{{fase.tiempo}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <!-- END-Documentos de requerimientos -->
-<!-- FASE ANALISIS -->
-                    <!-- Tabla de análisis y tiempos -->
-                    <div *ngIf="confFase.mostrarAnalisis" class="row margenSup">
-                        <div class="col-md-12">
-                            <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
-                                <table class="table">
-                                    <thead>
-                                        <th>Fase</th>
-                                        <th>Recursos</th>
-                                        <th>Tiempo</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase2.analisis">
-                                            <td>{{fase.fase}}</td>
-                                            <td>{{fase.recursos}}</td>
-                                            <td>{{fase.tiempo}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>                        
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END-Tabla de análisis y tiempos -->
-<!-- FASE APROBACION -->
-                    <!-- Para fase de aprobación -->
-                    <!-- Estado aprobación -->
-                    <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
-                        <div class="col-md-6">
-                            <h4>
-                                Estado aprobación:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Tabla de análisis y tiempos -->
+                <!-- FASE APROBACION -->
+                <!-- Para fase de aprobación -->
+                <!-- Estado aprobación -->
+                <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
+                    <div class="col-md-6">
+                        <h4>
+                            Estado aprobación:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto.fase3.estadoAprobacion | estadoAprobacion}}
                                 </small>
-                            </h4>
-                            
-                        </div>
+                        </h4>
+
                     </div>
-                    <!-- END-Estado aprobación -->
-                    <!-- Motivo de la aprobación/no aprobación -->
-                    <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Motivo:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Estado aprobación -->
+                <!-- Motivo de la aprobación/no aprobación -->
+                <div *ngIf="confFase.mostrarAprobacion" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Motivo:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.fase3.motivo}}
                                 </small>
-                            </h4>
-                        </div>
+                        </h4>
                     </div>
-                    <!-- END-Motivo de la aprobación/no aprobación -->
-                    <!-- END-Para fase de aprobación -->
-<!-- FASE PLANIFICACION -->
-                    <!-- Tabla de planificación -->
-                    <div *ngIf="confFase.mostrarPlanif" class="row margenSup">
-                        <div class="col-md-12">
-                            <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
-                                <table class="table">
-                                    <thead>
-                                        <th>Fase</th>
-                                        <th>Fecha inicio</th>
-                                        <th>Fecha fin</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase4.planificacion"> 
-                                            <td>{{fase.fase}}</td>
-                                            <td>{{fase.fechaInicio | fechaAFormato}}</td>
-                                            <td>{{fase.fechaFin | fechaAFormato}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>                        
-                            </div>
-                            <hr>
-                            <button [routerLink]="['/pages','project',proyectosservice.proyectoActual.proyecto._id,'avanzaraplanificacion']" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw">Replanificar</button>
+                </div>
+                <!-- END-Motivo de la aprobación/no aprobación -->
+                <!-- END-Para fase de aprobación -->
+                <!-- FASE PLANIFICACION -->
+                <!-- Tabla de planificación -->
+                <div *ngIf="confFase.mostrarPlanif" class="row margenSup">
+                    <div class="col-md-12">
+                        <div class="table-responsive ps ps--theme_default tableAnalisis" data-ps-id="9a2a0c43-c99f-2a61-a172-adabe4c4851f">
+                            <table class="table">
+                                <thead>
+                                    <th>Fase</th>
+                                    <th>Fecha inicio</th>
+                                    <th>Fecha fin</th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let fase of proyectosservice.proyectoActual.proyecto.fase4.planificacion">
+                                        <td>{{fase.fase}}</td>
+                                        <td>{{fase.fechaInicio | fechaAFormato}}</td>
+                                        <td>{{fase.fechaFin | fechaAFormato}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <button [routerLink]="['/pages','project',proyectosservice.proyectoActual.proyecto._id,'avanzaraplanificacion']" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw">Replanificar</button>
 
-                        </div>
                     </div>
-                    <!-- END-Tabla de planificación -->
-<!-- FASE ESPECIFICACION -->
-                    <!-- Documentos de especificación -->
-                    <div *ngIf="confFase.mostrarDocEsp" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Documento especificaciones:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Tabla de planificación -->
+                <!-- FASE ESPECIFICACION -->
+                <!-- Documentos de especificación -->
+                <div *ngIf="confFase.mostrarDocEsp" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Documento especificaciones:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoEsp.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
-                            </h4>
-                        </div>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
                     </div>
-                    <!-- END-Documentos de especificación -->
-<!-- FASE DESARROLLO -->
-                    <!-- Para la fase de desarrollo -->
-                    <!-- Descripción general Diseño-->
-                    <!-- <div *ngIf="confFase.mostrarDescDiseno" class="row margenSup">
+                </div>
+                <!-- END-Documentos de especificación -->
+                <!-- FASE DESARROLLO -->
+                <!-- Para la fase de desarrollo -->
+                <!-- Descripción general Diseño-->
+                <!-- <div *ngIf="confFase.mostrarDescDiseno" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
                                 Descripción general:
@@ -161,9 +160,9 @@
                             </h4>
                         </div>
                     </div> -->
-                    <!-- END-Descripción general-->
-                    <!-- Descripción bloque 1-->
-                    <div *ngFor="let bloque of proyectosservice.proyectoActual.proyecto.fase6.desarrollo; let i=index">
+                <!-- END-Descripción general-->
+                <!-- Descripción bloque 1-->
+                <div *ngFor="let bloque of proyectosservice.proyectoActual.proyecto.fase6.desarrollo; let i=index">
                     <div *ngIf="confFase.mostrarInformeDiseno" class="row margenSup">
                         <div class="col-md-12">
                             <h4>
@@ -202,158 +201,158 @@
                                             <td>{{bloque.rutaSoftware}}</td>
                                         </tr>
                                     </tbody>
-                                </table>                        
+                                </table>
                             </div>
                         </div>
                     </div>
-                    </div>
-                    <!-- END-Tabla bloque 1 -->
-                    <!-- Documentos de SOO -->
-                    <div *ngIf="confFase.mostrarDocSOO" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Versión SOO:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Tabla bloque 1 -->
+                <!-- Documentos de SOO -->
+                <div *ngIf="confFase.mostrarDocSOO" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Versión SOO:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoDiseno.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
-                            </h4>
-                        </div>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
                     </div>
-                    <!-- END-Para la fase de desarrollo -->
-<!-- FASE VALIDACION INTERNA Y CALIDAD-->
-                    <!-- Para la fase de validación -->
-                    <!-- Documentos de pruebas realizadas -->
-                    <div *ngIf="confFase.mostrarDocPruebas" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Version Pruebas:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Para la fase de desarrollo -->
+                <!-- FASE VALIDACION INTERNA Y CALIDAD-->
+                <!-- Para la fase de validación -->
+                <!-- Documentos de pruebas realizadas -->
+                <div *ngIf="confFase.mostrarDocPruebas" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Version Pruebas:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto | proyectoADocPruebas:fase}}
                                 </small>
-                                <button (click)="Doc_pruebas()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
-                            </h4>
-                        </div>
+                            <button (click)="Doc_pruebas()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                        </h4>
                     </div>
-                    <!-- END-Documentos de pruebas realizadas -->
-                    <!-- Documentos de Mantis -->
-                    <div *ngIf="confFase.mostrarDocMantis" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Versión documento mantis:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Documentos de pruebas realizadas -->
+                <!-- Documentos de Mantis -->
+                <div *ngIf="confFase.mostrarDocMantis" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Versión documento mantis:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoADocMantis:fase}}
                                 </small>
-                                <button (click)="Doc_mantis()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
-                            </h4>
-                        </div>
+                            <button (click)="Doc_mantis()" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button>
+                        </h4>
                     </div>
-                    <!-- END-Documentos de Mantis -->
-                    <!-- Manual -->
-                    <div *ngIf="confFase.mostrarManual" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Versión manual:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Documentos de Mantis -->
+                <!-- Manual -->
+                <div *ngIf="confFase.mostrarManual" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Versión manual:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoManual.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoManual.version}}
                                 </small>
-                                <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/MANUAL/{{proyectosservice.proyectoActual.proyecto.documentoManual.version}}{{proyectosservice.proyectoActual.proyecto.documentoManual.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
-                            </h4>
-                        </div>
+                            <a target="_blank" href="{{rutaBackend}}/documents/{{idProyecto}}/MANUAL/{{proyectosservice.proyectoActual.proyecto.documentoManual.version}}{{proyectosservice.proyectoActual.proyecto.documentoManual.extension}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
                     </div>
-                    <!-- END-Manual -->
-                    <!-- Prueba en fábrica -->
-                    <div *ngIf="confFase.mostrarTestProbado" class="row margenSup">
-                        <div class="col-md-6">
-                            <h4>
-                                Test probado:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Manual -->
+                <!-- Prueba en fábrica -->
+                <div *ngIf="confFase.mostrarTestProbado" class="row margenSup">
+                    <div class="col-md-6">
+                        <h4>
+                            Test probado:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoATestProbado:fase}}
                                 </small>
-                            </h4>
-                            
-                        </div>
+                        </h4>
+
                     </div>
-                    <!-- END-Prueba en fábrica -->
-                    <!-- END-Para la fase de validación -->
-<!-- Fabricación primera unidad                 -->
-                    <!-- Fabricada en primera unidad -->
-                    <div *ngIf="confFase.mostrarPrimeraUnidadFabrciada" class="row margenSup">
-                        <div class="col-md-6">
-                            <h4>
-                                Fabricada primera unidad:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Prueba en fábrica -->
+                <!-- END-Para la fase de validación -->
+                <!-- Fabricación primera unidad                 -->
+                <!-- Fabricada en primera unidad -->
+                <div *ngIf="confFase.mostrarPrimeraUnidadFabrciada" class="row margenSup">
+                    <div class="col-md-6">
+                        <h4>
+                            Fabricada primera unidad:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoAFabunidaduno}}
                                 </small>
-                            </h4>
-                            
-                        </div>
+                        </h4>
+
                     </div>
-                    <div *ngIf="confFase.mostrarComentariosFabPrimeraUnidad" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Comentarios:
-                                <small class="text-muted">
+                </div>
+                <div *ngIf="confFase.mostrarComentariosFabPrimeraUnidad" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Comentarios:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.fase9.comentarios}}
                                 </small>
-                            </h4>
-                        </div>
+                        </h4>
                     </div>
+                </div>
 
-                    <!-- END-Fabricada en primera unidad -->
-<!-- Validada primera unidad -->
-<!-- Validada primera unidad                 -->
-                    <!-- Validación primera unidad -->
-                    <div *ngIf="confFase.mostrarPrimeraUnidadTesteada" class="row margenSup">
-                        <div class="col-md-6">
-                            <h4>
-                                Validada primera unidad:
-                                <small class="text-muted">
+                <!-- END-Fabricada en primera unidad -->
+                <!-- Validada primera unidad -->
+                <!-- Validada primera unidad                 -->
+                <!-- Validación primera unidad -->
+                <div *ngIf="confFase.mostrarPrimeraUnidadTesteada" class="row margenSup">
+                    <div class="col-md-6">
+                        <h4>
+                            Validada primera unidad:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoAValunidaduno}}
                                 </small>
-                            </h4>
-                            
-                        </div>
+                        </h4>
+
                     </div>
-                    <div *ngIf="confFase.mostrarComentariosValPrimeraUnidad" class="row margenSup">
-                        <div class="col-md-12">
-                            <h4>
-                                Comentarios:
-                                <small class="text-muted">
+                </div>
+                <div *ngIf="confFase.mostrarComentariosValPrimeraUnidad" class="row margenSup">
+                    <div class="col-md-12">
+                        <h4>
+                            Comentarios:
+                            <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.fase10.comentarios}}
                                 </small>
-                            </h4>
-                        </div>
+                        </h4>
                     </div>
-                    <!-- END-Validación primera unidad -->
-                        
-                    <!-- Fecha prevista y responsable -->
-                    <div *ngIf="confFase.mostrarFechaResponsableSigFase" class="row margenSup">
-                        <div class="col-md-6">
-                            <h4>
-                                Fecha prevista {{confFase.siguienteFase}}:
-                                <small class="text-muted">
+                </div>
+                <!-- END-Validación primera unidad -->
+
+                <!-- Fecha prevista y responsable -->
+                <div *ngIf="confFase.mostrarFechaResponsableSigFase" class="row margenSup">
+                    <div class="col-md-6">
+                        <h4>
+                            Fecha prevista {{confFase.siguienteFase}}:
+                            <small class="text-muted">
                                     {{proyectosservice.proyectoActual.proyecto | proyectoAFecha:fase:'prevista'}}
                                 </small>
-                            </h4>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <h4>
-                                Resposable:
-                                <small class="text-muted">
+                        </h4>
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4>
+                            Resposable:
+                            <small class="text-muted">
                                     {{confFase.responsableSiguienteFase}}
                                 </small>
-                            </h4>
-                        </div>
+                        </h4>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12" style="text-align: center;">
-                            <button *ngIf="noFaseCreacion()" (click)="volverAFase()" type="submit" class="btn btn-success mr-2" style="width: 25%">Volver a esta fase</button>                
-                        </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12" style="text-align: center;">
+                        <button *ngIf="noFaseCreacion()" (click)="volverAFase()" type="submit" class="btn btn-success mr-2" style="width: 25%">Volver a esta fase</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
