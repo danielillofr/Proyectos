@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
-import { ModalService } from '../../../../../services/modal.service';
 
 declare function swal(titulo: String, mensaje: String ,tipo: String);
 
@@ -13,8 +12,11 @@ declare function swal(titulo: String, mensaje: String ,tipo: String);
 export class ProjectComponent implements OnInit {
 
   idProjecto: String = null;
-  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router: Router,
-              private modalservice: ModalService) {
+  modalservice: any = {
+    textoModal: '',
+    mostrarModal: false
+  }
+  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router: Router) {
    }
 
   ngOnInit() {

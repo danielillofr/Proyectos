@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from './services/modal.service';
 
 declare function initOffCanvas();
 declare function initMisc();
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit{
   title = 'purple';
   cadena = 'block';
 
-  constructor(public modalservice: ModalService){
+  constructor(){
   }
 
   ngOnInit() {
