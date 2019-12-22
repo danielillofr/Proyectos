@@ -24,6 +24,7 @@ import { AvanzaraFabpriunidadComponent } from './components/pages/subpages/proje
 import { AvanzaraValpriunidadComponent } from './components/pages/subpages/project/subpages/avanzara-valpriunidad/avanzara-valpriunidad.component';
 import { AvanzaraDesarrolloComponent } from './components/pages/subpages/project/subpages/avanzara-desarrollo/avanzara-desarrollo.component';
 import { PagesGuardGuard } from './guards/pages-guard.guard';
+import { UsersComponent } from './components/pages/subpages/users/users.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
             {path: '', component: DefaultComponent},
             {path: 'createproject', component: CreateProjectComponent},
             {path: 'listprojects', component: ListProjectsComponent},
+            {path: 'users', component: UsersComponent},
             {path: 'statistics', component: StatisticsComponent},
             {path: 'profile', component: ProfileComponent},
             {path: 'project/:idProyecto', component: ProjectComponent,

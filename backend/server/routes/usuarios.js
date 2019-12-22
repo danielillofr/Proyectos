@@ -9,20 +9,54 @@ const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./.
 
 //Obtener un listado con todos los usuarios. Solo administrador
 
+Obtener_usuarios = function() {
+    return new Promise((resolve,reject)=>{
+        Usuario.find({}, (err, usuariosDB) => {
+            if (err) {
+                reject (new Error(err));
+            }else{
+                resolve(usuariosDB);
+            }
+        })
+    });
+}
+
+Crear_usuario = function(usuario) {
+    return new Promise((resolve,reject)=>{
+        usuario.save((err, usuarioDB) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(usuarioDB);
+            }
+        });
+    })
+}
+
+Crear_usuario_y_listar = async(usuario) => {
+    try{
+        await Crear_usuario(usuario);
+        return await Obtener_usuarios();
+    }catch(err){
+        throw new Error(err);
+    }
+}
+
 app.get('/api/usuarios/todos', Autentificar, function(req, res) {
-    Usuario.find({}, (err, usuariosDB) => {
-        if (err) {
-            return res.status(200).json({
+    Obtener_usuarios()
+        .then((usuariosDB)=>{
+            res.json({
+                ok: true,
+                usuarios: usuariosDB
+            })
+        })
+        .catch((err)=>{
+            res.json({
                 ok: false,
                 errBaseDatos: true,
-                err
+                err: err.message
             })
-        }
-        res.status(200).json({
-            ok: true,
-            usuarios: usuariosDB
         })
-    })
 })
 
 app.get('/api/usuarios', Autentificar, function(req, res) {
@@ -66,21 +100,21 @@ app.post('/api/usuarios', (req, res) => {
         nombreCompleto: body.nombreCompleto,
         clave: bcrypt.hashSync(body.clave, 10),
         role: body.role,
-        aprobador: body.aprobador
+        email: body.email
     })
-    usuario.save((err, usuarioDB) => {
-        if (err) {
-            return res.status(200).json({
-                ok: false,
-                errBaseDatos: true,
-                err
+    Crear_usuario_y_listar(usuario)
+        .then((usuarios) => {
+            res.json({
+                ok:true,
+                usuarios
             })
-        }
-        res.status(200).json({
-            ok: true,
-            usuario: usuarioDB
-        });
-    });
+        })
+        .catch((err)=>{
+            res.json({
+                ok: false,
+                err: err.message
+            })
+        })
 })
 
 //Login

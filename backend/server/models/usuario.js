@@ -24,17 +24,13 @@ const usuarioSchema = new Schema({
     },
     email: {
         type: String,
-        require: [true, 'El email es obligatorio']
+        required: [true, 'El correo es obligatorio']
     },
     role: {
         type: String,
         default: 'INGENIERO',
         enum: rolesValidos
     },
-    aprobador: {
-        type: Schema.Types.ObjectId,
-        ref: 'Usuario'
-    }
 })
 
 usuarioSchema.methods.toJSON = function() {

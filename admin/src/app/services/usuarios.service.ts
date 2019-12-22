@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs';
-import { TipoUsuario, RespuestaListaUsuarios, RespuestaTipoLogin } from './../interfaces/usuario.interface';
+import { TipoUsuario, RespuestaListaUsuarios, RespuestaTipoLogin,RespuestaCrearUsuario } from './../interfaces/usuario.interface';
 import { environment } from './../../environments/environment';
 
 @Injectable({
@@ -31,6 +31,26 @@ export class UsuariosService {
     // return this.http.get(`http://localhost:3000/api/usuarios`, opciones);
     return this.http.get<RespuestaListaUsuarios>(`${this.env}/api/usuarios/todos`, opciones);
 
+  }
+
+  crearUsuario (usuario) {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.token
+      })
+    };
+    return new Promise((resolve,reject) => {
+      this.http.post<RespuestaCrearUsuario>(`${this.env}/api/usuarios`,usuario,opciones)
+        .subscribe((respuesta: RespuestaCrearUsuario)=>{
+          if (respuesta.ok==false) {
+            reject ('No se ha podido crear usuario')
+          }else{
+            resolve(respuesta.usuarios);
+          }
+        },(err)=>{
+           reject(err);  
+        })
+    })
   }
 
 }

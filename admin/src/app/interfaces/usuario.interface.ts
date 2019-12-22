@@ -20,7 +20,14 @@ export interface RespuestaTipoLogin {
   token: String
 }
 
-export interface RespuestaListaUsuarios {
+export interface RespuestaCrearUsuario {
   ok: boolean,
-  usuarios: TipoUsuario[]
+  errBaseDatos?: boolean,
+  err?: String,
+  usuarios: TipoUsuario[],
 }
+
+// export interface RespuestaListaUsuarios {
+//   ok: boolean,
+//   usuarios: TipoUsuario[]
+// }

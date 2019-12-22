@@ -44,6 +44,7 @@ import { ProyectoADocMantisPipe } from './pipes/proyecto-adoc-mantis.pipe';
 import { ProyectoATestProbadoPipe } from './pipes/proyecto-atest-probado.pipe';
 import { ProyectoAFabunidadunoPipe } from './pipes/proyecto-afabunidaduno.pipe';
 import { ProyectoAValunidadunoPipe } from './pipes/proyecto-avalunidaduno.pipe';
+import { UsersComponent } from './components/pages/subpages/users/users.component';
 
 
 @NgModule({
@@ -86,7 +87,8 @@ import { ProyectoAValunidadunoPipe } from './pipes/proyecto-avalunidaduno.pipe';
     ProyectoADocMantisPipe,
     ProyectoATestProbadoPipe,
     ProyectoAFabunidadunoPipe,
-    ProyectoAValunidadunoPipe
+    ProyectoAValunidadunoPipe,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
