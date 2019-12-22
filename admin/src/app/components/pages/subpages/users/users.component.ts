@@ -37,7 +37,10 @@ export class UsersComponent implements OnInit {
           console.log('usuarios:', respuesta.usuarios)
           this.usuarios = respuesta.usuarios;
         }
+      },(err)=>{
+        swal('Error','Error obteniendo usuarios','error')
       })
+
    }
 
   Guardar() {
