@@ -65,11 +65,11 @@
                         <input type="text" class="form-control" formControlName="nombre" id="nombre" placeholder="Nombre" [ngClass]="{'is-invalid': formCrearUsuario.controls['nombre'].errors}">
                         <small *ngIf="formCrearUsuario.controls['nombre'].errors" class="mensajeError" >El nombre debe tener una longitud mínima de 3 caracteres</small>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="exampleInputName1">Clave</label>
                         <input type="password" class="form-control" formControlName="clave" id="clave" placeholder="Clave" [ngClass]="{'is-invalid': formCrearUsuario.controls['clave'].errors}">
                         <small *ngIf="formCrearUsuario.controls['clave'].errors" class="mensajeError" >La clave debe tener una longitud mínima de 6 caracteres</small>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="exampleInputName1">Nombre completo</label>
                         <input type="text" class="form-control" formControlName="nombreCompleto" id="nombreCompleto" placeholder="Nombre completo" [ngClass]="{'is-invalid': formCrearUsuario.controls['nombreCompleto'].errors}">

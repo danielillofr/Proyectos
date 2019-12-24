@@ -59,31 +59,6 @@ app.get('/api/usuarios/todos', Autentificar, function(req, res) {
         })
 })
 
-app.get('/api/usuarios', Autentificar, function(req, res) {
-    let busqueda = {
-        $or: [{ aprobador: req.usuario._id },
-            { _id: req.usuario._id }
-        ]
-
-    };
-    if (req.usuario.role === 'DIRECTOR') {
-        busqueda = {};
-    }
-    Usuario.find(busqueda, (err, usuariosDB) => {
-        if (err) {
-            return res.status(200).json({
-                ok: false,
-                errBaseDatos: true,
-                err
-            })
-        }
-        res.status(200).json({
-            ok: true,
-            usuarios: usuariosDB
-        })
-    })
-})
-
 //Creacion de un nuevo usuario
 
 app.post('/api/usuarios', (req, res) => {

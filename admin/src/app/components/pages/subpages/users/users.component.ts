@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
       nombre: new FormControl('', [Validators.required,Validators.minLength(3)]),
       nombreCompleto: new FormControl('', [Validators.required,Validators.minLength(3)]),
       email: new FormControl('',[Validators.required,Validators.email]),
-      clave: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      clave: new FormControl(''),// [Validators.required, Validators.minLength(6)]),
       role: new FormControl('JEFEPROYECTO', [Validators.required])
     })
 
