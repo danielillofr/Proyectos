@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class AvanzaraEspecificacionesComponent implements OnInit, AfterContentChecked {
   formulario: FormGroup;
-  ficheroSeleccionado: String = null;
-  fichero: File = null;
+  ficheroSeleccionado: String[] = [null,null,null,null];
+  fichero: File[] = [null,null,null,null];
   constructor(private proyectosservice: ProyectosService, private router: Router) { 
     this.formulario = new FormGroup({
       fechaPrevista: new FormControl('01/01/2019',[Validators.required])
@@ -52,10 +52,10 @@ export class AvanzaraEspecificacionesComponent implements OnInit, AfterContentCh
       
   }
 
-  selecDocum = (archivo) => {
+  selecDocum = (archivo,numDoc) => {
     if (!archivo) return;
-    this.ficheroSeleccionado = archivo.name;
-    this.fichero = archivo;
+    this.ficheroSeleccionado[numDoc] = archivo.name;
+    this.fichero[numDoc] = archivo;
 
   }  
 }

@@ -45,8 +45,20 @@ export class DocumentsComponent implements OnInit {
         this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoReq, 'Requerimientos','req','REQUERIMIENTOS'));
         console.log(this.documentos);
        }
-      if (this.proyectosservice.proyectoActual.proyecto.documentoEsp) {
-        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoEsp, 'Especificaciones','esp','ESPECIFICACIONES'));
+      if (this.proyectosservice.proyectoActual.proyecto.documentoEsp1) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoEsp1, 'Especificaciones','esp1','ESPECIFICACIONES1'));
+        console.log(this.documentos);
+       }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoEsp2) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoEsp2, 'Especificaciones 2','esp2','ESPECIFICACIONES2'));
+        console.log(this.documentos);
+       }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoEsp3) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoEsp3, 'Especificaciones 3','esp3','ESPECIFICACIONES3'));
+        console.log(this.documentos);
+       }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoEsp4) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoEsp4, 'Especificaciones 4','esp4','ESPECIFICACIONES4'));
         console.log(this.documentos);
        }
       if (this.proyectosservice.proyectoActual.proyecto.documentoValInt) {

@@ -78,15 +78,23 @@ const proyectoSchema = new Schema({
         type: Number,
         default: 0
     },
-    // versionReq: {
-    //     type: Number,
-    //     default: 0
-    // },
     documentoReq: {
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
-    documentoEsp: {
+    documentoEsp1: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+    documentoEsp2: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+    documentoEsp3: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+    documentoEsp4: {
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
@@ -94,18 +102,6 @@ const proyectoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
-    // versionValInt: {
-    //     type: Number,
-    //     default: 0
-    // },
-    // versionValCal: {
-    //     type: Number,
-    //     default: 0
-    // },
-    // versionPruInt: {
-    //     type: Number,
-    //     default: 0
-    // },
     documentoPruInt: {
         type: Schema.Types.ObjectId,
         ref:'Documento'
@@ -118,14 +114,6 @@ const proyectoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
-    // versionPruCal: {
-    //     type: Number,
-    //     default: 0
-    // },
-    // versionDiseno: {
-    //     type: Number,
-    //     default: 0
-    // },
     documentoDiseno: {
         type: Schema.Types.ObjectId,
         ref:'Documento'
@@ -134,14 +122,6 @@ const proyectoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
-/*    versionCambio: {
-        type: Number,
-        default: 0
-    },*/
-    // versionManual: {
-    //     type: Number,
-    //     default: 0
-    // },
     documentoManual: {
         type: Schema.Types.ObjectId,
         ref:'Documento'

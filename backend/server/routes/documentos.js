@@ -41,13 +41,106 @@ app.post('/api/uploadreq/:idProyecto', [Autentificar],(req,res) => {
         })
 })
 
-app.post('/api/uploadesp/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadesp1/:idProyecto', [Autentificar],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
         return res.send('Nada');
     }
-    Subir_fichero (idProyecto,req.files.archivo, 'ESPECIFICACIONES',req.usuario)
+    Subir_fichero (idProyecto,req.files.archivo, 'ESPECIFICACIONES1',req.usuario)
+        .then((proyecto)=>{
+            Obterner_proyecto_completo(idProyecto)
+                .then(proyecto => {
+                    return res.json({
+                        ok: true,
+                        proyecto
+                    })
+                })
+                .catch(err => {
+                    console.log('Error capturado 2:',err)
+                    return res.json({
+                        ok: false,
+                        errBaseDatos: true,
+                        err: err.message
+                    })
+                })
+        })
+        .catch(err=>{
+            res.json({
+                ok:false,
+                err:err.message
+            })
+        })
+})
+app.post('/api/uploadesp2/:idProyecto', [Autentificar],(req,res) => {
+    let idProyecto = req.params.idProyecto;
+    if (!req.files) {
+
+        return res.send('Nada');
+    }
+    Subir_fichero (idProyecto,req.files.archivo, 'ESPECIFICACIONES2',req.usuario)
+        .then((proyecto)=>{
+            Obterner_proyecto_completo(idProyecto)
+                .then(proyecto => {
+                    return res.json({
+                        ok: true,
+                        proyecto
+                    })
+                })
+                .catch(err => {
+                    console.log('Error capturado 2:',err)
+                    return res.json({
+                        ok: false,
+                        errBaseDatos: true,
+                        err: err.message
+                    })
+                })
+        })
+        .catch(err=>{
+            res.json({
+                ok:false,
+                err:err.message
+            })
+        })
+})
+app.post('/api/uploadesp3/:idProyecto', [Autentificar],(req,res) => {
+    let idProyecto = req.params.idProyecto;
+    if (!req.files) {
+
+        return res.send('Nada');
+    }
+    Subir_fichero (idProyecto,req.files.archivo, 'ESPECIFICACIONES3',req.usuario)
+        .then((proyecto)=>{
+            Obterner_proyecto_completo(idProyecto)
+                .then(proyecto => {
+                    return res.json({
+                        ok: true,
+                        proyecto
+                    })
+                })
+                .catch(err => {
+                    console.log('Error capturado 2:',err)
+                    return res.json({
+                        ok: false,
+                        errBaseDatos: true,
+                        err: err.message
+                    })
+                })
+        })
+        .catch(err=>{
+            res.json({
+                ok:false,
+                err:err.message
+            })
+        })
+})
+app.post('/api/uploadesp4/:idProyecto', [Autentificar],(req,res) => {
+    let idProyecto = req.params.idProyecto;
+    if (!req.files) {
+
+        return res.send('Nada');
+    }
+    Subir_fichero (idProyecto,req.files.archivo, 'ESPECIFICACIONES4',req.usuario)
         .then((proyecto)=>{
             Obterner_proyecto_completo(idProyecto)
                 .then(proyecto => {

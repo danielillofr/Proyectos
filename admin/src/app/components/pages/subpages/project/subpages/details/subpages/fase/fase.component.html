@@ -140,9 +140,30 @@
                         <h4>
                             Documento especificaciones:
                             <small class="text-muted">
-                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp.version}}
+                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp1.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp1.version}}
                                 </small>
-                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp1.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoEsp2">
+                            Documento especificaciones 2:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp2.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp2.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp2.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoEsp3">
+                            Documento especificaciones 3:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp3.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp3.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp3.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoEsp4">
+                            Documento especificaciones 4:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoEsp4.nombre}} Versión: {{proyectosservice.proyectoActual.proyecto.documentoEsp4.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoEsp4.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                         </h4>
                     </div>
                 </div>

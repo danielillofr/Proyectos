@@ -48,7 +48,10 @@ Obtener_proyecto = (id) => {
         Proyecto.findById(id)
             .populate('jefeProyecto')
             .populate('documentoReq')
-            .populate('documentoEsp')
+            .populate('documentoEsp1')
+            .populate('documentoEsp2')
+            .populate('documentoEsp3')
+            .populate('documentoEsp4')
             .populate('documentoDiseno')
             .populate('documentoValInt')
             .populate('documentoPruInt')
@@ -161,7 +164,16 @@ Completar_fase = async(id, datos, usuario, ficheros) => {
         console.log('Datos::::', datos)
         await Guardar_planificacion_actual(id, datos.planificacion);
     } else if (datos.fase == '5') {
-        proyectoCompletado = await Subir_fichero(id, ficheros.docEsp, 'ESPECIFICACIONES', usuario)
+        proyectoCompletado = await Subir_fichero(id, ficheros.docEsp1, 'ESPECIFICACIONES1', usuario);
+        if (ficheros.docEsp2) {
+            proyectoCompletado = await Subir_fichero(id, ficheros.docEsp2, 'ESPECIFICACIONES2', usuario);
+        }
+        if (ficheros.docEsp3) {
+            proyectoCompletado = await Subir_fichero(id, ficheros.docEsp3, 'ESPECIFICACIONES3', usuario);
+        }
+        if (ficheros.docEsp4) {
+            proyectoCompletado = await Subir_fichero(id, ficheros.docEsp4, 'ESPECIFICACIONES4', usuario);
+        }
     } else if (datos.fase == '7') {
         await Subir_fichero(id, ficheros.docPruebas, 'PRUINT', usuario);
         await Subir_fichero(id, ficheros.docMantis, 'VALINT', usuario);
@@ -329,7 +341,7 @@ Completar_fase_comprobada = async(id, datos, ficheros, faseCorrecta) => {
                 { //Especificaciones
                     console.log('Ficheros:', ficheros);
                     if ((!datos.fechaPrevista) || (!ficheros) ||
-                        (!ficheros.docEsp)) {
+                        (!ficheros.docEsp1)) {
                         reject({
                             errBaseDatos: false,
                             err: 'Especificaciones y fecha prevista necesarias'

@@ -20,7 +20,10 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
     return new Promise((resolve,reject) => {
         Proyecto.findById(idProyecto)
                 .populate('documentoReq','version')
-                .populate('documentoEsp','version')
+                .populate('documentoEsp1','version')
+                .populate('documentoEsp2','version')
+                .populate('documentoEsp3','version')
+                .populate('documentoEsp4','version')
                 .populate('documentoDiseno','version')
                 .populate('documentoValInt','version')
                 .populate('documentoPruInt','version')
@@ -40,8 +43,17 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                     case 'REQUERIMIENTOS':{
                         resolve((proyectoDB.documentoReq)?proyectoDB.documentoReq.version:0);
                     }break;
-                    case 'ESPECIFICACIONES':{
-                        resolve((proyectoDB.documentoEsp)?proyectoDB.documentoEsp.version:0);
+                    case 'ESPECIFICACIONES1':{
+                        resolve((proyectoDB.documentoEsp1)?proyectoDB.documentoEsp1.version:0);
+                    }break;
+                    case 'ESPECIFICACIONES2':{
+                        resolve((proyectoDB.documentoEsp2)?proyectoDB.documentoEsp2.version:0);
+                    }break;
+                    case 'ESPECIFICACIONES3':{
+                        resolve((proyectoDB.documentoEsp3)?proyectoDB.documentoEsp3.version:0);
+                    }break;
+                    case 'ESPECIFICACIONES4':{
+                        resolve((proyectoDB.documentoEsp4)?proyectoDB.documentoEsp4.version:0);
                     }break;
                     case 'VALINT':{
                         resolve((proyectoDB.documentoValInt)?proyectoDB.documentoValInt.version:0);
@@ -100,8 +112,20 @@ Actualizar_proyecto = (idProyecto,tipo,idDocumento) => {
             case 'REQUERIMIENTOS':{
                 actualizacion = {documentoReq: idDocumento};
             }break;
-            case 'ESPECIFICACIONES':{
-                actualizacion = {documentoEsp: idDocumento};
+            case 'ESPECIFICACIONES1':{
+                actualizacion = {documentoEsp1: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'ESPECIFICACIONES2':{
+                actualizacion = {documentoEsp2: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'ESPECIFICACIONES3':{
+                actualizacion = {documentoEsp3: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'ESPECIFICACIONES4':{
+                actualizacion = {documentoEsp4: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'VALINT':{

@@ -152,10 +152,19 @@ export class ProyectosService {
 
   }
 
-  Completar_especificaciones = async(docReq: File, fechaPrevista: string) => {
+  Completar_especificaciones = async(docReq: File[], fechaPrevista: string) => {
     try{
       let formData = new FormData();
-      formData.append('docEsp',docReq,docReq.name);
+      formData.append('docEsp1',docReq[0],docReq[0].name);
+      if (docReq[1]) {
+        formData.append('docEsp2',docReq[1],docReq[1].name);
+      }
+      if (docReq[2]) {
+        formData.append('docEsp3',docReq[2],docReq[2].name);
+      }
+      if (docReq[3]) {
+        formData.append('docEsp4',docReq[3],docReq[3].name);
+      }
       formData.append('fechaPrevista',fechaPrevista);
       formData.append('fase', '5');
       this.proyectoActual = await this.subidaficherosservice.completarFormulario(formData, this.proyectoActual.proyecto._id);
