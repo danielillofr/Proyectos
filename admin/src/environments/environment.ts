@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ruta_backend: 'http://localhost:3000'
+  ruta_backend: 'http://localhost:3002'
 };
 
 /*

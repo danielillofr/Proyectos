@@ -8,7 +8,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private usuariosservice: UsuariosService) { }
+  constructor(public usuariosservice: UsuariosService) { }
 
   ngOnInit() {
   }
