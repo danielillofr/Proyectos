@@ -58,7 +58,7 @@ export class ProjectComponent implements OnInit {
 
   cambiarNombre(){
     swal({
-      text: 'Nueva fecha prevista',
+      text: 'Nuevo nombre',
       content: 'input',
       button: {
         text: 'Aceptar'
