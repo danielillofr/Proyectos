@@ -78,7 +78,7 @@ export class DetailProjectComponent implements OnInit {
       }
     })
     .then(fechaPrevista=>{
-      this.proyectosservice.VolverAFase(this.proyectosservice.proyectoActual.proyecto.fase, this.Intercambiar_fecha(fechaPrevista))
+      this.proyectosservice.VolverAFase(String(Number(this.proyectosservice.proyectoActual.proyecto.fase) + 1), this.Intercambiar_fecha(fechaPrevista))
         .then(respuesta=>{
           this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
         })
