@@ -109,10 +109,25 @@
                         </div>
                     </div>
                 </form>
-                <h4>SOO - Fichero seleccionado:<small *ngIf="ficheroSeleccionado">{{ficheroSeleccionado}}</small></h4>
+                <h4>SOO - Fichero seleccionado:<small *ngIf="ficheroSeleccionado[0]">{{ficheroSeleccionado[0]}}</small></h4>
                 <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
                     <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
-                    <input (change)="selecDocum($event.target.files[0])" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                    <input (change)="selecDocum($event.target.files[0],0)" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                </div>
+                <h4>SOO2 - Fichero seleccionado 2:<small *ngIf="ficheroSeleccionado[1]">{{ficheroSeleccionado[1]}}</small></h4>
+                <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                    <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
+                    <input (change)="selecDocum($event.target.files[0],1)" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                </div>
+                <h4>SOO3 - Fichero seleccionado 3:<small *ngIf="ficheroSeleccionado[2]">{{ficheroSeleccionado[2]}}</small></h4>
+                <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                    <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
+                    <input (change)="selecDocum($event.target.files[0],2)" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
+                </div>
+                <h4>SOO4 - Fichero seleccionado 4:<small *ngIf="ficheroSeleccionado[3]">{{ficheroSeleccionado[3]}}</small></h4>
+                <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
+                    <button type="submit" class="btn btn-success mr-2">Subir fichero</button>
+                    <input (change)="selecDocum($event.target.files[0],3)" type="file" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
                 </div>
 
             </blockquote>

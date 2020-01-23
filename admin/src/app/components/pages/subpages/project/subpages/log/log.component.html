@@ -12,7 +12,7 @@
                     <tbody>
                         <tr *ngFor="let log of proyectosservice.proyectoActual.logs">
                             <td>{{log.fecha | fechaAFormato}}</td>
-                            <td>{{log.usuario.nombre}}</td>
+                            <td>{{log.usuario.nombreCompleto}}</td>
                             <td>{{log.texto}}</td>
                         </tr>
                     </tbody>

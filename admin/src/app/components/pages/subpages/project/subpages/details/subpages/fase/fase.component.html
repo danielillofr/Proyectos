@@ -232,11 +232,32 @@
                 <div *ngIf="confFase.mostrarDocSOO" class="row margenSup">
                     <div class="col-md-12">
                         <h4>
-                            Versión SOO:
+                            Documento SOO:
                             <small class="text-muted">
                                         {{proyectosservice.proyectoActual.proyecto.documentoDiseno.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno.version}}
                                 </small>
                             <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoDiseno2">
+                            Documento SOO 2:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoDiseno2.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno2.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno2.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoDiseno3">
+                            Documento SOO 3:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoDiseno3.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno3.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno3.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
+                        </h4>
+                        <h4 *ngIf="proyectosservice.proyectoActual.proyecto.documentoDiseno4">
+                            Documento SOO 4:
+                            <small class="text-muted">
+                                        {{proyectosservice.proyectoActual.proyecto.documentoDiseno4.nombre}} Versión {{proyectosservice.proyectoActual.proyecto.documentoDiseno4.version}}
+                                </small>
+                            <a target="_blank" href="{{rutaBackend}}{{proyectosservice.proyectoActual.proyecto.documentoDiseno4.ruta}}"><button type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a>
                         </h4>
                     </div>
                 </div>

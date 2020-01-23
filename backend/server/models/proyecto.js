@@ -118,6 +118,18 @@ const proyectoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref:'Documento'
     },
+    documentoDiseno2: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+    documentoDiseno3: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
+    documentoDiseno4: {
+        type: Schema.Types.ObjectId,
+        ref:'Documento'
+    },
     documentoCambio: {
         type: Schema.Types.ObjectId,
         ref:'Documento'

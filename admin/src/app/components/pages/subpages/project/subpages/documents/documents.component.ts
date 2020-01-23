@@ -85,6 +85,18 @@ export class DocumentsComponent implements OnInit {
         this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoDiseno, 'SOO','diseno','DISENO'));
         console.log(this.documentos);
        }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoDiseno2) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoDiseno2, 'SOO 2','diseno 2','DISENO2'));
+        console.log(this.documentos);
+       }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoDiseno3) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoDiseno3, 'SOO 3','diseno 3','DISENO3'));
+        console.log(this.documentos);
+       }
+      if (this.proyectosservice.proyectoActual.proyecto.documentoDiseno4) {
+        this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoDiseno4, 'SOO 4','diseno 4','DISENO4'));
+        console.log(this.documentos);
+       }
       if (this.proyectosservice.proyectoActual.proyecto.documentoCambio) {
         this.documentos.push(this.Crear_documento(this.proyectosservice.proyectoActual.proyecto.documentoCambio, 'Cambio','cambio','CAMBIO'));
         console.log(this.documentos);

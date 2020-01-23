@@ -25,6 +25,9 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                 .populate('documentoEsp3','version')
                 .populate('documentoEsp4','version')
                 .populate('documentoDiseno','version')
+                .populate('documentoDiseno2','version')
+                .populate('documentoDiseno3','version')
+                .populate('documentoDiseno4','version')
                 .populate('documentoValInt','version')
                 .populate('documentoPruInt','version')
                 .populate('documentoManual','version')
@@ -63,6 +66,15 @@ Obtener_version_proyecto = (idProyecto,tipo) => {
                     }break;
                     case 'DISENO':{
                         resolve((proyectoDB.documentoDiseno)?proyectoDB.documentoDiseno.version:0);
+                    }break;
+                    case 'DISENO2':{
+                        resolve((proyectoDB.documentoDiseno2)?proyectoDB.documentoDiseno2.version:0);
+                    }break;
+                    case 'DISENO3':{
+                        resolve((proyectoDB.documentoDiseno3)?proyectoDB.documentoDiseno3.version:0);
+                    }break;
+                    case 'DISENO4':{
+                        resolve((proyectoDB.documentoDiseno4)?proyectoDB.documentoDiseno4.version:0);
                     }break;
                     case 'CAMBIO':{
                         resolve((proyectoDB.documentoCambio)?proyectoDB.documentoCambio.version:0);
@@ -138,6 +150,18 @@ Actualizar_proyecto = (idProyecto,tipo,idDocumento) => {
             }break;
             case 'DISENO':{
                 actualizacion = {documentoDiseno: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'DISENO2':{
+                actualizacion = {documentoDiseno2: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'DISENO3':{
+                actualizacion = {documentoDiseno3: idDocumento};
+                console.log(actualizacion);
+            }break;
+            case 'DISENO4':{
+                actualizacion = {documentoDiseno4: idDocumento};
                 console.log(actualizacion);
             }break;
             case 'CAMBIO':{

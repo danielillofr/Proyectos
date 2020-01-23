@@ -174,12 +174,28 @@ export class ProyectosService {
     }
   }
 
-  Completar_desarrollo_conSOO = async(desarrollo:any,fechaPrevista: string, docSOO: File) => {
+  Completar_desarrollo_conSOO = async(desarrollo:any,fechaPrevista: string, docSOO: File[]) => {
     let formData = new FormData();
     try{
       await this.Completar_desarrollo(desarrollo,fechaPrevista);
-      formData.append('archivo',docSOO,docSOO.name);
+      formData.append('archivo',docSOO[0],docSOO[0].name);
       this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno');
+      if (docSOO[1]) {
+        formData.delete('archivo');
+        formData.append('archivo',docSOO[1],docSOO[1].name);
+        this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno2');
+      }
+      if (docSOO[2]) {
+        formData.delete('archivo');
+        formData.append('archivo',docSOO[2],docSOO[2].name);
+        this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno3');
+      }
+      if (docSOO[3]) {
+        formData.delete('archivo');
+        formData.append('archivo',docSOO[3],docSOO[3].name);
+        this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno4');
+      }
+      // this.proyectoActual = await this.subidaficherosservice.subidaFichero(formData,this.proyectoActual.proyecto._id,'diseno');
       return this.proyectoActual;
     }catch(err){
       throw new Error (err);
