@@ -334,6 +334,31 @@ export class ProyectosService {
         })
     })
   }
+  CambiarNombre (nombre: string) {
+    const datos:any = {
+      nombre
+    }
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      this.http.put(`${this.env}/api/proyectos/${this.proyectoActual.proyecto._id}`, datos, opciones)
+        .subscribe((respuesta) => {
+          const datos:any = <any>respuesta;
+          if (datos.ok === false) {
+            console.log('Error:',datos);
+            reject();
+          }else{
+            this.proyectoActual = datos.proyecto;
+            resolve();
+          }
+        }, (err)=>{
+          reject();
+        })
+    })
+  }
 
   SolicitarEstadisticas () {
     const opciones = {

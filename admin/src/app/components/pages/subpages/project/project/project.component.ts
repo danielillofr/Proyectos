@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
-declare function swal(titulo: String, mensaje: String ,tipo: String);
+
+// declare function swal(titulo: String, mensaje: String ,tipo: String);
+
+declare function swal(any);
 
 @Component({
   selector: 'app-project',
@@ -32,8 +35,16 @@ export class ProjectComponent implements OnInit {
         .catch((err)=>{
           this.modalservice.mostrarModal = false;
           console.log('Error:', err);
-          swal('Error','Error obteniendo el proyecto','error')
-            .then(()=>{
+          swal({
+            title: 'Error',
+            text: `Error obteniendo proyecto`,
+            icon: 'error',
+            button: {
+              text: 'Aceptar'
+            }
+
+          })
+          .then(()=>{
               this.router.navigate(['/pages']);
             })
         })
@@ -41,4 +52,36 @@ export class ProjectComponent implements OnInit {
     })
 
   }
+  hola(){
+    alert('Hola')
+  }
+
+  cambiarNombre(){
+    swal({
+      text: 'Nueva fecha prevista',
+      content: 'input',
+      button: {
+        text: 'Aceptar'
+      }
+    })
+    .then(nombre=>{
+      this.proyectosservice.CambiarNombre(nombre)
+        .then(respuesta=>{
+          this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
+        })
+        .catch((err)=>{
+          console.log(err);
+          swal({
+            title: 'Error',
+            text: `Nombre cambiado correctamente ${nombre}`,
+            icon: 'error',
+            button: {
+              text: 'Aceptar'
+            }
+          })
+        })
+      });
+  }
+
+  
 }

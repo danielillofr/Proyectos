@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
+declare function swal(any);
+
 @Component({
   selector: 'app-detail-project',
   templateUrl: './detail-project.component.html',
@@ -59,4 +61,40 @@ export class DetailProjectComponent implements OnInit {
     let faseNum: number = Number(this.proyectosservice.proyectoActual.proyecto.fase);
     return (faseNum != 10);
   }
+
+  Intercambiar_fecha = (fechaEuropa: string) => {
+    let b = fechaEuropa.split('/');
+    let fechaBD: string = b[1] + '/' + b[0] + '/' + b[2];
+    return fechaBD;
+  }
+
+
+  volverAFase(){
+    swal({
+      text: 'Nueva fecha prevista',
+      content: 'input',
+      button: {
+        text: 'Aceptar'
+      }
+    })
+    .then(fechaPrevista=>{
+      this.proyectosservice.VolverAFase(this.proyectosservice.proyectoActual.proyecto.fase, this.Intercambiar_fecha(fechaPrevista))
+        .then(respuesta=>{
+          this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
+        })
+        .catch((err)=>{
+          console.log(err);
+          swal({
+            title: 'Error',
+            text: `Error estableciendo la fecha ${fechaPrevista}`,
+            icon: 'error',
+            button: {
+              text: 'Aceptar'
+            }
+          })
+        })
+      });
+  }
+
+
 }

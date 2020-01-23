@@ -8,6 +8,10 @@
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Estado actual</h3>
                                 <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAEstado}}</h4>
+                                <button *ngIf="ProyectoNoFinalizado()" type="button" (click)="avanzar()" class="btn btn-gradient-info btn-rounded btn-fw">
+                                        <i class="mdi mdi-border-color"></i>
+                                        Avanzar
+                                </button>
                         </div>
                 </div>
         </div>
@@ -20,9 +24,9 @@
                                 <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAFase}}</h4>
                                 <!-- <h4>Fecha prevista</h4> -->
                                 <p>{{proyectosservice.proyectoActual.proyecto.fechaPrevista | fechaAFormato}}</p>
-                                <button *ngIf="ProyectoNoFinalizado()" type="button" (click)="avanzar()" class="btn btn-gradient-info btn-rounded btn-fw">
+                                <button *ngIf="ProyectoNoFinalizado()" type="button" (click)="volverAFase()" class="btn btn-gradient-info btn-rounded btn-fw">
                                         <i class="mdi mdi-border-color"></i>
-                                        Avanzar
+                                        Cambiar
                                 </button>
                                 <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
                         </div>
