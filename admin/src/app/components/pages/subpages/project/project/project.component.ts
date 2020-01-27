@@ -60,26 +60,42 @@ export class ProjectComponent implements OnInit {
     swal({
       text: 'Nuevo nombre',
       content: 'input',
-      button: {
-        text: 'Aceptar'
-      }
+      buttons: {
+        cancel: {
+          text: "Cancel",
+          value: null,
+          visible: true,
+          className: "",
+          closeModal: true,
+        },
+        confirm: {
+          text: "OK",
+          value: true,
+          visible: true,
+          className: "",
+          closeModal: true
+        }
+    },
     })
     .then(nombre=>{
-      this.proyectosservice.CambiarNombre(nombre)
-        .then(respuesta=>{
-          this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
-        })
-        .catch((err)=>{
-          console.log(err);
-          swal({
-            title: 'Error',
-            text: `Nombre cambiado correctamente ${nombre}`,
-            icon: 'error',
-            button: {
-              text: 'Aceptar'
-            }
+      if (nombre)
+      {
+        this.proyectosservice.CambiarNombre(nombre)
+          .then(respuesta=>{
+            this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
           })
-        })
+          .catch((err)=>{
+            console.log(err);
+            swal({
+              title: 'Error',
+              text: `Nombre cambiado correctamente ${nombre}`,
+              icon: 'error',
+              button: {
+                text: 'Aceptar'
+              }
+            })
+          })
+      }
       });
   }
 

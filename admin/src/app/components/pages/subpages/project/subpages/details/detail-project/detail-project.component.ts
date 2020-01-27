@@ -73,26 +73,47 @@ export class DetailProjectComponent implements OnInit {
     swal({
       text: 'Nueva fecha prevista',
       content: 'input',
-      button: {
-        text: 'Aceptar'
-      }
+      buttons: {
+          cancel: {
+            text: "Cancel",
+            value: null,
+            visible: true,
+            className: "",
+            closeModal: true,
+          },
+          confirm: {
+            text: "OK",
+            value: true,
+            visible: true,
+            className: "",
+            closeModal: true
+          }
+      },
+      // button: {
+      //   text: 'Aceptar'
+      // },
+      showCancelButton: true
     })
     .then(fechaPrevista=>{
-      this.proyectosservice.VolverAFase(String(Number(this.proyectosservice.proyectoActual.proyecto.fase) + 1), this.Intercambiar_fecha(fechaPrevista))
-        .then(respuesta=>{
-          this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
-        })
-        .catch((err)=>{
-          console.log(err);
-          swal({
-            title: 'Error',
-            text: `Error estableciendo la fecha ${fechaPrevista}`,
-            icon: 'error',
-            button: {
-              text: 'Aceptar'
-            }
+      if (fechaPrevista)
+      {
+        this.proyectosservice.VolverAFase(String(Number(this.proyectosservice.proyectoActual.proyecto.fase) + 1), this.Intercambiar_fecha(fechaPrevista))
+          .then(respuesta=>{
+            this.router.navigate(['/pages','project', this.proyectosservice.proyectoActual.proyecto._id])
           })
-        })
+          .catch((err)=>{
+            console.log(err);
+            swal({
+              title: 'Error',
+              text: `Error estableciendo la fecha ${fechaPrevista}`,
+              icon: 'error',
+              button: {
+                text: 'Aceptar'
+              }
+            })
+          })
+
+      }
       });
   }
 
