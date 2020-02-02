@@ -45,7 +45,9 @@ import { ProyectoATestProbadoPipe } from './pipes/proyecto-atest-probado.pipe';
 import { ProyectoAFabunidadunoPipe } from './pipes/proyecto-afabunidaduno.pipe';
 import { ProyectoAValunidadunoPipe } from './pipes/proyecto-avalunidaduno.pipe';
 import { UsersComponent } from './components/pages/subpages/users/users.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {MatTableModule, MatSortModule,MatPaginatorModule,MatFormFieldModule,MatSelectModule,MatListModule} from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -95,7 +97,9 @@ import { UsersComponent } from './components/pages/subpages/users/users.componen
     app_routing,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatTableModule, MatSortModule,MatPaginatorModule,MatFormFieldModule,MatSelectModule,MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

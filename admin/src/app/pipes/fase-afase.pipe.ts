@@ -25,7 +25,7 @@ export class FaseAFasePipe implements PipeTransform {
         cadena = 'Especificando';
       }break;
       case 5:{
-        cadena = 'Desarrolando';
+        cadena = 'Desarrollando';
       }break;
       case 6:{
         cadena = 'Validando Int';
