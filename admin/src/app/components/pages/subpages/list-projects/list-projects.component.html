@@ -19,7 +19,7 @@
                         </div>
                         <br><hr>
                         <input (keyup)="applyFilter($event.target.value)" placeholder="Búsqueda">
-                        <table mat-table [dataSource]="datos" matSort  matSortActive="vencimiento" matSortDirection="desc" matSortDisableClear class="table table-striped">
+                        <table mat-table [dataSource]="datos" matSort  matSortActive="vencimiento" matSortDirection="asc" matSortDisableClear class="table table-striped">
                             <ng-container matColumnDef="nombre">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                                 <td mat-cell *matCellDef="let proyecto"> {{proyecto.nombre}} </td>
@@ -39,7 +39,7 @@
                                 </td>
                             </ng-container>   
                             <ng-container matColumnDef="vencimiento">
-                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Proximo vencimiento </th>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header>Vencimiento </th>
                                 <td mat-cell *matCellDef="let proyecto"> 
                                     {{proyecto.fechaPrevista | fechaAFormato}}
                                 </td>
@@ -53,7 +53,7 @@
                             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>               
                         </table>
-                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        <mat-paginator [pageSizeOptions]="[10, 5, 20]" showFirstLastButtons></mat-paginator>
                     </div>
                 </div>
             </div>
