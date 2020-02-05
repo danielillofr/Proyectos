@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as configFases from './../../../../../../../../configs/config';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { environment } from './../../../../../../../../../environments/environment'
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 declare function swal(any);
 
@@ -24,7 +25,7 @@ export class FaseComponent implements OnInit {
   numFase: Number = null;
   rutaBackend = environment.ruta_backend;
 
-  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) {
+  constructor(private _activatedRoute: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router, public usuariosservice: UsuariosService) {
     // this.proyecto = proyectosservice.proyectoActual;
     _activatedRoute.parent.parent.params.subscribe (params=>{
       this.idProyecto = params.idProyecto;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LogsService } from 'src/app/services/logs.service';
 import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 declare function swal(titulo: String, mensaje: String ,tipo: String);
 
@@ -13,7 +14,7 @@ export class DefaultComponent implements OnInit {
 
   logsCargados: boolean = false;
 
-  constructor(public logsservice: LogsService, private router: Router) {
+  constructor(public logsservice: LogsService, private router: Router, public usuarioService: UsuariosService) {
     //Solicitamos los logs
     logsservice.Obtener_ultimos_logs()
       .then(()=>{

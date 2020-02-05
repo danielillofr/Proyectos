@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectosService } from 'src/app/services/proyectos.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 declare function swal(any);
 
@@ -13,7 +14,7 @@ export class DetailProjectComponent implements OnInit {
 
   idProyecto: String = '';
 
-  constructor(private _router: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router) { }
+  constructor(private _router: ActivatedRoute, public proyectosservice: ProyectosService, private router:Router, public usuariosservice: UsuariosService) { }
 
   ngOnInit() {
     this._router.parent.params.subscribe((params) => {

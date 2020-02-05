@@ -8,7 +8,7 @@
                         <div class="card-body" style="text-align:center; height: 182px;">
                                 <h3>Estado actual</h3>
                                 <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAEstado}}</h4>
-                                <button *ngIf="ProyectoNoFinalizado()" type="button" (click)="avanzar()" class="btn btn-gradient-info btn-rounded btn-fw">
+                                <button *ngIf="ProyectoNoFinalizado() && (usuariosservice.usuarioApp.role=='ADMINISTRADOR')" type="button" (click)="avanzar()" class="btn btn-gradient-info btn-rounded btn-fw">
                                         <i class="mdi mdi-border-color"></i>
                                         Avanzar
                                 </button>
@@ -24,7 +24,7 @@
                                 <h4 style="color: white">{{proyectosservice.proyectoActual.proyecto.fase | faseAFase}}</h4>
                                 <!-- <h4>Fecha prevista</h4> -->
                                 <p>{{proyectosservice.proyectoActual.proyecto.fechaPrevista | fechaAFormato}}</p>
-                                <button *ngIf="ProyectoNoFinalizado()" type="button" (click)="volverAFase()" class="btn btn-gradient-info btn-rounded btn-fw">
+                                <button *ngIf="ProyectoNoFinalizado() && (usuariosservice.usuarioApp.role=='ADMINISTRADOR')" type="button" (click)="volverAFase()" class="btn btn-gradient-info btn-rounded btn-fw">
                                         <i class="mdi mdi-border-color"></i>
                                         Cambiar
                                 </button>

@@ -17,7 +17,7 @@ declare function swal(titulo: String, mensaje: String ,tipo: String);
 export class ListProjectsComponent implements OnInit {
   proyectos: any[] = null;
   datos;// = new MatTableDataSource(ELEMENT_DATA);
-  displayedColumns: string[] = ['nombre', 'progreso','fase','vencimiento','acceder'];
+  displayedColumns: string[] = ['nombre', 'progreso','fase','vencimiento','acceder','planificacion'];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild('lista', {static: true}) zapatos: any;

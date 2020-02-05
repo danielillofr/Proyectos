@@ -103,7 +103,7 @@ app.get('/api/proyectos/detalle/:id', [Autentificar], (req, res) => {
 })
 
 //Crear un nuevo proyecto
-app.post('/api/proyectos', [Autentificar], (req, res) => {
+app.post('/api/proyectos', [Autentificar, AutentificarAdmin], (req, res) => {
     const datosProyecto = req.body;
     if ((!datosProyecto.nombre) || (!datosProyecto.descripcion) || (!datosProyecto.jefeProyecto) || (!datosProyecto.fechaPrevista)) {
         return res.json({
@@ -131,7 +131,7 @@ app.post('/api/proyectos', [Autentificar], (req, res) => {
 
 //Eliminar proyecto
 
-app.delete('/api/proyectos/:id', [Autentificar], (req, res) => {
+app.delete('/api/proyectos/:id', [Autentificar,AutentificarAdmin], (req, res) => {
     const id = req.params.id;
     Eliminar_proyecto(id)
         .then(borrado => {
@@ -149,7 +149,7 @@ app.delete('/api/proyectos/:id', [Autentificar], (req, res) => {
         })
 })
 
-app.put('/api/proyectos/completar/:id', [Autentificar], (req, res) => {
+app.put('/api/proyectos/completar/:id', [Autentificar,AutentificarAdmin], (req, res) => {
     let body = req.body;
     console.log(body);
     let archivos = null;
@@ -212,7 +212,7 @@ app.get('/api/proyectos/logs', [Autentificar], (req, res) => {
         })
 })
 
-app.put('/api/proyectos/:id', [Autentificar], (req, res) => {
+app.put('/api/proyectos/:id', [Autentificar,AutentificarAdmin], (req, res) => {
     const id = req.params.id;
     Modificar_proyecto(id, req.body, req.usuario)
         .then(proyecto => {

@@ -22,6 +22,10 @@ export class UsuariosService {
     return this.http.post<RespuestaTipoLogin>(`${this.env}/api/usuarios/login`, {nombre: usuario, clave});
   }
 
+  usuario_es_admin() {
+    return this.usuarioApp.role="ADMINISTRADOR";
+  }
+
   soliticar_usuarios() {
     const opciones = {
       headers: new HttpHeaders ({

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { environment } from './../../../../../../../environments/environment';
 import { SubidaFicherosService } from 'src/app/services/subida-ficheros.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 declare function swal(titulo: String, mensaje: String ,tipo: String);
 
@@ -30,7 +31,7 @@ export class DocumentsComponent implements OnInit {
 
 
 
-  constructor(private proyectosservice: ProyectosService, private subidaficherosservice: SubidaFicherosService) {
+  constructor(private proyectosservice: ProyectosService, private subidaficherosservice: SubidaFicherosService, public usuariosservice: UsuariosService) {
       this.Calcular_documentos();
       proyectosservice.Solicitar_planificaciones(proyectosservice.proyectoActual.proyecto._id)
         .then((planificaciones: any[]) => {

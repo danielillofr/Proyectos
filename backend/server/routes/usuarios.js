@@ -61,7 +61,7 @@ app.get('/api/usuarios/todos', Autentificar, function(req, res) {
 
 //Creacion de un nuevo usuario
 
-app.post('/api/usuarios', (req, res) => {
+app.post('/api/usuarios', [Autentificar, AutentificarAdmin], (req, res) => {
     let body = req.body;
     if ((!body.nombre) || (!body.nombreCompleto)) {
         return res.status(200).json({

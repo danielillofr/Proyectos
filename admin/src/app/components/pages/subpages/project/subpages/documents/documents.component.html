@@ -10,7 +10,8 @@
                             <th>Documento</th>
                             <th>Versión</th>
                             <th>Descarga</th>
-                            <th>Nueva</th>
+                            <th>{{(usuariosservice.usuarioApp.role=='ADMINISTRADOR')?'Nueva':''}}
+                            </th>
                             <th>Historial</th>
                         </thead>
                         <tbody>
@@ -35,7 +36,7 @@
                                 <td><a target="_blank" href="{{documento.rutaDescarga}}"><button [disabled]="!(documento.existente)" type="button" class="btn btn-primary btn-sm btn-rounded btn-fw"><i class="mdi mdi-cloud-download"></i> Descargar</button></a></td>
                                 <td>
                                     <div style="position:relative; overflow: hidden; width: 122px; height: 34px;">
-                                        <button type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
+                                        <button *ngIf="usuariosservice.usuarioApp.role=='ADMINISTRADOR'" type="submit" class="btn btn-primary btn-sm btn-rounded btn-fw">Subir fichero</button>
                                         <input type="file" (change)="selecDocum($event.target.files[0],documento.tipoDoc)" style="position: absolute; top:0px; left: 0px; width: 600px; height: 600px; opacity: 0; cursor: pointer;">
                                     </div>
                                 </td>

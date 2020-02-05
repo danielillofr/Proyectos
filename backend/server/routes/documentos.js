@@ -2,14 +2,14 @@ const Documento = require('./../models/documento');
 const express = require('express');
 const app = express();
 const _ = require('underscore');
-const {Autentificar} = require('./../middlewares/Autentificar')
+const {Autentificar, AutentificarAdmin} = require('./../middlewares/Autentificar')
 const {Subir_fichero} = require('./../dbAccess/documentos')
 const {Obterner_proyecto_completo} = require ('./../dbAccess/proyectos')
 
 
 
 
-app.post('/api/uploadreq/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadreq/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -41,7 +41,7 @@ app.post('/api/uploadreq/:idProyecto', [Autentificar],(req,res) => {
         })
 })
 
-app.post('/api/uploadesp1/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadesp1/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -72,7 +72,7 @@ app.post('/api/uploadesp1/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadesp2/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadesp2/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -103,7 +103,7 @@ app.post('/api/uploadesp2/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadesp3/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadesp3/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -134,7 +134,7 @@ app.post('/api/uploadesp3/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadesp4/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadesp4/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -166,7 +166,7 @@ app.post('/api/uploadesp4/:idProyecto', [Autentificar],(req,res) => {
         })
 })
 
-app.post('/api/uploadvalint/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadvalint/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -197,7 +197,7 @@ app.post('/api/uploadvalint/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadvalcal/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadvalcal/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -228,7 +228,7 @@ app.post('/api/uploadvalcal/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploaddiseno/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploaddiseno/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -259,7 +259,7 @@ app.post('/api/uploaddiseno/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploaddiseno2/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploaddiseno2/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -290,7 +290,7 @@ app.post('/api/uploaddiseno2/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploaddiseno3/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploaddiseno3/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -321,7 +321,7 @@ app.post('/api/uploaddiseno3/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploaddiseno4/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploaddiseno4/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -352,7 +352,7 @@ app.post('/api/uploaddiseno4/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadcambio/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadcambio/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -384,7 +384,7 @@ app.post('/api/uploadcambio/:idProyecto', [Autentificar],(req,res) => {
         })
 })
 
-app.post('/api/uploadpruint/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadpruint/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -415,7 +415,7 @@ app.post('/api/uploadpruint/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadprucal/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadprucal/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
@@ -446,7 +446,7 @@ app.post('/api/uploadprucal/:idProyecto', [Autentificar],(req,res) => {
             })
         })
 })
-app.post('/api/uploadmanual/:idProyecto', [Autentificar],(req,res) => {
+app.post('/api/uploadmanual/:idProyecto', [Autentificar, AutentificarAdmin],(req,res) => {
     let idProyecto = req.params.idProyecto;
     if (!req.files) {
 
