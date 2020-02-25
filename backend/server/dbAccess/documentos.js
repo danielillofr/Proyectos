@@ -220,4 +220,16 @@ Subir_fichero = async(idProyecto, fichero,tipo,usuario) => {
     }
 } 
 
-module.exports = {Subir_fichero}
+Eliminar_documentos_proyecto = (idProyecto) => {
+    return new Promise((resolve,reject) => {
+        Documento.deleteMany({proyecto: idProyecto} , (err) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(true);
+            }
+        })
+    })
+}
+
+module.exports = {Subir_fichero,Eliminar_documentos_proyecto}

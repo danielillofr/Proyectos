@@ -2,9 +2,9 @@ const Proyecto = require('./../models/proyecto');
 const _ = require('underscore');
 const Planificacion = require('./../models/planificacion')
 
-const { Anadir_log_proyecto_creado, Anadir_log_fase_completada, Obtener_log_proyecto, Anadir_log_proyecto_modificado } = require('./logs')
+const { Anadir_log_proyecto_creado, Anadir_log_fase_completada, Obtener_log_proyecto, Anadir_log_proyecto_modificado, Eliminar_logs_proyecto } = require('./logs')
 
-const { Subir_fichero } = require('./documentos')
+const { Subir_fichero, Eliminar_documentos_proyecto } = require('./documentos')
 
 Crear_proyecto = (datosProyecto) => {
     return new Promise((resolve, reject) => {
@@ -86,6 +86,18 @@ Obterner_proyecto_completo = async(id) => {
     }
 }
 
+Eliminar_planificaciones_proyecto = (idProyecto) => {
+    return new Promise((resolve,reject)=>{
+        Planificacion.deleteMany({proyecto: idProyecto}, (err)=>{
+            if (err) {
+                reject (err);
+            }else{
+                resolve(true);
+            }
+        })
+    })
+}
+
 Eliminar_proyecto = (idProyecto) => {
     return new Promise((resolve, reject) => {
         Proyecto.findByIdAndDelete(idProyecto, (err, proyectoBorrado) => {
@@ -98,6 +110,17 @@ Eliminar_proyecto = (idProyecto) => {
             }
         })
     })
+}
+
+Eliminar_proyecto_completo = async(idProyecto) => {
+    try {
+        await Eliminar_logs_proyecto(idProyecto);
+        await Eliminar_documentos_proyecto(idProyecto);
+        await Eliminar_planificaciones_proyecto(idProyecto);
+        await Eliminar_proyecto(idProyecto);
+    }catch(err) {
+        throw new Error(err);
+    }
 }
 
 Comprabar_fase_correcta = (id, fase) => {
@@ -576,4 +599,4 @@ Modificar_proyecto = async(id, datos, usuario) => {
 
 
 
-module.exports = { Crear_proyecto_con_log, Eliminar_proyecto, Completar_fase, Obterner_proyecto_completo, Modificar_proyecto }
+module.exports = { Crear_proyecto_con_log, Eliminar_proyecto_completo, Completar_fase, Obterner_proyecto_completo, Modificar_proyecto }

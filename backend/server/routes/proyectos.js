@@ -3,7 +3,7 @@ const Planificacion = require('./../models/planificacion')
 const express = require('express');
 const app = express();
 const _ = require('underscore');
-const { Crear_proyecto_con_log, Eliminar_proyecto, Completar_fase, Obterner_proyecto_completo, Modificar_proyecto } = require('./../dbAccess/proyectos')
+const { Crear_proyecto_con_log, Eliminar_proyecto_completo, Completar_fase, Obterner_proyecto_completo, Modificar_proyecto } = require('./../dbAccess/proyectos')
 
 const { Autentificar, AutentificarAdmin, AutentificarAdminOUser } = require('./../middlewares/Autentificar');
 
@@ -133,7 +133,7 @@ app.post('/api/proyectos', [Autentificar, AutentificarAdmin], (req, res) => {
 
 app.delete('/api/proyectos/:id', [Autentificar,AutentificarAdmin], (req, res) => {
     const id = req.params.id;
-    Eliminar_proyecto(id)
+    Eliminar_proyecto_completo(id)
         .then(borrado => {
             return res.json({
                 ok: true,

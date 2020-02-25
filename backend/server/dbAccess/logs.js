@@ -142,4 +142,18 @@ Anadir_log_cambio_documento = (idProyecto,usuario,tipo,version) => {
     })
 }
 
-module.exports = {Anadir_log_proyecto_creado,Anadir_log_fase_completada,Obtener_log_proyecto,Obtener_todos_logs,Anadir_log_proyecto_modificado,Anadir_log_cambio_documento}
+Eliminar_logs_proyecto = (idProyecto) => {
+    return new Promise((resolve,reject) => {
+        Log.deleteMany({proyecto: idProyecto}, (err) => {
+            if (err) {
+                reject(err);
+            }else{
+                resolve(true);
+            }
+        })
+    })
+}
+
+
+
+module.exports = {Anadir_log_proyecto_creado,Anadir_log_fase_completada,Obtener_log_proyecto,Obtener_todos_logs,Anadir_log_proyecto_modificado,Anadir_log_cambio_documento,Eliminar_logs_proyecto}
