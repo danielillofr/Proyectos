@@ -133,6 +133,7 @@ app.post('/api/proyectos', [Autentificar, AutentificarAdmin], (req, res) => {
 
 app.delete('/api/proyectos/:id', [Autentificar,AutentificarAdmin], (req, res) => {
     const id = req.params.id;
+    console.log('Eliminando:', id);
     Eliminar_proyecto_completo(id)
         .then(borrado => {
             return res.json({

@@ -334,6 +334,33 @@ export class ProyectosService {
         })
     })
   }
+
+  Eliminar_proyecto(idProyecto) {
+    const opciones = {
+      headers: new HttpHeaders ({
+        Authorization: this.usuarioservice.token
+      })
+    };
+    return new Promise((resolve,reject)=>{
+      console.log('Lanzada la eliminación de:', this.proyectoActual.proyecto._id);
+      console.log(`${this.env}/api/proyectos/${this.proyectoActual.proyecto._id}`);
+      this.http.delete(`${this.env}/api/proyectos/${this.proyectoActual.proyecto._id}`, opciones)
+      .subscribe((datos: any) => {
+        if (datos.ok === false) {
+          console.log(datos);
+          reject();
+        }else{
+          console.log('Borrado')
+          resolve();
+        }
+        }, (err)=>{
+          console.log(err);
+          reject();
+        })
+        
+    })
+  }
+
   CambiarNombre (nombre: string) {
     const datos:any = {
       nombre
@@ -400,5 +427,8 @@ export class ProyectosService {
         })
     })
   }
+
+
+
 }
 

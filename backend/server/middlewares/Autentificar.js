@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 let Autentificar = (req, res, next) => {
     let tokenRecibido = req.get('Authorization');
     if (!tokenRecibido) {
+        console.log('No autoraizado');
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,
@@ -26,6 +27,7 @@ let Autentificar = (req, res, next) => {
 
 let AutentificarAdmin = (req, res, next) => {
     if (req.usuario.role != 'ADMINISTRADOR') {
+        console.log('No autoraizado');
         return res.status(200).json({
             ok: false,
             errBaseDatos: false,

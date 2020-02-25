@@ -116,7 +116,25 @@ export class DetailProjectComponent implements OnInit {
 
       }
       });
-  }
+    }
+
+    Eliminar_proyecto () {
+      this.proyectosservice.Eliminar_proyecto(this.proyectosservice.proyectoActual.idProyecto)
+        .then(() => {
+          this.router.navigate(['/pages','listprojects']);
+        })
+        .catch((err)=>{
+          console.log(err);
+          swal({
+            title: 'Error',
+            text: `Error eliminando proyecto`,
+            icon: 'error',
+            button: {
+              text: 'Aceptar'
+            }
+          })
+      })
+    }
 
 
 }
